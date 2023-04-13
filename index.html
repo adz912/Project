@@ -1,45 +1,67 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>My Website Template</title>
+    <title>My Website</title>
+    <style>
+        /* CSS for the login box */
+        .login-box {
+            width: 300px;
+            margin: 0 auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            background-color: #f9f9f9;
+        }
+        .login-box label,
+        .login-box input {
+            display: block;
+            margin-bottom: 10px;
+        }
+        .login-box input[type="submit"] {
+            padding: 10px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+        }
+    </style>
 </head>
 <body>
-
-	<header>
-		<h1>My Website</h1>
-		<form>
-			<label for="search">Search:</label>
-			<input type="search" id="search" name="search">
-			<input type="submit" value="Submit">
-		</form>
-	</header>
-
-	<table>
-		<thead>
-			<tr>
-				<th>Column 1</th>
-				<th>Column 2</th>
-				<th>Column 3</th>
-			</tr>
-		</thead>
-		<tbody>
-			<tr>
-				<td>Row 1, Column 1</td>
-				<td>Row 1, Column 2</td>
-				<td>Row 1, Column 3</td>
-			</tr>
-			<tr>
-				<td>Row 2, Column 1</td>
-				<td>Row 2, Column 2</td>
-				<td>Row 2, Column 3</td>
-			</tr>
-			<tr>
-				<td>Row 3, Column 1</td>
-				<td>Row 3, Column 2</td>
-				<td>Row 3, Column 3</td>
-			</tr>
-		</tbody>
-	</table>
-
+    <header>
+        <h1>Welcome to My Website</h1>
+        <nav>
+            <ul>
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+    <section id="home">
+        <h2>Home</h2>
+        <p>This is the home section of my website. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque viverra dapibus bibendum. Nullam eget blandit magna. Vestibulum consequat finibus tellus, sit amet efficitur urna congue nec.</p>
+    </section>
+    <section id="about">
+        <h2>About</h2>
+        <p>This is the about section of my website. Ut bibendum vestibulum mi, nec finibus sapien fringilla eget. In laoreet dapibus justo a vestibulum. Sed ullamcorper lorem in feugiat venenatis. Nulla facilisi.</p>
+    </section>
+    <section id="contact">
+        <h2>Contact</h2>
+        <p>This is the contact section of my website. Sed pulvinar elit a sapien pharetra, eget volutpat enim mollis. Morbi rhoncus facilisis erat id suscipit. Fusce imperdiet rhoncus erat, in volutpat risus tristique sit amet.</p>
+    </section>
+    <section>
+        <div class="login-box">
+            <h2>Login</h2>
+            <form>
+                <label for="username">Username:</label>
+                <input type="text" id="username" name="username" required>
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password" required>
+                <input type="submit" value="Login">
+            </form>
+        </div>
+    </section>
+    <footer>
+        <p>&copy; 2023 My Website. All rights reserved.</p>
+    </footer>
 </body>
 </html>
