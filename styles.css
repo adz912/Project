@@ -21,6 +21,26 @@
 			box-sizing: border-box;
 		}
 
-		
+        /* CSS for the login box */
+        .login-box {
+            width: 300px;
+            margin: 0 auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            background-color: #f9f9f9;
+        }
+        .login-box label,
+        .login-box input {
+            display: block;
+            margin-bottom: 10px;
+        }
+        .login-box input[type="submit"] {
+            padding: 10px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+        }
+
 
 		
