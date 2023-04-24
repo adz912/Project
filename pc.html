@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>PC Comparison Tool</title>
+	<meta charset="utf-8">
+	<link rel="stylesheet" href="styles.css">
+	<script>
+		function filterTable() {
+			// Get input element
+			var input = document.getElementById("filterInput");
+
+			// Get table rows
+			var rows = document.querySelectorAll("tbody tr");
+
+			// Loop through rows and hide those that don't match the filter
+			for (var i = 0; i < rows.length; i++) {
+				var td = rows[i].querySelectorAll("td")[0];
+				if (td) {
+					var txtValue = td.textContent || td.innerText;
+					if (txtValue.toLowerCase().indexOf(input.value.toLowerCase()) === -1) {
+						rows[i].style.display = "none";
+					} else {
+						rows[i].style.display = "";
+					}
+				}       
+			}
+		}
+	</script>
+</head>
+<body>
+	<header>
+		<img src="PcComparisonTool.png" alt="PC Comparison Tool">
+	</header>
+	<nav>
+		<ul>
+			<section id="home">
+				<h2><a href="index.html">Home</a></h2>
+			</section>
+			<section id="about">
+				<h2><a href="about.html">About</a></h2>
+			</section>
+			<section id="contact">
+				<h2><a href="contact.html">Contact</a></h2>
+			</section>
+		</ul>
+	</nav>
+    <div class="container">
+	<input type="text" id="filterInput" onkeyup="filterTable()" placeholder="Filter results...">
+	<table>
+		<thead>
+			<tr>
+				<th>Name</th>
+				<th>Core Count</th>
+				<th>CPU Boost Clock</th>
+				<th>Memory</th>
+				<th>SSD Storage</th>
+				<th>HDD Storage</th>
+				<th>Graphics Card</th>
+				<th>Price</th>
+			</tr>
+		</thead>
+		<tbody>
+			<!-- Use JavaScript to populate the table with data from MySQLWorkbench -->
+		</tbody>
+	</table>
+	<script>
+		// Use JavaScript to fetch data from MySQLWorkbench and populate the table
+	</script>
+    </div>
+</body>
+</html>
+
