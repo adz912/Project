@@ -1,62 +1,48 @@
 from selenium import webdriver
+import time
 import mysql.connector
 
-# Set up the database connection
-db = mysql.connector.connect(
-    host="localhost",
-    user="yourusername",
-    password="yourpassword",
-    database="yourdatabase"
+# Connect to MySQL database
+mydb = mysql.connector.connect(
+  host="DESKTOP-DS75HTK",
+  user="Admin",
+  password="Adminpw2023",
+  database="pc_comparison"
 )
+mycursor = mydb.cursor()
 
-# Create the products table if it doesn't exist
-cursor = db.cursor()
-cursor.execute('''CREATE TABLE IF NOT EXISTS products
-             (id INT AUTO_INCREMENT PRIMARY KEY,
-             title VARCHAR(255),
-             price FLOAT,
-             rating FLOAT)''')
+# Launch Chrome driver
+driver = webdriver.Chrome()
 
-# Set up the Chrome driver
-options = webdriver.ChromeOptions()
-options.add_argument('headless')  # run Chrome in headless mode (without GUI)
-driver = webdriver.Chrome(options=options)
+# Navigate to Amazon UK pre-built PC listings
+driver.get("https://www.amazon.co.uk/s?k=pre+built+pc&ref=nb_sb_noss")
 
-# Define the search URL
-search_url = 'https://www.amazon.com/s?k=pre-built+pcs'
+# Wait for page to load
+time.sleep(3)
 
-# Navigate to the search URL
-driver.get(search_url)
+# Find all PC listings on page
+pc_listings = driver.find_elements_by_xpath("//div[@data-component-type='s-search-result']")
 
-# Find all the product containers on the page
-product_containers = driver.find_elements_by_xpath('//div[@data-component-type="s-search-result"]')
-
-# Loop through the product containers and extract the data
-for container in product_containers:
-    # Extract the product title
-    title = container.find_element_by_xpath('.//h2').text
+# Loop through each listing and extract relevant information
+for listing in pc_listings:
+    # Extract product title
+    title_element = listing.find_element_by_xpath(".//h2/a")
+    title = title_element.text
     
-    # Extract the product price
-    try:
-        price = float(container.find_element_by_xpath('.//span[@class="a-offscreen"]')
-                      .text.replace('$', '').replace(',', ''))
-    except:
-        price = None
+    # Extract product price
+    price_element = listing.find_element_by_xpath(".//span[@class='a-price']/span[@class='a-offscreen']")
+    price = float(price_element.text.replace('£',''))
     
-    # Extract the product rating
-    try:
-        rating = float(container.find_element_by_xpath('.//span[@class="a-icon-alt"]')
-                       .get_attribute('innerHTML').split()[0])
-    except:
-        rating = None
+    # Extract product link
+    link_element = listing.find_element_by_xpath(".//h2/a")
+    link = link_element.get_attribute("href")
     
-    # Insert the data into the database
-    sql = "INSERT INTO products (title, price, rating) VALUES (%s, %s, %s)"
-    values = (title, price, rating)
-    cursor.execute(sql, values)
-    db.commit()
-    
-# Close the database connection and quit the driver
-cursor.close()
-db.close()
+    # Save data into MySQL database
+    sql = "INSERT INTO prebuilt_pcs (title, price, link) VALUES (%s, %s, %s)"
+    val = (title, price, link)
+    mycursor.execute(sql, val)
+    mydb.commit()
+
+# Close driver and database connection
 driver.quit()
+mydb.close()

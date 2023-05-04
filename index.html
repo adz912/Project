@@ -26,14 +26,37 @@
     <section>
         <div class="login-box">
             <h2>Login</h2>
-            <form>
-                <label for="username">Username:</label>
-                <input type="text" id="username" name="username" required>
-                <label for="password">Password:</label>
-                <input type="password" id="password" name="password" required>
-                <input type="submit" value="Login">
-                <nav><a href="register.html"><p>Not a user? Register here.</p></a></nav>
+            <form method="post" action="login.php">
+              <label for="username">Username:</label>
+              <input type="text" id="username" name="username">
+              <br>
+              <label for="password">Password:</label>
+              <input type="password" id="password" name="password">
+              <br>
+              <input type="submit" value="Login" onclick="checkCredentials(event)">
+              <input type="button" value="Not a user? Register Here" onclick="window.location.href='register.html'">
             </form>
+          </div>
+          
+          <script>
+            function checkCredentials(event) {
+              // Prevent the default form submission behavior
+              event.preventDefault();
+          
+              // Get the values of the username and password fields
+              const username = document.getElementById("username").value;
+              const password = document.getElementById("password").value;
+          
+              // Check if the username and password are correct
+              if (username === "Admin" && password === "Admin") {
+                // Redirect the user to the pc.html page
+                window.location.href = "pc.html";
+              } else {
+                // Display an error message
+                alert("Incorrect username or password. Please try again.");
+              }
+            }   
+        </script>          
         </div>
     </section>
     <footer>

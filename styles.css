@@ -28,52 +28,82 @@
             width: 60%;
             margin: 0 auto;
           }
+         
           
 
-        /* CSS for the login box */
+
+/*LOGIN*/
+        /* Style the login box */
         .login-box {
-            width: 300px;
-            margin: 0 auto;
-            padding: 20px;
+            background-color: #f2f2f2;
             border: 1px solid #ccc;
-            background-color: lightgray;
-            border-radius: 10px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+            margin: 0 auto;
+            max-width: 400px;
+            padding: 20px;
         }
-        .login-box label,
-        .login-box input {
-            display: block;
-            margin-bottom: 10px;
+
+        /* Style the login form inputs */
+        .login-box input[type=text], .login-box input[type=password] {
+            width: 100%;
+            padding: 12px 20px;
+            margin: 8px 0;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 4px;
         }
-        .login-box input[type="submit"] {
-            padding: 10px;
-            background-color: #007bff;
-            color: #fff;
+
+        /* Style the login and register buttons */
+        .login-box input[type=submit], .login-box input[type=button] {
+            width: 100%;
+            padding: 14px 20px;
+            margin: 8px 0;
             border: none;
+            border-radius: 4px;
             cursor: pointer;
         }
 
-        .register-box label,
-        .register-box input {
-            display: block;
-            margin-bottom: 10px;
+        /* Style the login button */
+        .login-box input[type=submit] {
+            background-color: #2196f3;
+            color: white;
         }
 
-        .register-box input[type="submit"] {
-            padding: 10px;
-            background-color: #007bff;
-            color: #fff;
-            border: none;
-            cursor: pointer;
+        /* Hover effect for the login button */
+        .login-box input[type=submit]:hover {
+            background-color: #0b7dda;
         }
 
-        .register-box {
-            width: 300px;
-            margin: 0 auto;
-            padding: 20px;
-            border: 1px solid #ccc;
-            background-color: lightgray;
-            border-radius: 10px;
+        /* Style the register button */
+        .login-box input[type=button] {
+            background-color: #f44336;
+            color: white;
         }
+
+        /* Hover effect for the register button */
+        .login-box input[type=button]:hover {
+            background-color: #da190b;
+        }
+
+        .register-link {
+            margin-top: 20px;
+          }
+          
+          .register-link p {
+            font-size: 14px;
+            margin: 0;
+          }
+          
+          .register-link a {
+            color: #1e90ff;
+            text-decoration: none;
+          }
+          
+          .register-link a:hover {
+            text-decoration: underline;
+          }
+
 
         nav ul {
             display: flex;
