@@ -1,21 +1,22 @@
 from flask import Flask, render_template
 import mysql.connector
 
-app = Flask(__name__)
+app = Flask(__name__, template_folder='')
+
 
 @app.route('/')
 def index():
     # Connect to the database
     mydb = mysql.connector.connect(
-        host="localhost",
-        user="username",
-        password="password",
-        database="database"
+        host="ADELS-PC",
+        user="Admin",
+        password="Adminpw2023",
+        database="pc_comparison"
     )
 
     # Retrieve data from the database
     cursor = mydb.cursor()
-    cursor.execute("SELECT * FROM mytable")
+    cursor.execute("SELECT * FROM pcs")
     data = cursor.fetchall()
 
     # Close the database connection
