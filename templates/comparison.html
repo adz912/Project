@@ -6,30 +6,51 @@
 	<link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
 	<script>
 		function filterTable() {
-			// Get input element
-			var input = document.getElementById("filterInput");
+			// Get input elements
+			var coreCount = document.getElementById("coreCountFilter").value.toLowerCase();
+			var memory = document.getElementById("memoryFilter").value.toLowerCase();
+			var ssdStorage = document.getElementById("ssdStorageFilter").value.toLowerCase();
+			var hddStorage = document.getElementById("hddStorageFilter").value.toLowerCase();
+			var graphicsCard = document.getElementById("graphicsCardFilter").value.toLowerCase();
+			var priceMin = parseInt(document.getElementById("priceMinFilter").value);
+			var priceMax = parseInt(document.getElementById("priceMaxFilter").value);
 
 			// Get table rows
 			var rows = document.querySelectorAll("tbody tr");
 
-			// Loop through rows and hide those that don't match the filter
+			// Loop through rows and hide those that don't match the filters
 			for (var i = 0; i < rows.length; i++) {
-				var td = rows[i].querySelectorAll("td")[0];
-				if (td) {
-					var txtValue = td.textContent || td.innerText;
-					if (txtValue.toLowerCase().indexOf(input.value.toLowerCase()) === -1) {
-						rows[i].style.display = "none";
-					} else {
-						rows[i].style.display = "";
-					}
-				}       
+				var coreCountCol = rows[i].querySelectorAll("td")[1];
+				var memoryCol = rows[i].querySelectorAll("td")[3];
+				var ssdStorageCol = rows[i].querySelectorAll("td")[4];
+				var hddStorageCol = rows[i].querySelectorAll("td")[5];
+				var graphicsCardCol = rows[i].querySelectorAll("td")[6];
+				var priceCol = rows[i].querySelectorAll("td")[7];
+
+				if (coreCount !== "all" && coreCountCol && coreCountCol.textContent.toLowerCase() !== coreCount) {
+					rows[i].style.display = "none";
+				} else if (memory !== "all" && memoryCol && memoryCol.textContent.toLowerCase() !== memory) {
+					rows[i].style.display = "none";
+				} else if (ssdStorage !== "all" && ssdStorageCol && ssdStorageCol.textContent.toLowerCase() !== ssdStorage) {
+					rows[i].style.display = "none";
+				} else if (hddStorage !== "all" && hddStorageCol && hddStorageCol.textContent.toLowerCase() !== hddStorage) {
+					rows[i].style.display = "none";
+				} else if (graphicsCard !== "all" && graphicsCardCol && graphicsCardCol.textContent.toLowerCase() !== graphicsCard) {
+					rows[i].style.display = "none";
+				} else if (priceMin && priceCol && parseInt(priceCol.textContent) < priceMin) {
+					rows[i].style.display = "none";
+				} else if (priceMax && priceCol && parseInt(priceCol.textContent) > priceMax) {
+					rows[i].style.display = "none";
+				} else {
+					rows[i].style.display = "";
+				}
 			}
 		}
 	</script>
 </head>
 <body>
 	<header>
-		<img src="PcComparisonTool.png" alt="PC Comparison Tool">
+		<img src="{{ url_for('static', filename='images/PcComparisonTool.png') }}" alt="PC Comparison Tool">
 	</header>
 	<nav>
 		<ul>
@@ -44,8 +65,57 @@
 			</section>
 		</ul>
 	</nav>
-    <div class="container">
-	<input type="text" id="filterInput" onkeyup="filterTable()" placeholder="Filter results...">
+    <div class="filters">
+	<input type="text" id="filterInput" onkeyup="filterTable()" placeholder="Name">
+		<label for="core-count">Core Count:</label>
+		<select id="core-count">
+			<option value="">Any</option>
+			<option value="2">2</option>
+			<option value="4">4</option>
+			<option value="6">6</option>
+			<option value="8">8</option>
+			<option value="10">10</option>
+			<option value="12">12</option>
+			<option value="14">14</option>
+			<option value="16">16</option>
+			<option value="24">24</option>
+		</select>
+		<label for="cpu-clock">CPU Boost Clock:</label>
+		<input type="range" id="cpu-clock" min="1" max="5" step="0.1" value="1">
+		<label for="memory">Memory:</label>
+		<select id="memory">
+			<option value="">Any</option>
+			<option value="4">4 GB</option>
+			<option value="8">8 GB</option>
+			<option value="16">16 GB</option>
+			<option value="32">32 GB</option>
+			<option value="64">64 GB</option>
+			<option value="128">128 GB</option>
+		</select>
+		<label for="ssd">SSD Storage:</label>
+		<select id="ssd">
+			<option value="">Any</option>
+			<option value="256">128 GB</option>
+			<option value="256">256 GB</option>
+			<option value="512">512 GB</option>
+			<option value="1024">1 TB</option>
+		</select>
+		<label for="hdd">HDD Storage:</label>
+		<select id="hdd">
+			<option value="">Any</option>
+			<option value="500">500 GB</option>
+			<option value="1000">1 TB</option>
+			<option value="2000">2 TB</option>
+		</select>
+		<label for="graphics">Graphics Card:</label>
+		<select id="graphics">
+			<option value="">Any</option>
+			<option value="nvidia">NVIDIA</option>
+			<option value="amd">AMD</option>
+		</select>
+		<label for="price">Price:</label>
+		<input type="range" id="price" min="0" max="3000" step="10" value="0">
+	</div>
 	<table>
 		<thead>
 			<tr>
