@@ -4,6 +4,8 @@
 	<title>PC Comparison Tool</title>
 	<meta charset="utf-8">
 	<link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/14.6.4/nouislider.min.css" integrity="sha512-UVTEaeJYXzeIzP0oMtdRH29z1VQ8uE5CC1VieS/ZF5R5L5xxHi0eU+kH7U4ZB0iHQ6uH5ETrFrwVJy5GrPYScg==" crossorigin="anonymous" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/14.6.4/nouislider.min.js" integrity="sha512-CYEtI/Pegk+41J2jqMhWbJcGVv+MPfZ1sQs1tT13E0edJzHyNx0Bt57gzi8WFXeCwvOktq3f0+PxX8Wb1cLlPA==" crossorigin="anonymous"></script>
 	<script>
 		function filterTable() {
 			// Get input elements
@@ -50,23 +52,33 @@
 </head>
 <body>
 	<header>
-		<img src="{{ url_for('static', filename='images/PcComparisonTool.png') }}" alt="PC Comparison Tool">
-	</header>
-	<nav>
-		<ul>
-			<section id="home">
-				<h2><a href="/">Home</a></h2>
-			</section>
-			<section id="about">
-				<h2><a href="/about">About</a></h2>
-			</section>
-			<section id="contact">
-				<h2><a href="/contact">Contact</a></h2>
-			</section>
-		</ul>
-	</nav>
+        <a href="/">
+        <img src="{{ url_for('static', filename='images/PcComparisonTool.png') }}" alt="PC Comparison Tool">
+    </a>  
+        <nav>
+            <ul>
+                <section id="home">
+                    <h2><a href="/">Home</a></h2>
+                </section>
+                <section id="about">
+                    <h2><a href="/about">About</a></h2>
+                </section>
+                <section id="contact">
+                    <h2><a href="/contact">Contact</a></h2>
+                </section>
+            </ul>
+        </nav>
+    </header>
     <div class="filters">
 	<input type="text" id="filterInput" onkeyup="filterTable()" placeholder="Name">
+
+		<label for="cpu">CPU:</label>
+		<select id="cpu">
+			<option value="">Any</option>
+			<option value="2">AMD</option>
+			<option value="4">Intel</option>
+		</select>
+
 		<label for="core-count">Core Count:</label>
 		<select id="core-count">
 			<option value="">Any</option>
@@ -80,8 +92,29 @@
 			<option value="16">16</option>
 			<option value="24">24</option>
 		</select>
-		<label for="cpu-clock">CPU Boost Clock:</label>
-		<input type="range" id="cpu-clock" min="1" max="5" step="0.1" value="1">
+
+
+		<label for="cpu-clock">Min CPU Boost Clock:</label>
+		<input type="range" id="cpu-clock" min="1" max="6" step="0.1" value="1" oninput="document.getElementById('cpu-clock-value').innerHTML = this.value">
+		<span id="cpu-clock-value">1</span> GHz<br>
+
+		<label for="price-range">Maximum Price:</label>
+		<input type="range" id="price-range" min="100" max="10000" step="10" value="10000" oninput="document.getElementById('price-range-value').innerHTML = this.value">
+		£<span id="price-range-value">10000</span>
+
+		<script>
+		function updateRange() {
+		const value = document.getElementById("cpu-clock").value;
+		document.getElementById("cpu-clock-range").max = value;
+		}
+
+		function updateValue() {
+		const rangeValue = document.getElementById("cpu-clock-range").value;
+		document.getElementById("cpu-clock").value = rangeValue;
+		}
+		</script>
+
+
 		<label for="memory">Memory:</label>
 		<select id="memory">
 			<option value="">Any</option>
@@ -92,6 +125,7 @@
 			<option value="64">64 GB</option>
 			<option value="128">128 GB</option>
 		</select>
+
 		<label for="ssd">SSD Storage:</label>
 		<select id="ssd">
 			<option value="">Any</option>
@@ -99,27 +133,34 @@
 			<option value="256">256 GB</option>
 			<option value="512">512 GB</option>
 			<option value="1024">1 TB</option>
+			<option value="2048">2 TB</option>
+			<option value="4096">4 TB</option>
 		</select>
+
 		<label for="hdd">HDD Storage:</label>
 		<select id="hdd">
 			<option value="">Any</option>
 			<option value="500">500 GB</option>
 			<option value="1000">1 TB</option>
 			<option value="2000">2 TB</option>
+			<option value="4000">4 TB</option>
+			<option value="8000">8 TB</option>
 		</select>
+
 		<label for="graphics">Graphics Card:</label>
 		<select id="graphics">
 			<option value="">Any</option>
 			<option value="nvidia">NVIDIA</option>
 			<option value="amd">AMD</option>
 		</select>
-		<label for="price">Price:</label>
-		<input type="range" id="price" min="0" max="3000" step="10" value="0">
+
 	</div>
-	<table>
+	<br>
+	<table class="my-table">
 		<thead>
 			<tr>
 				<th>Name</th>
+				<th>CPU</th>
 				<th>Core Count</th>
 				<th>CPU Boost Clock</th>
 				<th>Memory</th>
@@ -130,11 +171,60 @@
 			</tr>
 		</thead>
 		<tbody>
+			<tr>
+			  <td>Product 1</td>
+			  <td>i7-9700K</td>
+			  <td>8</td>
+			  <td>4.9 GHz</td>
+			  <td>16 GB</td>
+			  <td>512 GB</td>
+			  <td>2 TB</td>
+			  <td>RTX 3080</td>
+			  <td>$1999</td>
+			</tr>
+			<tr>
+			  <td>Product 2</td>
+			  <td>Ryzen 9 5950X</td>
+			  <td>16</td>
+			  <td>4.9 GHz</td>
+			  <td>32 GB</td>
+			  <td>1 TB</td>
+			  <td>4 TB</td>
+			  <td>RTX 3090</td>
+			  <td>$3499</td>
+			</tr>
+		  </tbody>
+		<tbody>
 		</tbody>
 	</table>
 		<!--Use JavaScript to fetch data from MySQLWorkbench and populate the table -->
 		<script src="js/populate-table.js"></script>
     </div>
+	<!--Script for sliders -->
+	<script>
+		var slider = document.getElementById('cpu-clock-slider');
+		var minValue = document.getElementById('cpu-clock-min').value;
+		var maxValue = document.getElementById('cpu-clock-max').value;
+	
+		noUiSlider.create(slider, {
+		  start: [minValue, maxValue],
+		  connect: true,
+		  step: 0.1,
+		  range: {
+			'min': parseFloat(minValue),
+			'max': parseFloat(maxValue)
+		  }
+		});
+	
+		slider.noUiSlider.on('update', function(values, handle) {
+		  var value = parseFloat(values[handle]);
+		  if (handle == 0) {
+			document.getElementById('cpu-clock').value = value;
+		  } else {
+			document.getElementById('cpu-clock-max').value = value;
+		  }
+		});
+	  </script>
 </body>
 </html>
 
