@@ -213,7 +213,7 @@
 
           select {
             padding: 8px 12px;
-            width: 150px !important;
+            width: 150px;
             border-radius: 5px;
             font-size: 16px;
             box-sizing: border-box;
@@ -221,6 +221,13 @@
             border: 1px solid #ccc;
 
           }
+
+          select[id="sort-by"] {
+            display: inline-block;
+            width: 220px;
+         }
+        
+        
 
 
           
