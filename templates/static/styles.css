@@ -197,6 +197,7 @@
         #filterInput {
 			padding: 10px;
 			font-size: 16px;
+      width: 100px;
 			border: 1px solid #ddd;
 			border-radius: 5px;
 			margin-bottom: 20px;
@@ -213,13 +214,24 @@
 
           select {
             padding: 8px 12px;
-            width: 150px;
+            width: 120px;
             border-radius: 5px;
             font-size: 16px;
             box-sizing: border-box;
             background-color: #fff;
             border: 1px solid #ccc;
 
+          }
+
+          .sort-container {
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            margin-right: 20px;
+          }
+          
+          .sort-container label {
+            margin-right: 20px;
           }
 
           select[id="sort-by"] {
