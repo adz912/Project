@@ -31,7 +31,7 @@ product_elements = driver.find_elements(By.CSS_SELECTOR, '.s-result-item')
 # Sets up the connection to your MySQL database
 try:
     connection = mysql.connector.connect(
-        host="ADELS-PC",
+        host="127.0.0.1",
         user="Admin",
         password="Adminpw2023",
         database="pc_comparison"
@@ -55,7 +55,7 @@ for product_element in product_elements:
 
     try:
         price_element = product_element.find_element(By.CSS_SELECTOR, '.a-price-whole')
-        price = price_element.text
+        price = price_element.text.replace(',', '')  # Remove the comma from the price value
     except NoSuchElementException:
         price = "N/A"
 

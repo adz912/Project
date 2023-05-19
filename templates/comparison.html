@@ -5,50 +5,9 @@
 	<meta charset="utf-8">
 	<link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/14.6.4/nouislider.min.css" integrity="sha512-UVTEaeJYXzeIzP0oMtdRH29z1VQ8uE5CC1VieS/ZF5R5L5xxHi0eU+kH7U4ZB0iHQ6uH5ETrFrwVJy5GrPYScg==" crossorigin="anonymous" />
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/14.6.4/nouislider.min.js" integrity="sha512-CYEtI/Pegk+41J2jqMhWbJcGVv+MPfZ1sQs1tT13E0edJzHyNx0Bt57gzi8WFXeCwvOktq3f0+PxX8Wb1cLlPA==" crossorigin="anonymous"></script>
-	<script>
-		function filterTable() {
-			// Get input elements
-			var coreCount = document.getElementById("coreCountFilter").value.toLowerCase();
-			var memory = document.getElementById("memoryFilter").value.toLowerCase();
-			var ssdStorage = document.getElementById("ssdStorageFilter").value.toLowerCase();
-			var hddStorage = document.getElementById("hddStorageFilter").value.toLowerCase();
-			var graphicsCard = document.getElementById("graphicsCardFilter").value.toLowerCase();
-			var priceMin = parseInt(document.getElementById("priceMinFilter").value);
-			var priceMax = parseInt(document.getElementById("priceMaxFilter").value);
-
-			// Get table rows
-			var rows = document.querySelectorAll("tbody tr");
-
-			// Loop through rows and hide those that don't match the filters
-			for (var i = 0; i < rows.length; i++) {
-				var coreCountCol = rows[i].querySelectorAll("td")[1];
-				var memoryCol = rows[i].querySelectorAll("td")[3];
-				var ssdStorageCol = rows[i].querySelectorAll("td")[4];
-				var hddStorageCol = rows[i].querySelectorAll("td")[5];
-				var graphicsCardCol = rows[i].querySelectorAll("td")[6];
-				var priceCol = rows[i].querySelectorAll("td")[7];
-
-				if (coreCount !== "all" && coreCountCol && coreCountCol.textContent.toLowerCase() !== coreCount) {
-					rows[i].style.display = "none";
-				} else if (memory !== "all" && memoryCol && memoryCol.textContent.toLowerCase() !== memory) {
-					rows[i].style.display = "none";
-				} else if (ssdStorage !== "all" && ssdStorageCol && ssdStorageCol.textContent.toLowerCase() !== ssdStorage) {
-					rows[i].style.display = "none";
-				} else if (hddStorage !== "all" && hddStorageCol && hddStorageCol.textContent.toLowerCase() !== hddStorage) {
-					rows[i].style.display = "none";
-				} else if (graphicsCard !== "all" && graphicsCardCol && graphicsCardCol.textContent.toLowerCase() !== graphicsCard) {
-					rows[i].style.display = "none";
-				} else if (priceMin && priceCol && parseInt(priceCol.textContent) < priceMin) {
-					rows[i].style.display = "none";
-				} else if (priceMax && priceCol && parseInt(priceCol.textContent) > priceMax) {
-					rows[i].style.display = "none";
-				} else {
-					rows[i].style.display = "";
-				}
-			}
-		}
-	</script>
+ 	<script src="https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/14.6.4/nouislider.min.js" integrity="sha512-CYEtI/Pegk+41J2jqMhWbJcGVv+MPfZ1sQs1tT13E0edJzHyNx0Bt57gzi8WFXeCwvOktq3f0+PxX8Wb1cLlPA==" crossorigin="anonymous"></script>
+	<script src="filter-table.js"></script>
+		
 </head>
 <body>
 	<header>
@@ -75,12 +34,12 @@
 		<label for="cpu">CPU:</label>
 		<select id="cpu">
 			<option value="">Any</option>
-			<option value="2">AMD</option>
-			<option value="4">Intel</option>
+			<option value="amd">AMD</option>
+			<option value="intel">Intel</option>
 		</select>
 
 		<label for="core-count">Core Count:</label>
-		<select id="core-count">
+		<select id="coreCountFilter">
 			<option value="">Any</option>
 			<option value="2">2</option>
 			<option value="4">4</option>
@@ -102,17 +61,7 @@
 		<input type="range" id="price-range" min="100" max="10000" step="10" value="10000" oninput="document.getElementById('price-range-value').innerHTML = this.value">
 		£<span id="price-range-value">10000</span>
 
-		<script>
-		function updateRange() {
-		const value = document.getElementById("cpu-clock").value;
-		document.getElementById("cpu-clock-range").max = value;
-		}
-
-		function updateValue() {
-		const rangeValue = document.getElementById("cpu-clock-range").value;
-		document.getElementById("cpu-clock").value = rangeValue;
-		}
-		</script>
+		<script src="range-update.js"></script>
 
 
 		<label for="memory">Memory:</label>
@@ -182,37 +131,13 @@
 				<th>Price</th>
 			</tr>
 		</thead>
-		<tbody>
-			<tr>
-			  <td>Product 1</td>
-			  <td>i7-9700K</td>
-			  <td>8</td>
-			  <td>4.9 GHz</td>
-			  <td>16 GB</td>
-			  <td>512 GB</td>
-			  <td>2 TB</td>
-			  <td>RTX 3080</td>
-			  <td></td>
-			  <td>$1999</td>
-			</tr>
-			<tr>
-			  <td>Product 2</td>
-			  <td>Ryzen 9 5950X</td>
-			  <td>16</td>
-			  <td>4.9 GHz</td>
-			  <td>32 GB</td>
-			  <td>1 TB</td>
-			  <td>4 TB</td>
-			  <td>RTX 3090</td>
-			  <td></td>
-			  <td>$3499</td>
-			</tr>
-		  </tbody>
-		<tbody>
+		<tbody id="comparison-table-body">
+			<!-- Table rows will be dynamically populated here -->
 		</tbody>
+
 	</table>
 		<!--Use JavaScript to fetch data from MySQLWorkbench and populate the table -->
-		<script src="js/populate-table.js"></script>
+		<script src="populate-table.js"></script>
     </div>
 	<!--Script for sliders -->
 	<script>

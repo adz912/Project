@@ -1,21 +1,23 @@
 // Get the table body element
-const tbody = document.querySelector('tbody');
+const tbody = document.getElementById('comparison-table-body');
 
-// Fetch data from the database
-fetch('/data')
+// Fetch data from the server
+fetch('/get-products') // Updated URL
   .then(response => response.json())
   .then(data => {
     // Loop through the data and create a row for each item
     data.forEach(item => {
       const tr = document.createElement('tr');
       tr.innerHTML = `
-        <td>${item.title}</td>
-        <td>${item.core_count}</td>
-        <td>${item.cpu_boost_clock}</td>
+        <td>${item.name}</td>
+        <td>${item.cpu}</td>
+        <td>${item.coreCount}</td>
+        <td>${item.cpuBoostClock}</td>
         <td>${item.memory}</td>
-        <td>${item.ssd_storage}</td>
-        <td>${item.hdd_storage}</td>
-        <td>${item.graphics_card}</td>
+        <td>${item.ssdStorage}</td>
+        <td>${item.hddStorage}</td>
+        <td>${item.graphicsCard}</td>
+        <td>${item.avgPerformance}</td>
         <td>${item.price}</td>
       `;
       tbody.appendChild(tr);
