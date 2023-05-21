@@ -1,5 +1,6 @@
 from flask import Flask, render_template, jsonify
 import mysql.connector
+import json
 
 app = Flask(__name__, template_folder='')
 
@@ -16,7 +17,7 @@ def index():
 
     # Retrieve data from the database
     cursor = mydb.cursor()
-    cursor.execute("SELECT name, price FROM pcs")
+    cursor.execute("SELECT title, price FROM pcs")
     data = cursor.fetchall()
 
     # Close the database connection
@@ -48,55 +49,58 @@ def register():
 
 @app.route('/comparison')
 def comparison():
-    return render_template('comparison.html')
+    # Load the exported JSON data from Apify
+    with open('C:\\Users\\Adel\\Downloads\\dataset_Amazon-crawler_2023-05-20_19-00-49-385.json', 'r', encoding='utf-8') as file:
+        apify_data = json.load(file)
+
+    # Extract the necessary information from the JSON data
+    products = []
+    for item in apify_data:
+        title = item.get('title', '')
+        # Extract other relevant information from the item as needed
+
+        # Create a dictionary with the extracted information
+        product = {
+            'title': title,
+            # Add other relevant information as needed
+        }
+
+        products.append(product)
+
+    # Render the 'comparison.html' template with the products data
+    return render_template('comparison.html', products=products)
+
+
+
 
 
 @app.route('/get-products')
 def get_products():
-    # Retrieve the data from your MySQL database
-    try:
-        connection = mysql.connector.connect(
-            host="127.0.0.1",
-            user="Admin",
-            password="Adminpw2023",
-            database="pc_comparison"
-        )
+    # Load the exported JSON data from Apify
+    with open('C:\\Users\\Adel\\Downloads\\dataset_Amazon-crawler_2023-05-20_19-00-49-385.json', 'r', encoding='utf-8') as file:
+        apify_data = json.load(file)
 
-        if connection.is_connected():
-            print('Connected to MySQL database')
-    except mysql.connector.Error as e:
-        print(f'Error while connecting to MySQL: {e}')
-
-    select_query = "SELECT name, cpu, coreCount, cpuBoostClock, memory, ssdStorage, hddStorage, graphicsCard, avgPerformance, price FROM pcs"
-    cursor = connection.cursor()
-    cursor.execute(select_query)
-    rows = cursor.fetchall()
-
-    # Create a list of dictionaries representing the product data
+    # Extract the necessary information from the JSON data
     products = []
-    for row in rows:
-        product = {
-            "name": row[0],
-            "cpu": row[1],
-            "coreCount": row[2],
-            "cpuBoostClock": row[3],
-            "memory": row[4],
-            "ssdStorage": row[5],
-            "hddStorage": row[6],
-            "graphicsCard": row[7],
-            "avgPerformance": row[8],
-            "price": row[9]
-        }
-        products.append(product)
+    for item in apify_data:
+        title = item.get('title', '')
+        list_price = item.get('listPrice')
+        price = list_price['value'] if list_price else None
+        currency = list_price['currency'] if list_price else None
 
-    # Close the database connection
-    if connection.is_connected():
-        cursor.close()
-        connection.close()
-        print('MySQL connection closed')
+        # Create a dictionary with the extracted information
+        product = {
+            'id': item.get('id'),
+            'title': title,
+            'price': f"{price} {currency}" if price and currency else None
+        }
+
+        products.append(product)
 
     # Return the product data as JSON
     return jsonify(products)
+
+
 
 
 if __name__ == '__main__':
