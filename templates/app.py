@@ -1,4 +1,4 @@
-from flask import Flask, render_template, jsonify
+from flask import Flask, render_template, jsonify, request
 import mysql.connector
 import json
 
@@ -7,24 +7,7 @@ app = Flask(__name__, template_folder='')
 
 @app.route('/')
 def index():
-    # Connect to the database
-    mydb = mysql.connector.connect(
-        host="localhost",
-        user="Admin",
-        password="Adminpw2023",
-        database="pc_comparison"
-    )
-
-    # Retrieve data from the database
-    cursor = mydb.cursor()
-    cursor.execute("SELECT title, price FROM pcs")
-    data = cursor.fetchall()
-
-    # Close the database connection
-    mydb.close()
-
-    # Render the data on the web page
-    return render_template('index.html', data=data)
+    return render_template('index.html')
 
 
 @app.route('/about')
@@ -49,58 +32,59 @@ def register():
 
 @app.route('/comparison')
 def comparison():
-    # Load the exported JSON data from Apify
-    with open('C:\\Users\\Adel\\Downloads\\dataset_Amazon-crawler_2023-05-20_19-00-49-385.json', 'r', encoding='utf-8') as file:
-        apify_data = json.load(file)
-
-    # Extract the necessary information from the JSON data
-    products = []
-    for item in apify_data:
-        title = item.get('title', '')
-        # Extract other relevant information from the item as needed
-
-        # Create a dictionary with the extracted information
-        product = {
-            'title': title,
-            # Add other relevant information as needed
-        }
-
-        products.append(product)
-
-    # Render the 'comparison.html' template with the products data
-    return render_template('comparison.html', products=products)
+    return render_template('comparison.html')
 
 
+@app.route('/get_pcs', methods=['GET'])
+def get_pcs():
+    # Connect to the database
+    mydb = mysql.connector.connect(
+        host="127.0.0.1",
+        user="Admin",
+        password="Adminpw2023",
+        database="pc_comparison"
+    )
+
+    # Retrieve data from the database
+    cursor = mydb.cursor(dictionary=True)
+    cursor.execute("SELECT * FROM pcs")
+    data = cursor.fetchall()
+
+    # Close the database connection
+    mydb.close()
+
+    # Return the data as JSON response
+    return jsonify(data)
 
 
+@app.route('/insert_pc', methods=['POST'])
+def insert_pc():
+    data = request.get_json()
+    title = data['title']
+    price = data['price']
+    # Extract other fields from the data
 
-@app.route('/get-products')
-def get_products():
-    # Load the exported JSON data from Apify
-    with open('C:\\Users\\Adel\\Downloads\\dataset_Amazon-crawler_2023-05-20_19-00-49-385.json', 'r', encoding='utf-8') as file:
-        apify_data = json.load(file)
+    # Connect to the database
+    db = mysql.connector.connect(
+        host='localhost',
+        user='Admin',
+        password='Adminpw2023',
+        database='pc_comparison'
+    )
 
-    # Extract the necessary information from the JSON data
-    products = []
-    for item in apify_data:
-        title = item.get('title', '')
-        list_price = item.get('listPrice')
-        price = list_price['value'] if list_price else None
-        currency = list_price['currency'] if list_price else None
+    # Create a cursor to execute SQL queries
+    cursor = db.cursor()
 
-        # Create a dictionary with the extracted information
-        product = {
-            'id': item.get('id'),
-            'title': title,
-            'price': f"{price} {currency}" if price and currency else None
-        }
+    # Insert the data into the 'pcs' table
+    query = "INSERT INTO pcs (title, price) VALUES (%s, %s)"
+    values = (title, price)
+    cursor.execute(query, values)
 
-        products.append(product)
+    # Commit the changes and close the database connection
+    db.commit()
+    db.close()
 
-    # Return the product data as JSON
-    return jsonify(products)
-
-
+    return jsonify({'message': 'PC data inserted successfully!'})
 
 
 if __name__ == '__main__':

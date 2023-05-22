@@ -1,17 +1,18 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>PC Comparison Tool</title>
-	<meta charset="utf-8">
-	<link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/14.6.4/nouislider.min.css" integrity="sha512-UVTEaeJYXzeIzP0oMtdRH29z1VQ8uE5CC1VieS/ZF5R5L5xxHi0eU+kH7U4ZB0iHQ6uH5ETrFrwVJy5GrPYScg==" crossorigin="anonymous" />
- 	<script src="https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/14.6.4/nouislider.min.js" integrity="sha512-CYEtI/Pegk+41J2jqMhWbJcGVv+MPfZ1sQs1tT13E0edJzHyNx0Bt57gzi8WFXeCwvOktq3f0+PxX8Wb1cLlPA==" crossorigin="anonymous"></script>
-	<script src="static/js/apifyScraper.mjs"></script>
-	<script src="static/js/filter-table.js"></script>
-	<script src="static/js/populate-table.js"></script>
+    <title>PC Comparison Tool</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/14.6.4/nouislider.min.css" integrity="sha512-UVTEaeJYXzeIzP0oMtdRH29z1VQ8uE5CC1VieS/ZF5R5L5xxHi0eU+kH7U4ZB0iHQ6uH5ETrFrwVJy5GrPYScg==" crossorigin="anonymous" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/14.6.4/nouislider.min.js" integrity="sha512-CYEtI/Pegk+41J2jqMhWbJcGVv+MPfZ1sQs1tT13E0edJzHyNx0Bt57gzi8WFXeCwvOktq3f0+PxX8Wb1cLlPA==" crossorigin="anonymous"></script>
+    <script src="static/js/apifyScraper.mjs"></script>
+    <script src="static/js/filter-table.js"></script>
+    <script src="static/js/populate-table.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
-	<header>
+    <header>
         <a href="/">
         <img src="{{ url_for('static', filename='images/PcComparisonTool.png') }}" alt="PC Comparison Tool">
     </a>  
@@ -30,142 +31,151 @@
         </nav>
     </header>
     <div class="filters">
-	<input type="text" id="filterInput" onkeyup="filterTable()" placeholder="Name">
+    <input type="text" id="filterInput" onkeyup="filterTable()" placeholder="Name">
 
-		<label for="cpu">CPU:</label>
-		<select id="cpu">
-			<option value="">Any</option>
-			<option value="amd">AMD</option>
-			<option value="intel">Intel</option>
-		</select>
+        <label for="cpu">CPU:</label>
+        <select id="cpu">
+            <option value="">Any</option>
+            <option value="amd">AMD</option>
+            <option value="intel">Intel</option>
+        </select>
 
-		<label for="core-count">Core Count:</label>
-		<select id="coreCountFilter">
-			<option value="">Any</option>
-			<option value="2">2</option>
-			<option value="4">4</option>
-			<option value="6">6</option>
-			<option value="8">8</option>
-			<option value="10">10</option>
-			<option value="12">12</option>
-			<option value="14">14</option>
-			<option value="16">16</option>
-			<option value="24">24</option>
-		</select>
-
-
-		<label for="cpu-clock">Min CPU Boost Clock:</label>
-		<input type="range" id="cpu-clock" min="1" max="6" step="0.1" value="1" oninput="document.getElementById('cpu-clock-value').innerHTML = this.value">
-		<span id="cpu-clock-value">1</span> GHz
-
-		<label for="price-range">Maximum Price:</label>
-		<input type="range" id="price-range" min="100" max="10000" step="10" value="10000" oninput="document.getElementById('price-range-value').innerHTML = this.value">
-		£<span id="price-range-value">10000</span>
-
-		
+        <label for="core-count">Core Count:</label>
+        <select id="coreCountFilter">
+            <option value="">Any</option>
+            <option value="2">2</option>
+            <option value="4">4</option>
+            <option value="6">6</option>
+            <option value="8">8</option>
+            <option value="10">10</option>
+            <option value="12">12</option>
+            <option value="14">14</option>
+            <option value="16">16</option>
+            <option value="24">24</option>
+        </select>
 
 
-		<label for="memory">Memory:</label>
-		<select id="memory">
-			<option value="">Any</option>
-			<option value="4">4 GB</option>
-			<option value="8">8 GB</option>
-			<option value="16">16 GB</option>
-			<option value="32">32 GB</option>
-			<option value="64">64 GB</option>
-			<option value="128">128 GB</option>
-		</select>
+        <label for="cpu-clock">Min CPU Boost Clock:</label>
+        <input type="range" id="cpu-clock" min="1" max="6" step="0.1" value="1" oninput="document.getElementById('cpu-clock-value').innerHTML = this.value">
+        <span id="cpu-clock-value">1</span> GHz
 
-		<label for="ssd">SSD Storage:</label>
-		<select id="ssd">
-			<option value="">Any</option>
-			<option value="256">128 GB</option>
-			<option value="256">256 GB</option>
-			<option value="512">512 GB</option>
-			<option value="1024">1 TB</option>
-			<option value="2048">2 TB</option>
-			<option value="4096">4 TB</option>
-		</select>
+        <label for="price-range">Maximum Price:</label>
+        <input type="range" id="price-range" min="100" max="10000" step="10" value="10000" oninput="document.getElementById('price-range-value').innerHTML = this.value">
+        £<span id="price-range-value">10000</span>
 
-		<label for="hdd">HDD Storage:</label>
-		<select id="hdd">
-			<option value="">Any</option>
-			<option value="500">500 GB</option>
-			<option value="1000">1 TB</option>
-			<option value="2000">2 TB</option>
-			<option value="4000">4 TB</option>
-			<option value="8000">8 TB</option>
-		</select>
+        <label for="memory">Memory:</label>
+        <select id="memory">
+            <option value="">Any</option>
+            <option value="4">4 GB</option>
+            <option value="8">8 GB</option>
+            <option value="16">16 GB</option>
+            <option value="32">32 GB</option>
+            <option value="64">64 GB</option>
+            <option value="128">128 GB</option>
+        </select>
 
-		<label for="graphics">Graphics Card:</label>
-		<select id="graphics">
-			<option value="">Any</option>
-			<option value="nvidia">NVIDIA</option>
-			<option value="amd">AMD</option>
-		</select>
-	<br>
-	<br>
-	<div class="sort-container">
-		<label for="sort-by">Sort By:</label>
-		<select id="sort-by">
-			<option value="recommended">Recommended</option>
-			<option value="price-high-low">Price: High-Low</option>
-			<option value="price-low-high">Price: Low-High</option>
-			<option value="performance-high-low">Performance: High-Low</option>
-			<option value="performance-low-high">Performance: Low-High</option>
-		</select>
-	</div>
+        <label for="ssd">SSD Storage:</label>
+        <select id="ssd">
+            <option value="">Any</option>
+            <option value="256">128 GB</option>
+            <option value="256">256 GB</option>
+            <option value="512">512 GB</option>
+            <option value="1024">1 TB</option>
+            <option value="2048">2 TB</option>
+            <option value="4096">4 TB</option>
+        </select>
 
-	<br>
-	<table class="my-table">
-		<thead>
-			<tr>
-				<th>Name</th>
-				<th>CPU</th>
-				<th>Core Count</th>
-				<th>CPU Boost Clock</th>
-				<th>Memory</th>
-				<th>SSD Storage</th>
-				<th>HDD Storage</th>
-				<th>Graphics Card</th>
-				<th>AVG Performance</th>
-				<th>Price</th>
-			</tr>
-		</thead>
+        <label for="hdd">HDD Storage:</label>
+        <select id="hdd">
+            <option value="">Any</option>
+            <option value="500">500 GB</option>
+            <option value="1000">1 TB</option>
+            <option value="2000">2 TB</option>
+            <option value="4000">4 TB</option>
+            <option value="8000">8 TB</option>
+        </select>
 
-	<tbody id="comparison-table-body">
-		<!-- Table rows will be dynamically populated here -->
-	</tbody>
-
-	</table>
-		<!--Use JavaScript to fetch data from MySQLWorkbench and populate the table -->
-
+        <label for="graphics">Graphics Card:</label>
+        <select id="graphics">
+            <option value="">Any</option>
+            <option value="nvidia">NVIDIA</option>
+            <option value="amd">AMD</option>
+        </select>
+    <br>
+    <br>
+    <div class="sort-container">
+        <label for="sort-by">Sort By:</label>
+        <select id="sort-by">
+            <option value="recommended">Recommended</option>
+            <option value="price-high-low">Price: High-Low</option>
+            <option value="price-low-high">Price: Low-High</option>
+            <option value="performance-high-low">Performance: High-Low</option>
+            <option value="performance-low-high">Performance: Low-High</option>
+        </select>
     </div>
-	<!--Script for sliders -->
-	<script>
-		var slider = document.getElementById('cpu-clock-slider');
-		var minValue = document.getElementById('cpu-clock-min').value;
-		var maxValue = document.getElementById('cpu-clock-max').value;
-	
-		noUiSlider.create(slider, {
-		  start: [minValue, maxValue],
-		  connect: true,
-		  step: 0.1,
-		  range: {
-			'min': parseFloat(minValue),
-			'max': parseFloat(maxValue)
-		  }
-		});
-	
-		slider.noUiSlider.on('update', function(values, handle) {
-		  var value = parseFloat(values[handle]);
-		  if (handle == 0) {
-			document.getElementById('cpu-clock-slider').value = value;
-		  } else {
-			document.getElementById('cpu-clock-max').value = value;
-		  }
-		});
-	  </script>
+
+    <br>
+        <table class="my-table">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>CPU</th>
+                    <th>Core Count</th>
+                    <th>CPU Boost Clock</th>
+                    <th>Memory</th>
+                    <th>SSD Storage</th>
+                    <th>HDD Storage</th>
+                    <th>Graphics Card</th>
+                    <th>AVG Performance</th>
+                    <th>Price</th>
+                </tr>
+            </thead>
+            <tbody id="pcTableBody">
+            </tbody>
+        </table>
+    </div>
+    <div class="footer">
+    </div>
+    <script>
+        $(document).ready(function() {
+            // Function to populate the comparison table with data
+            function populateTable() {
+                $.ajax({
+                    url: "/get_pcs",  // Endpoint to retrieve PC data from the database
+                    type: "GET",
+                    success: function(data) {
+                        var pcTableBody = $("#pcTableBody");
+
+                        // Clear the table body before populating with new data
+                        pcTableBody.empty();
+
+                        // Iterate over the data and create table rows
+                        for (var i = 0; i < data.length; i++) {
+                            var pc = data[i];
+                            var row = "<tr>" +
+                                "<td>" + pc.title + "</td>" +
+                                "<td>" + pc.cpu + "</td>" +
+                                "<td>" + pc.coreCount + "</td>" +
+                                "<td>" + pc.cpuBoostClock + "</td>" +
+                                "<td>" + pc.memory + "</td>" +
+                                "<td>" + pc.ssdStorage + "</td>" +
+                                "<td>" + pc.hddStorage + "</td>" +
+                                "<td>" + pc.graphicsCard + "</td>" +
+                                "<td>" + pc.avgPerformance + "</td>" +
+                                "<td>" + pc.price + "</td>" +
+                                "</tr>";
+
+                            pcTableBody.append(row);
+                        }
+                    },
+                    error: function() {
+                        console.log("Error retrieving PC data.");
+                    }
+                });
+            }
+
+            populateTable();  // Call the populateTable function to initially fill the table with data
+        });
+    </script>
 </body>
 </html>
-
