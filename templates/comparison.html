@@ -6,12 +6,9 @@
 	<link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/14.6.4/nouislider.min.css" integrity="sha512-UVTEaeJYXzeIzP0oMtdRH29z1VQ8uE5CC1VieS/ZF5R5L5xxHi0eU+kH7U4ZB0iHQ6uH5ETrFrwVJy5GrPYScg==" crossorigin="anonymous" />
  	<script src="https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/14.6.4/nouislider.min.js" integrity="sha512-CYEtI/Pegk+41J2jqMhWbJcGVv+MPfZ1sQs1tT13E0edJzHyNx0Bt57gzi8WFXeCwvOktq3f0+PxX8Wb1cLlPA==" crossorigin="anonymous"></script>
-	<script src="js/apifyScraper.js"></script>
-	<script src="js/filter-table.js"></script>
-	<script src="js/populate-table.js"></script>
-	<script src="js/range-update.js"></script>
-
-	 
+	<script src="static/js/apifyScraper.js"></script>
+	<script src="static/js/filter-table.js"></script>
+	<script src="static/js/populate-table.js"></script>
 </head>
 <body>
 	<header>
@@ -139,13 +136,9 @@
 	<tbody id="comparison-table-body">
 		<!-- Table rows will be dynamically populated here -->
 	</tbody>
-	<script src="{{ url_for('static', filename='populate-table.js') }}"></script>
-
-
 
 	</table>
 		<!--Use JavaScript to fetch data from MySQLWorkbench and populate the table -->
-		
 
     </div>
 	<!--Script for sliders -->
@@ -167,7 +160,7 @@
 		slider.noUiSlider.on('update', function(values, handle) {
 		  var value = parseFloat(values[handle]);
 		  if (handle == 0) {
-			document.getElementById('cpu-clock').value = value;
+			document.getElementById('cpu-clock-slider').value = value;
 		  } else {
 			document.getElementById('cpu-clock-max').value = value;
 		  }
