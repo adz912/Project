@@ -53,8 +53,9 @@ def get_pcs():
     # Close the database connection
     mydb.close()
 
-    # Return the data as JSON response
+    # Return the data as a list of dictionaries
     return jsonify(data)
+
 
 
 @app.route('/insert_pc', methods=['POST'])
@@ -83,9 +84,6 @@ def insert_pc():
     # Commit the changes and close the database connection
     db.commit()
     db.close()
-
-    return jsonify({'message': 'PC data inserted successfully!'})
-
 
 if __name__ == '__main__':
     app.run(debug=True)
