@@ -34,6 +34,9 @@ def register():
 def comparison():
     return render_template('comparison.html')
 
+@app.route('/learn-more')
+def learnMore():
+    return render_template('learn-more.html')
 
 @app.route('/get_pcs', methods=['GET'])
 def get_pcs():

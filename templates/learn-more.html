@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>PC Comparison Tool</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <header>
+        <a href="/">
+        <img src="{{ url_for('static', filename='images/PcComparisonTool.png') }}" alt="PC Comparison Tool">
+    </a>  
+        <nav>
+            <ul>
+                <section id="home">
+                    <h2><a href="/">Home</a></h2>
+                </section>
+                <section id="about">
+                    <h2><a href="/about">About Us</a></h2>
+                </section>
+                <section id="contact">
+                    <h2><a href="/contact">Contact</a></h2>
+                </section>
+                <section id="learn-more">
+                    <h2><a href="/learn-more">Learn More</a></h2>
+                </section>
+                
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <div class="text-box">
+          <section id="cpu-learn">
+            <h2>What is a CPU?</h2>
+            <p>A CPU, short for Central Processing Unit, is often referred to as the "brains" of a computer. It is responsible for executing
+              instructions and performing calculations that drive the overall operation of the computer system. The CPU's primary function
+              is to process data and perform tasks according to the instructions provided by software programs.</p>
+            <p>The performance of a CPU greatly influences the overall speed and responsiveness of a computer. A faster CPU can handle more
+              instructions per second, resulting in improved multitasking capabilities, faster program execution, and smoother user experiences.</p>
+            <p>Want to learn even more? Here are some useful links:</p>
+            <ul>
+              <li><a href="https://greenvalleygaming.com/how-does-cpu-affect-gaming/" id="learn-link">How does a CPU affect gaming performance?</a></li>
+              <li><a href="https://www.digitaltrends.com/computing/what-is-a-cpu/" id="learn-link">What is a CPU?</a></li>
+              <li><a href="https://www.tomshardware.com/reviews/cpu-buying-guide,5643.html" id="learn-link">CPU Buying Guide</a></li>
+            </ul>
+          </section>
+
+          <section id="cpu-cores-learn">
+            <h2>What are CPU Cores?</h2>
+            <p>CPU Cores refer to the individual processing units within a Central Processing Unit (CPU). 
+                A CPU core is responsible for executing instructions and performing calculations in a computer system. 
+                The more CPU cores a processor has, the more tasks it can handle simultaneously.</p>
+            <p>CPU cores play a crucial role in determining the performance and multitasking capabilities of a computer. 
+                With multiple CPU cores, a processor can divide and conquer tasks, allowing for parallel processing and improved efficiency. 
+                This can result in faster execution times, smoother multitasking, and better overall performance, especially in applications that can utilize multiple cores.</p>
+            <p>It's important to note that not all software or tasks can effectively utilize multiple CPU cores. 
+                Some applications are primarily single-threaded, meaning they can only utilize a single CPU core. 
+                In such cases, a CPU with higher clock speed and single-core performance may offer better performance for those specific tasks.</p>
+            <p>Want to learn even more? Here are some useful links:</p>
+            <ul>
+              <li><a href="https://www.tomshardware.com/news/cpu-core-definition,37658.html" id="learn-link">What are CPU cores?</a></li>
+              <li><a href="https://www.liquidweb.com/blog/difference-cpu-cores-thread/#:~:text=Understanding%20CPU%20Threads,speed%20and%20efficiency%20of%20multitasking." id="learn-link">What are threads?</a></li>
+            </ul>
+          </section>
+          
+          <section id="cpu-clock-speed-learn">
+            <h2>What is CPU Clock Speed?</h2>
+            <p>CPU Clock Speed refers to the frequency at which a Central Processing Unit (CPU) completes a processing cycle. 
+                It is measured in Hertz (Hz) and represents the number of cycles a CPU can execute per second. 
+                A higher clock speed generally indicates faster processing capabilities.</p>
+            <p>The clock speed of a CPU determines how quickly it can execute instructions and perform calculations. 
+                A higher clock speed means that more instructions can be processed in a given time, leading to improved performance in tasks that require high-speed processing, 
+                such as gaming, video editing, and complex simulations.</p>
+            <p>It's important to note that comparing clock speeds alone may not provide a complete picture of performance, 
+                as different CPUs may have varying efficiencies and architectures. Additionally, advancements in technology have allowed CPUs to become more efficient, 
+                offering better performance even at lower clock speeds.</p>
+            <p>When considering CPU clock speed, it's also essential to understand that software and applications can have varying levels of multi-threaded optimization. 
+                Some software can effectively utilize multiple cores or threads, while others may primarily rely on a single core.</p>
+            <p>Want to learn even more? Here are some useful links:</p>
+            <ul>
+                <li><a href="https://www.tomshardware.com/news/clock-speed-definition,37657.html" id="learn-link">What is CPU Clock Speed?</a></li>
+              <li><a href="https://www.makeuseof.com/cpu-core-count-vs-clock-speed-what-is-more-important/" id="learn-link">CPU Core Count or Clock Speed?</a></li>
+            </ul>
+          </section>
+          
+
+          <section id="memory-learn">
+            <h2>What is Memory?</h2>
+            <p>Memory, also known as RAM (Random Access Memory), plays a crucial role in a computer's performance. Unlike storage, which stores
+              your applications and files long-term, memory is responsible for temporarily holding the data and instructions that your computer
+              needs to actively process.</p>
+            <p>The more RAM you have and the faster it is, the better your computer's multitasking capabilities become. With more RAM, you can
+              run multiple applications simultaneously without experiencing performance bottlenecks. Faster RAM allows for quicker data access,
+              resulting in smoother and more responsive computing experiences.</p>
+            <p>Want to learn even more? Here are some useful links:</p>
+            <ul>
+              <li><a href="https://www.digitaltrends.com/computing/what-is-ram/" id="learn-link">What is RAM?</a></li>
+              <li><a href="https://www.tomsguide.com/features/how-much-ram-do-i-need-heres-how-to-know" id="learn-link">How much RAM do I need?</a></li>
+            </ul>
+          </section>
+          
+
+          <section id="storage-learn">
+            <h2>What is Storage?</h2>
+            <p>Storage refers to the ability to store and retrieve data for long-term use. 
+                It provides a means to store files, programs, and operating systems even when the computer is powered off. 
+                Storage plays a crucial role in preserving data and enabling quick access to it.</p>
+            <p>The more storage you have, the more things you can store, including documents, photos, videos, games, and applications. 
+                Having ample storage allows you to keep a larger collection of files and media, 
+                giving you the flexibility to store and access a variety of content.</p>
+            <p>Want to learn even more? Here are some useful links:</p>
+            <ul>
+              <li><a href="https://www.techopedia.com/definition/1115/storage" id="learn-link">What is Storage?</a></li>
+              <li id="HowMuch"><a href="https://www.howtogeek.com/795993/how-much-storage-do-i-need-on-my-computer/" id="learn-link">How much Storage do I need?</a></li>
+            </ul>
+          </section>
+          
+
+        <section id="SSDorHDD">
+            <h2>What is an SSD? What is a HDD?</h2>
+            <p>Solid State Drives (SSDs) use flash memory technology to store data. They are faster, more reliable, and more power-efficient than traditional hard disk drives (HDDs). 
+                SSDs have no moving parts, which results in faster data access times and improved overall system performance. 
+                They are commonly used as the primary storage in modern computers due to their speed and reliability.
+
+                Hard Disk Drives (HDDs) are the traditional mechanical storage devices found in many computers. They use rotating magnetic platters and read/write 
+                heads to store and retrieve data. HDDs offer larger storage capacities at a lower cost compared to SSDs. 
+                However, they are relatively slower in terms of data transfer speeds and can be more susceptible to physical damage due to their mechanical nature.
+            </p>
+            <p>Want to learn even more? Here are some useful links:</p>
+            <ul>
+                <li><a href="https://www.avast.com/c-what-is-ssd" id="learn-link">What is an SSD?</a></li>
+                <li><a href="https://uk.crucial.com/articles/pc-builders/what-is-a-hard-drive" id="learn-link">What is an HDD?</a></li>
+            </ul>
+        </section>
+
+        <section id="What should I pick/prioritise?">
+            <h2>What storage should I pick for my PC?</h2>
+            <p>Overall, SSDs (Solid State Drives) and HDDs (Hard Disk Drives) have distinct advantages that make them suitable for different PC needs:
+                <br>
+                <br>
+                <b>SSDs:</b>
+                SSDs offer significant benefits in terms of speed and performance. They excel in boot times, loading applications, and accessing data quickly. 
+                With no moving parts, SSDs are more resistant to physical damage and provide silent operation. 
+                They are ideal for users who prioritize fast system responsiveness, quick file transfers, and snappy application performance. 
+                SSDs are particularly beneficial for gaming enthusiasts, content creators, and professionals who work with large files or resource-intensive applications.
+                <br>
+                <br>
+                <b>HDDs:</b>
+                HDDs are still relevant for users who require massive storage capacity at an affordable price. 
+                They provide ample space for storing large media libraries, extensive file archives, and backups. 
+                HDDs are a cost-effective option for users who prioritize storage volume over speed. 
+                HDDs are suitable for tasks such as data backup, media storage, and archival purposes.
+                
+                Ultimately, the choice between SSDs and HDDs depends on individual needs and budget considerations. 
+                For users seeking a balance between performance and storage capacity, 
+                a combination of SSD for the operating system and frequently used applications, along with an HDD for bulk storage, can offer the best of both worlds.
+                
+                It's worth noting that as SSD technology advances and prices continue to drop, 
+                they are becoming increasingly popular as the primary storage solution for many PC users due to their noticeable speed advantages.
+            </p>
+            <p>Want to learn even more? Here are some useful links:</p>
+            <ul>
+                <li><a href="https://www.easeus.com/partition-master/does-ssd-speed-matter-for-gaming.html" id="learn-link">Does SSD Speed Matter?</a></li>
+                <li><a href="https://www.computerscience.gcse.guru/theory/storage-devices" id="learn-link">Different types of storage?</a></li>
+            </ul>
+        </section>
+
+        <section id="graphics-card-learn">
+            <h2>What is a Graphics Card?</h2>
+            <p>A Graphics Card, also known as a video card or GPU (Graphics Processing Unit), 
+                is a crucial component of a computer system that handles the rendering and display of images, videos, and graphics-intensive tasks. 
+                It's responsible for processing and generating the visual output that you see on your monitor.</p>
+            <p>A high-performance graphics card can greatly impact the visual quality, smoothness, and overall performance of graphics-intensive applications such as games, 
+                video editing software, and 3D rendering programs. It offloads the graphical processing tasks from the CPU, 
+                allowing for faster and more efficient rendering of complex visual elements.</p>
+            <p>Graphics cards are available in various models and configurations, each offering different levels of performance, features, and compatibility. 
+                They are typically equipped with dedicated memory (VRAM) and specialized processors to handle graphics-related computations.</p>
+            <p>Want to learn even more? Here are some useful links:</p>
+            <ul>
+              <li><a href="https://www.tomshardware.com/reviews/gpu-buying-guide,5844.html" id="learn-link">Graphics Card Buying Guide</a></li>
+              <li><a href="https://www.nvidia.com/en-us/geforce/graphics-cards/" id="learn-link">NVIDIA Graphics Cards</a></li>
+              <li><a href="https://www.amd.com/en/graphics" id="learn-link">AMD Graphics Cards</a></li>
+            </ul>
+          </section>
+          
+          <section id="ray-tracing-learn">
+            <h2>What is Ray Tracing?</h2>
+            <p>Ray Tracing is a rendering technique used in computer graphics to simulate the behavior of light in a virtual environment. 
+               It traces the path of individual rays of light as they interact with objects in the scene, calculating how they reflect, refract, and illuminate the surrounding surfaces.</p>
+            <p>Rather than using traditional rendering methods, which approximate light behavior, ray tracing produces more realistic and accurate lighting effects, reflections, and shadows. 
+               It can enhance the visual quality of games and other graphical applications by providing lifelike lighting and improved realism.</p>
+            <p>Having a GPU capable of ray tracing is essential for experiencing the full benefits of this technology. 
+               Ray tracing GPUs are optimized to handle the complex calculations involved in tracing rays of light, which can significantly improve the visual quality of games and simulations.</p>
+            <p>With ray tracing, game developers can create more realistic lighting, shadows, and reflections, leading to enhanced immersion and visual fidelity. 
+               However, it's important to note that enabling ray tracing may require more computational power, resulting in increased GPU load and potentially impacting overall performance. 
+               Some users may need to balance graphical fidelity and performance depending on their hardware capabilities and personal preferences.</p>
+            <p>Want to learn even more? Here are some useful links and videos:</p>
+            <ul>
+              <li><a href="https://www.nvidia.com/en-gb/geforce/rtx/" id="learn-link">NVIDIA Ray Tracing</a></li>
+              <li><a href="https://www.makeuseof.com/nvidia-vs-amd-ray-tracing-support/" id="learn-link">What GPUs support Ray Tracing?</a></li>
+              <li><a href="https://www.digitaltrends.com/computing/what-is-ray-tracing/" id="learn-link">What is Ray Tracing?</a></li>
+            </ul>
+            <div class="video-container">
+                <h3>Cyberpunk 2077 Ray Tracing Overdrive ON vs OFF</h3>
+              <iframe width="480" height="270" src="https://www.youtube.com/embed/X8XfvuCwLg8" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                <h3>Cyberpunk RT Overdrive Benchmarks, Image Quality, Path Tracing, & DLSS</h3>
+              <iframe width="480" height="270" src="https://www.youtube.com/embed/0EYaMupOPJg" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </div>
+          </section>
+          
+          <section id="vram-learn">
+            <h2>What is VRAM?</h2>
+            <p>VRAM, short for Video Random Access Memory, is a type of memory specifically designed to store graphical data and accelerate the rendering process in graphics cards.</p>
+            <p>Graphics cards use VRAM to store textures, shaders, frame buffers, and other graphical data required for rendering images and videos on a display. 
+                It acts as a dedicated memory pool for the graphics processing unit (GPU), allowing faster access to data compared to system RAM.</p>
+            <p>The amount of VRAM available in a graphics card has a significant impact on its performance and the visual quality it can deliver. 
+                Higher VRAM capacity enables the card to handle more complex and detailed textures, resulting in improved graphics and smoother gameplay.</p>
+            <p>When a game or application requires more VRAM than is available, it can lead to performance issues such as stuttering, texture pop-ins, or reduced graphical fidelity. 
+                It's important to ensure that your graphics card has sufficient VRAM for the specific tasks you intend to perform, whether it's gaming, content creation, or other GPU-intensive workloads.</p>
+            <p>Want to learn more about VRAM? Check out the following resources:</p>
+            <ul>
+              <li><a href="https://www.pcworld.com/article/2903372/vram-what-it-is-and-how-it-works.html" id="learn-link">Understanding VRAM: What is it and how does it work?</a></li>
+              <li><a href="https://www.digitaltrends.com/computing/how-much-vram-do-you-need/" id="learn-link">How much VRAM do you need?</a></li>
+              <li><a href="https://www.tomshardware.com/reviews/vram-explained-graphics-card-memory,6347.html" id="learn-link">VRAM Explained: What is Video Memory?</a></li>
+            </ul>
+            <div class="video-container">
+              <h3>How important is VRAM?</h3>
+
+                <iframe width="480" height="270" src="https://www.youtube.com/embed/mWp5HjLGkjY" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+              </div>
+              <h3>How Much VRAM Do You Need?</h3>
+                <iframe width="480" height="270" src="https://www.youtube.com/embed/KTNvdZd3FeM" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+              </div>
+            </div>
+          </section>
+          
+    </div>
+    </main>
+    <footer>
+        <div class="footer-content">
+            <p class="footer-text">PC Comparison Tool</p>
+            <p class="footer-disclaimer">Please note this website is not intended for commercial use.</p>
+        </div>
+    </footer>
+    <script src="{{ url_for('static', filename='autoScroll.js') }}"></script>
+</body>
+</html>
