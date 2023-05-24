@@ -251,6 +251,54 @@
             width: 220px;
          }
         
+         /* CSS code for Tips */
+         .tooltip {
+          position: relative;
+          display: inline-block;
+          cursor: pointer;
+        }
+        
+        .info-icon {
+          display: inline-block;
+          width: 15px;
+          height: 15px;
+          line-height: 15px;
+          text-align: center;
+          background-color: #333;
+          color: #fff;
+          border-radius: 50%;
+          font-weight: bold;
+          font-size: 12px;
+          margin-right: 5px;
+        }
+        
+        .tooltip .tooltip-text {
+          visibility: hidden;
+          background-color: #333;
+          color: #fff;
+          text-align: center;
+          border-radius: 6px;
+          padding: 5px;
+          position: absolute;
+          z-index: 1;
+          top: 100%; /* Adjust this value to control the distance of tooltip from the 'i' icon */
+          left: 50%;
+          transform: translateX(-50%);
+          opacity: 0;
+          transition: opacity 0.3s;
+        }
+        
+        
+        .tooltip:hover .tooltip-text {
+          visibility: visible;
+          opacity: 1;
+        }
+
+        .learn-more-link {
+          color: #1e90ff;
+        }
+        
+        
         
 
 
