@@ -58,7 +58,6 @@ function filterTable() {
 
 
 
-// Function to sort the table based on the selected option
 function sortTable() {
   var sortBySelect = document.getElementById("sort-by");
   var sortByValue = sortBySelect.value;
@@ -72,30 +71,52 @@ function sortTable() {
   switch (sortByValue) {
     case "price-high-low":
       sortedRows.sort(function (a, b) {
-        var priceA = parseFloat(a.cells[9].textContent.replace("£", ""));
-        var priceB = parseFloat(b.cells[9].textContent.replace("£", ""));
+        var priceA = parseFloat(a.cells[10].textContent.replace("£", ""));
+        var priceB = parseFloat(b.cells[10].textContent.replace("£", ""));
         return priceB - priceA;
       });
       break;
     case "price-low-high":
       sortedRows.sort(function (a, b) {
-        var priceA = parseFloat(a.cells[9].textContent.replace("£", ""));
-        var priceB = parseFloat(b.cells[9].textContent.replace("£", ""));
+        var priceA = parseFloat(a.cells[10].textContent.replace("£", ""));
+        var priceB = parseFloat(b.cells[10].textContent.replace("£", ""));
         return priceA - priceB;
       });
       break;
-    case "performance-high-low":
+    case "performance-high-low-cpu":
       sortedRows.sort(function (a, b) {
-        var performanceA = parseFloat(a.cells[8].textContent);
-        var performanceB = parseFloat(b.cells[8].textContent);
-        return performanceB - performanceA;
+        var performanceA = parseFloat(a.cells[2].textContent);
+        var performanceB = parseFloat(b.cells[2].textContent);
+        if (performanceA < performanceB) return 1;
+        if (performanceA > performanceB) return -1;
+        return 0;
       });
       break;
-    case "performance-low-high":
+    case "performance-low-high-cpu":
       sortedRows.sort(function (a, b) {
-        var performanceA = parseFloat(a.cells[8].textContent);
-        var performanceB = parseFloat(b.cells[8].textContent);
-        return performanceA - performanceB;
+        var performanceA = parseFloat(a.cells[2].textContent);
+        var performanceB = parseFloat(b.cells[2].textContent);
+        if (performanceA < performanceB) return -1;
+        if (performanceA > performanceB) return 1;
+        return 0;
+      });
+      break;
+    case "performance-high-low-gpu":
+      sortedRows.sort(function (a, b) {
+        var performanceA = parseFloat(a.cells[9].textContent);
+        var performanceB = parseFloat(b.cells[9].textContent);
+        if (performanceA < performanceB) return 1;
+        if (performanceA > performanceB) return -1;
+        return 0;
+      });
+      break;
+    case "performance-low-high-gpu":
+      sortedRows.sort(function (a, b) {
+        var performanceA = parseFloat(a.cells[9].textContent);
+        var performanceB = parseFloat(b.cells[9].textContent);
+        if (performanceA < performanceB) return -1;
+        if (performanceA > performanceB) return 1;
+        return 0;
       });
       break;
     default:
@@ -123,3 +144,4 @@ function updateTable() {
 // Event listener for the "Sort By" dropdown change
 var sortBySelect = document.getElementById("sort-by");
 sortBySelect.addEventListener("change", updateTable);
+

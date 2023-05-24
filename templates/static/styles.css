@@ -272,7 +272,8 @@
 
           select[id="sort-by"] {
             display: inline-block;
-            width: 220px;
+            min-width: 120px;
+            max-width: 500px;
          }
         
          /* CSS code for Tips */

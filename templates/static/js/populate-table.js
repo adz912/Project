@@ -18,6 +18,7 @@ $(document).ready(function() {
                     var row = "<tr>" +
                         "<td>" + pc.title + "</td>" +
                         "<td>" + pc.cpu + "</td>" +
+                        "<td>" + pc.avgCPUperformance + "</td>" +
                         "<td>" + pc.coreCount + "</td>" +
                         "<td>" + pc.cpuBoostClock + "</td>" +
                         "<td>" + pc.memory + "</td>" +

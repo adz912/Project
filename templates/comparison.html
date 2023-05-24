@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/14.6.4/nouislider.min.css" integrity="sha512-UVTEaeJYXzeIzP0oMtdRH29z1VQ8uE5CC1VieS/ZF5R5L5xxHi0eU+kH7U4ZB0iHQ6uH5ETrFrwVJy5GrPYScg==" crossorigin="anonymous" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/14.6.4/nouislider.min.js" integrity="sha512-CYEtI/Pegk+41J2jqMhWbJcGVv+MPfZ1sQs1tT13E0edJzHyNx0Bt57gzi8WFXeCwvOktq3f0+PxX8Wb1cLlPA==" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
 </head>
 <body>
     <header>
@@ -104,17 +105,20 @@
         </select>
     <br>
     <br>
+    
     <div class="sort-container">
         <label for="sort-by">Sort By:</label>
         <select id="sort-by">
-            <option value="recommended">Recommended</option>
+            <option value="Default">Default</option>
             <option value="price-high-low">Price: High-Low</option>
             <option value="price-low-high">Price: Low-High</option>
-            <option value="performance-high-low">Performance: High-Low</option>
-            <option value="performance-low-high">Performance: Low-High</option>
+            <option value="performance-high-low-cpu">3D Mark CPU Performance: High-Low</option>
+            <option value="performance-low-high-cpu">3D Mark CPU Performance: Low-High</option>
+            <option value="performance-high-low-gpu">3D Mark GPU Performance: High-Low</option>
+            <option value="performance-low-high-gpu">3D Mark GPU Performance: Low-High</option>
         </select>
     </div>
-
+    <script src="static/js/update-sort.js"></script>
     <br>
         <table class="my-table">
             <thead>
@@ -134,6 +138,15 @@
                             <a href="/learn-more" target="/learn-more" class="learn-more-link">Click here to learn more</a></span>
                         </div>
                       </th>
+                      <th id = "mark">
+                        <div class="tooltip">
+                            <span class="table-heading">3D Mark AVG CPU Performance</span><br>
+                            <span class="info-icon">i</span>
+                            <span class="tooltip-text">3D Mark is a benchmarking tool used to measure the performance of CPUs. The benchmark specifically is Time Spy. 
+                                It is one of many and it is always best to look at many reviews and benchmarks to see what kind of performance you will get.<br>
+                              <a href="https://benchmarks.ul.com/3dmark" target="/learn-more" class="learn-more-link">Click here to learn more</a></span>
+                          </div>
+                    </th>
                     <th>
                         <div class="tooltip">
                             <span class="table-heading">Core Count</span><br>
@@ -183,11 +196,12 @@
                               <a href="/learn-more" target="/learn-more" class="learn-more-link">Click here to learn more</a></span>
                           </div>
                     </th>
+                    
                     <th id = "mark">
                         <div class="tooltip">
-                            <span class="table-heading">3D Mark AVG Performance</span><br>
+                            <span class="table-heading">3D Mark AVG GPU Performance</span><br>
                             <span class="info-icon">i</span>
-                            <span class="tooltip-text">3D Mark is a benchmarking tool used to measure the performance of GPUs. 
+                            <span class="tooltip-text">3D Mark is a benchmarking tool used to measure the performance of GPUs. The benchmark specifically is Time Spy. 
                                 It is one of many and it is always best to look at many reviews and benchmarks to see what kind of performance you will get.<br>
                               <a href="https://benchmarks.ul.com/3dmark" target="/learn-more" class="learn-more-link">Click here to learn more</a></span>
                           </div>
