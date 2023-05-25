@@ -243,26 +243,22 @@
         .filter-group {
           /* Existing styles for the .filter-group container */
           margin-bottom: 10px;
+          display: flex;
+          flex-wrap: wrap;
+          align-items: center; /* Added alignment to center the checkboxes vertically */
         }
         
-        .filter-group label {
-          /* Existing styles for the filter labels */
+        
+        .filter-group div {
+          /* Added styles for the checkbox container */
+          margin-right: 10px; /* Adjust the margin as needed */
         }
         
-        .filter-group select,
-        .filter-group input[type="range"] {
-          /* Existing styles for the filter inputs */
-          width: 100%;
-          max-width: 200px; /* Adjust the max-width as needed */
+        .filter-group input[type="checkbox"] {
+          /* Existing styles for the checkboxes */
+          margin-right: 5px; /* Adjust the margin as needed */
         }
         
-        .filter-group:last-child {
-          flex-basis: 100%;
-        }
-        
-        .filter-group:not(:last-child) {
-          flex-basis: calc(50% - 5px); /* Adjust the width based on the number of filters */
-        }
         
         
 
