@@ -41,8 +41,14 @@ $(document).ready(function() {
                     var hddStorage = pc.hddStorage !== null ? pc.hddStorage : "N/A";  // Check if HDD Storage is null
 
                     var row = "<tr>" +
-                        "<td>" + pc.title + "</td>" +
-                        // Add the new favorite button column
+                        "<td>" +
+                        "<div class='product-image-container'>" +
+                            "<img src='" + pc.image_url + "' class='product-image'>" +
+                        "</div>" +
+                        "<div class='product-text'>" +
+                            "<span>" + pc.title + "</span>" +
+                            "<span>" + "</span>" +
+                        "</div>" +
                         "<td>" +
                             "<button id='favorite-button-" + pc.id + "' class='favorite-button " +
                             (pc.isFavorite ? "liked" : "") + "' onclick='toggleFavorite(" + pc.id + ")'>" +
@@ -58,7 +64,10 @@ $(document).ready(function() {
                         "<td>" + hddStorage + "</td>" +
                         "<td>" + pc.graphicsCard + "</td>" +
                         "<td>" + pc.avgPerformance + "</td>" +
-                        "<td>" + "£" + pc.price + "</td>" +
+                        "<td>" +
+                            "<a href='" + pc.amazon_link + "' target='_blank' class='price-link'>" +
+                                "£" + pc.price +
+                            "</a>" +
                         "</tr>";
 
                     pcTableBody.append(row);

@@ -4,6 +4,7 @@
     <title>PC Comparison Tool</title>
     <meta charset="utf-8">
     <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    
 </head>
 <body>
     <header>
@@ -28,20 +29,26 @@
             </ul>
         </nav>
     </header>
-    <section>
-        <div class="login-box">
-          <h2>Register</h2>
-          <form method="post" action="{{ url_for('register') }}">
+<section>
+    <div class="login-box">
+        <h2>Register</h2>
+        <form method="post" action="{{ url_for('register') }}">
             <label for="username">Username:</label>
             <input type="text" id="username" name="username" required>
             <label for="password">Password:</label>
-            <input type="password" id="password" name="password" required>
+            <input type="password" id="password" name="password" required pattern="^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{5,}$">
             <label for="confirm-password">Confirm Password:</label>
             <input type="password" id="confirm-password" name="confirm-password" required>
             <input type="submit" value="Register">
-          </form>
-          </div>
-        </div>
-      </section>
+            <script src="static/js/login-validation.js"></script>
+        </form>
+    </div>
+</section>
+<footer>
+    <div class="footer-content">
+      <p class="footer-text">PC Comparison Tool</p>
+      <p class="footer-disclaimer">Please note this website is not intended for commercial use.</p>
+      </div>
+  </footer>
 </body>
 </html>

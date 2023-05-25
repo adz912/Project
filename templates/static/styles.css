@@ -36,6 +36,8 @@
             margin-left: 12%;
             margin-right: 10%;
           }
+
+          
           
 
 
@@ -193,6 +195,20 @@
         }
 
         /* CSS code for PC Comparison Page */
+
+        .product-image-container {
+          text-align: center;
+        }
+        
+        .product-image {
+          width: 50px;
+          height: auto;
+        }
+        
+        .product-text {
+          text-align: center;
+        }
+        
         
         .my-table {
           border-collapse: collapse;

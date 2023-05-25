@@ -58,11 +58,24 @@ def index():
 
     return render_template('index.html')
 
+
 @app.route('/register', methods=['GET', 'POST'])
 def register():
     if request.method == 'POST':
         username = request.form['username']
         password = request.form['password']
+
+        if len(username) < 3:
+            return jsonify({'success': False, 'message': 'Username must contain at least 3 characters.'})
+
+        if len(password) < 5:
+            return jsonify({'success': False, 'message': 'Password must contain at least 5 characters including letters, numbers, and at least 1 symbol.'})
+
+        # Password pattern: at least one letter, one number, and one symbol
+        import re
+        password_pattern = r'^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{5,}$'
+        if not re.match(password_pattern, password):
+            return jsonify({'success': False, 'message': 'Password must contain at least one letter, one number, and one symbol. It should be at least 5 characters long.'})
 
         # Connect to the database
         mydb = mysql.connector.connect(
@@ -81,17 +94,17 @@ def register():
             existing_user = cursor.fetchone()
 
             if existing_user:
-                return 'Username already exists. Please choose a different username.'
+                return jsonify({'success': False, 'message': 'Username already exists. Please choose a different username.'})
 
             # Insert the new user into the database
             cursor.execute('INSERT INTO users (username, password) VALUES (%s, %s)', (username, password))
             mydb.commit()
 
             # Redirect the user to the index page
-            return redirect('/')
+            return jsonify({'success': True, 'message': 'Account successfully created.'})
 
         except mysql.connector.Error as err:
-            return f"Database error: {err}"
+            return jsonify({'success': False, 'message': f"Database error: {err}"})
 
         finally:
             # Close the database connection
@@ -99,6 +112,8 @@ def register():
             mydb.close()
 
     return render_template('register.html')
+
+
 
 
 @app.route('/about')
