@@ -4,38 +4,105 @@
     <title>Contact Us</title>
     <meta charset="utf-8">
     <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <style>
+        /* Styles Specifically for Contact Page */
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        .contact-info {
+            margin-bottom: 20px;
+        }
+
+        .contact-info li {
+            margin-bottom: 10px;
+        }
+
+        .contact-info li a {
+            color: #333;
+            text-decoration: none;
+        }
+
+        .contact-form {
+            max-width: 400px;
+            margin: 0 auto;
+        }
+
+        .contact-form input,
+        .contact-form textarea {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            resize: vertical;
+        }
+
+        .contact-form button {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            background-color: #333;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .contact-form button:hover {
+            background-color: #555;
+        }
+    </style>
 </head>
 <body>
     <header>
         <a href="/">
-        <img src="{{ url_for('static', filename='images/PcComparisonTool.png') }}" alt="PC Comparison Tool">
-    </a>  
+            <img src="{{ url_for('static', filename='images/PcComparisonTool.png') }}" alt="PC Comparison Tool">
+        </a>  
         <nav>
             <ul>
-                <section id="home">
-                    <h2><a href="/">Home</a></h2>
-                </section>
-                <section id="about">
-                    <h2><a href="/about">About Us</a></h2>
-                </section>
-                <section id="contact">
-                    <h2><a href="/contact">Contact</a></h2>
-                </section>
-                <section id="learn-more">
-                    <h2><a href="/learn-more">Learn More</a></h2>
-                </section>
-                
+                <li><a href="/">Home</a></li>
+                <li><a href="/about">About</a></li>
+                <li><a href="/contact">Contact</a></li>
+                <li><a href="/learn-more">Learn More</a></li>
+                {% if 'user_id' in session %}
+                    <li><a href="/comparison">Comparison</a></li>
+                    {% if 'user_id' in session %}
+                        <li><a href="/profile">Profile</a></li>
+                    {% endif %}
+                    <li><a href="/logout" class="logout-button">Logout</a></li>
+                {% else %}
+                    <li><a href="/register">Register</a></li>
+                {% endif %}
             </ul>
         </nav>
     </header>
-    <div class = "text-box">
-    <p>If you have a complaint or would like to provide feedback, we would love to hear from you! Please feel free to reach out to us using the email address or phone number provided below.</p>
-    <h2>Contact Information:</h2>
-    <ul>
-        <li>Email: <a href="mailto:pccomparisontool@gmail.com">pccomparisontool@gmail.com</a></li>
-        <li>Phone: +44 7900 111 123</li>
-    </ul>
-    <p>We value your input and strive to provide the best possible experience for our users. Whether you have a suggestion, concern, or praise, we are eager to listen and address your needs. Thank you for choosing to contact us.</p>
-</div>
+    <div class="container">
+
+
+        <div class="contact-form">
+            <h2>Get in Touch</h2>
+            <p>We value your input and strive to provide the best possible experience for our users. 
+                Whether you have a suggestion, concern, or praise, we are eager to listen and address your needs. 
+                Thank you for choosing to contact us.</p>
+            <form action="#" method="post">
+                <input type="text" name="name" placeholder="Your Name" required>
+                <input type="email" name="email" placeholder="Your Email" required>
+                <textarea name="message" placeholder="Your Message" rows="5" required></textarea>
+                <button type="submit">Send Message</button>
+            </form>
+        </div>
+
+       
+    </div>
 </body>
+</html>
+
 </html>

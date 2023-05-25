@@ -6,28 +6,28 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
 </head>
 <body>
-    <header>
-        <a href="/">
+  <header>
+    <a href="/">
         <img src="{{ url_for('static', filename='images/PcComparisonTool.png') }}" alt="PC Comparison Tool">
     </a>  
-        <nav>
-            <ul>
-                <section id="home">
-                    <h2><a href="/">Home</a></h2>
-                </section>
-                <section id="about">
-                    <h2><a href="/about">About Us</a></h2>
-                </section>
-                <section id="contact">
-                    <h2><a href="/contact">Contact</a></h2>
-                </section>
-                <section id="learn-more">
-                    <h2><a href="/learn-more">Learn More</a></h2>
-                </section>
-                
-            </ul>
-        </nav>
-    </header>
+    <nav>
+        <ul>
+            <li><a href="/">Home</a></li>
+            <li><a href="/about">About</a></li>
+            <li><a href="/contact">Contact</a></li>
+            <li><a href="/learn-more">Learn More</a></li>
+            {% if 'user_id' in session %}
+                <li><a href="/comparison">Comparison</a></li>
+                {% if 'user_id' in session %}
+                    <li><a href="/profile">Profile</a></li>
+                {% endif %}
+                <li><a href="/logout" class="logout-button">Logout</a></li>
+            {% else %}
+                <li><a href="/register">Register</a></li>
+            {% endif %}
+        </ul>
+    </nav>
+</header>
     <main>
         <div class="text-box">
           <section id="cpu-learn">
@@ -39,9 +39,9 @@
               instructions per second, resulting in improved multitasking capabilities, faster program execution, and smoother user experiences.</p>
             <p>Want to learn even more? Here are some useful links:</p>
             <ul>
-              <li><a href="https://greenvalleygaming.com/how-does-cpu-affect-gaming/" id="learn-link">How does a CPU affect gaming performance?</a></li>
-              <li><a href="https://www.digitaltrends.com/computing/what-is-a-cpu/" id="learn-link">What is a CPU?</a></li>
-              <li><a href="https://www.tomshardware.com/reviews/cpu-buying-guide,5643.html" id="learn-link">CPU Buying Guide</a></li>
+              <li><a href="https://greenvalleygaming.com/how-does-cpu-affect-gaming/" id="link">How does a CPU affect gaming performance?</a></li>
+              <li><a href="https://www.digitaltrends.com/computing/what-is-a-cpu/" id="link">What is a CPU?</a></li>
+              <li><a href="https://www.tomshardware.com/reviews/cpu-buying-guide,5643.html" id="link">CPU Buying Guide</a></li>
             </ul>
           </section>
 
@@ -58,8 +58,8 @@
                 In such cases, a CPU with higher clock speed and single-core performance may offer better performance for those specific tasks.</p>
             <p>Want to learn even more? Here are some useful links:</p>
             <ul>
-              <li><a href="https://www.tomshardware.com/news/cpu-core-definition,37658.html" id="learn-link">What are CPU cores?</a></li>
-              <li><a href="https://www.liquidweb.com/blog/difference-cpu-cores-thread/#:~:text=Understanding%20CPU%20Threads,speed%20and%20efficiency%20of%20multitasking." id="learn-link">What are threads?</a></li>
+              <li><a href="https://www.tomshardware.com/news/cpu-core-definition,37658.html" id="link">What are CPU cores?</a></li>
+              <li><a href="https://www.liquidweb.com/blog/difference-cpu-cores-thread/#:~:text=Understanding%20CPU%20Threads,speed%20and%20efficiency%20of%20multitasking." id="link">What are threads?</a></li>
             </ul>
           </section>
           
@@ -78,8 +78,8 @@
                 Some software can effectively utilize multiple cores or threads, while others may primarily rely on a single core.</p>
             <p>Want to learn even more? Here are some useful links:</p>
             <ul>
-                <li><a href="https://www.tomshardware.com/news/clock-speed-definition,37657.html" id="learn-link">What is CPU Clock Speed?</a></li>
-              <li><a href="https://www.makeuseof.com/cpu-core-count-vs-clock-speed-what-is-more-important/" id="learn-link">CPU Core Count or Clock Speed?</a></li>
+                <li><a href="https://www.tomshardware.com/news/clock-speed-definition,37657.html" id="link">What is CPU Clock Speed?</a></li>
+              <li><a href="https://www.makeuseof.com/cpu-core-count-vs-clock-speed-what-is-more-important/" id="link">CPU Core Count or Clock Speed?</a></li>
             </ul>
           </section>
           
@@ -94,8 +94,8 @@
               resulting in smoother and more responsive computing experiences.</p>
             <p>Want to learn even more? Here are some useful links:</p>
             <ul>
-              <li><a href="https://www.digitaltrends.com/computing/what-is-ram/" id="learn-link">What is RAM?</a></li>
-              <li><a href="https://www.tomsguide.com/features/how-much-ram-do-i-need-heres-how-to-know" id="learn-link">How much RAM do I need?</a></li>
+              <li><a href="https://www.digitaltrends.com/computing/what-is-ram/" id="link">What is RAM?</a></li>
+              <li><a href="https://www.tomsguide.com/features/how-much-ram-do-i-need-heres-how-to-know" id="link">How much RAM do I need?</a></li>
             </ul>
           </section>
           
@@ -110,8 +110,8 @@
                 giving you the flexibility to store and access a variety of content.</p>
             <p>Want to learn even more? Here are some useful links:</p>
             <ul>
-              <li><a href="https://www.techopedia.com/definition/1115/storage" id="learn-link">What is Storage?</a></li>
-              <li id="HowMuch"><a href="https://www.howtogeek.com/795993/how-much-storage-do-i-need-on-my-computer/" id="learn-link">How much Storage do I need?</a></li>
+              <li><a href="https://www.techopedia.com/definition/1115/storage" id="link">What is Storage?</a></li>
+              <li id="HowMuch"><a href="https://www.howtogeek.com/795993/how-much-storage-do-i-need-on-my-computer/" id="link">How much Storage do I need?</a></li>
             </ul>
           </section>
           
@@ -128,8 +128,8 @@
             </p>
             <p>Want to learn even more? Here are some useful links:</p>
             <ul>
-                <li><a href="https://www.avast.com/c-what-is-ssd" id="learn-link">What is an SSD?</a></li>
-                <li><a href="https://uk.crucial.com/articles/pc-builders/what-is-a-hard-drive" id="learn-link">What is an HDD?</a></li>
+                <li><a href="https://www.avast.com/c-what-is-ssd" id="link">What is an SSD?</a></li>
+                <li><a href="https://uk.crucial.com/articles/pc-builders/what-is-a-hard-drive" id="link">What is an HDD?</a></li>
             </ul>
         </section>
 
@@ -160,8 +160,8 @@
             </p>
             <p>Want to learn even more? Here are some useful links:</p>
             <ul>
-                <li><a href="https://www.easeus.com/partition-master/does-ssd-speed-matter-for-gaming.html" id="learn-link">Does SSD Speed Matter?</a></li>
-                <li><a href="https://www.computerscience.gcse.guru/theory/storage-devices" id="learn-link">Different types of storage?</a></li>
+                <li><a href="https://www.easeus.com/partition-master/does-ssd-speed-matter-for-gaming.html" id="link">Does SSD Speed Matter?</a></li>
+                <li><a href="https://www.computerscience.gcse.guru/theory/storage-devices" id="link">Different types of storage?</a></li>
             </ul>
         </section>
 
@@ -177,9 +177,9 @@
                 They are typically equipped with dedicated memory (VRAM) and specialized processors to handle graphics-related computations.</p>
             <p>Want to learn even more? Here are some useful links:</p>
             <ul>
-              <li><a href="https://www.tomshardware.com/reviews/gpu-buying-guide,5844.html" id="learn-link">Graphics Card Buying Guide</a></li>
-              <li><a href="https://www.nvidia.com/en-us/geforce/graphics-cards/" id="learn-link">NVIDIA Graphics Cards</a></li>
-              <li><a href="https://www.amd.com/en/graphics" id="learn-link">AMD Graphics Cards</a></li>
+              <li><a href="https://www.tomshardware.com/reviews/gpu-buying-guide,5844.html" id="link">Graphics Card Buying Guide</a></li>
+              <li><a href="https://www.nvidia.com/en-us/geforce/graphics-cards/" id="link">NVIDIA Graphics Cards</a></li>
+              <li><a href="https://www.amd.com/en/graphics" id="link">AMD Graphics Cards</a></li>
             </ul>
           </section>
           
@@ -196,9 +196,9 @@
                Some users may need to balance graphical fidelity and performance depending on their hardware capabilities and personal preferences.</p>
             <p>Want to learn even more? Here are some useful links and videos:</p>
             <ul>
-              <li><a href="https://www.nvidia.com/en-gb/geforce/rtx/" id="learn-link">NVIDIA Ray Tracing</a></li>
-              <li><a href="https://www.makeuseof.com/nvidia-vs-amd-ray-tracing-support/" id="learn-link">What GPUs support Ray Tracing?</a></li>
-              <li><a href="https://www.digitaltrends.com/computing/what-is-ray-tracing/" id="learn-link">What is Ray Tracing?</a></li>
+              <li><a href="https://www.nvidia.com/en-gb/geforce/rtx/" id="link">NVIDIA Ray Tracing</a></li>
+              <li><a href="https://www.makeuseof.com/nvidia-vs-amd-ray-tracing-support/" id="link">What GPUs support Ray Tracing?</a></li>
+              <li><a href="https://www.digitaltrends.com/computing/what-is-ray-tracing/" id="link">What is Ray Tracing?</a></li>
             </ul>
             <div class="video-container">
                 <h3>Cyberpunk 2077 Ray Tracing Overdrive ON vs OFF</h3>
@@ -219,9 +219,9 @@
                 It's important to ensure that your graphics card has sufficient VRAM for the specific tasks you intend to perform, whether it's gaming, content creation, or other GPU-intensive workloads.</p>
             <p>Want to learn more about VRAM? Check out the following resources:</p>
             <ul>
-              <li><a href="https://www.pcworld.com/article/2903372/vram-what-it-is-and-how-it-works.html" id="learn-link">Understanding VRAM: What is it and how does it work?</a></li>
-              <li><a href="https://www.digitaltrends.com/computing/how-much-vram-do-you-need/" id="learn-link">How much VRAM do you need?</a></li>
-              <li><a href="https://www.tomshardware.com/reviews/vram-explained-graphics-card-memory,6347.html" id="learn-link">VRAM Explained: What is Video Memory?</a></li>
+              <li><a href="https://www.pcworld.com/article/2903372/vram-what-it-is-and-how-it-works.html" id="link">Understanding VRAM: What is it and how does it work?</a></li>
+              <li><a href="https://www.digitaltrends.com/computing/how-much-vram-do-you-need/" id="link">How much VRAM do you need?</a></li>
+              <li><a href="https://www.tomshardware.com/reviews/vram-explained-graphics-card-memory,6347.html" id="link">VRAM Explained: What is Video Memory?</a></li>
             </ul>
             <div class="video-container">
               <h3>How important is VRAM?</h3>

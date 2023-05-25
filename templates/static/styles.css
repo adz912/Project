@@ -112,18 +112,33 @@
           }
 
 
-          label {
-            font-weight: bold;
-          }
-          
+        /* Style for Like Button */
+        .favorite-button {
+          border-radius: 20px;
+          padding: 5px 10px;
+          cursor: pointer;
+        }
+
+        .favorite-button.clicked {
+          background-color: #90ee90;
+        }
+
+        .favorite-button:focus {
+          outline: none;
+        }
+
+                
+
 
         nav ul {
             display: flex;
             justify-content: space-evenly;
             list-style-type: none;
             margin: 0;
+
           }
 
+          
           nav a {
             color: black;
             text-decoration: none;
@@ -147,6 +162,8 @@
           
           nav li {
             display: inline-block;
+            font-weight: bold;
+            font-size: 18px;
           }
           
           #price-slider {
@@ -262,7 +279,6 @@
         
         
 
-
         
         #filterInput {
           padding: 10px;
@@ -342,20 +358,20 @@
         }
 
         /* CSS for links in Learn More section */
-        .learn-more-link {
-          color: #1e90ff;
-        }
 
-        a#learn-link {
+        a#link {
           color: black;
           text-decoration: none;
           transition: color 0.4s;
         }
 
-        a#learn-link:hover {
+        a#link:hover {
           color: #1e90ff;
           transition: color 0.4s;
         }
+
+
+
 
         /* CSS for Video Player section */
         .video-container {

@@ -43,12 +43,12 @@ function filterTable() {
     var row = rows[i];
     var cells = row.getElementsByTagName("td");
     var name = cells[0].textContent.toUpperCase();
-    var cpu = cells[1].textContent.toUpperCase();
-    var graphics = cells[8].textContent.toUpperCase();
-    var coreCount = cells[3].textContent;
-    var memory = cells[5].textContent;
-    var ssdStorage = cells[6].textContent;
-    var hddStorage = cells[7].textContent;
+    var cpu = cells[2].textContent.toUpperCase();
+    var graphics = cells[9].textContent.toUpperCase();
+    var coreCount = cells[4].textContent;
+    var memory = cells[6].textContent;
+    var ssdStorage = cells[7].textContent;
+    var hddStorage = cells[8].textContent;
 
     var matchSearch = name.includes(filter) || filter === "";
     var matchCPU = selectedCPU.length === 0 || selectedCPU.some(option => cpu.includes(option));
@@ -111,43 +111,43 @@ function sortTable() {
   switch (sortByValue) {
     case "price-high-low":
       sortedRows.sort(function (a, b) {
-        var priceA = parseFloat(a.cells[10].textContent.replace("£", ""));
-        var priceB = parseFloat(b.cells[10].textContent.replace("£", ""));
+        var priceA = parseFloat(a.cells[11].textContent.replace("£", ""));
+        var priceB = parseFloat(b.cells[11].textContent.replace("£", ""));
         return priceB - priceA;
       });
       break;
     case "price-low-high":
       sortedRows.sort(function (a, b) {
-        var priceA = parseFloat(a.cells[10].textContent.replace("£", ""));
-        var priceB = parseFloat(b.cells[10].textContent.replace("£", ""));
+        var priceA = parseFloat(a.cells[11].textContent.replace("£", ""));
+        var priceB = parseFloat(b.cells[11].textContent.replace("£", ""));
         return priceA - priceB;
       });
       break;
     case "performance-high-low-cpu":
       sortedRows.sort(function (a, b) {
-        var performanceA = parseFloat(a.cells[2].textContent);
-        var performanceB = parseFloat(b.cells[2].textContent);
+        var performanceA = parseFloat(a.cells[3].textContent);
+        var performanceB = parseFloat(b.cells[3].textContent);
         return performanceB - performanceA;
       });
       break;
     case "performance-low-high-cpu":
       sortedRows.sort(function (a, b) {
-        var performanceA = parseFloat(a.cells[2].textContent);
-        var performanceB = parseFloat(b.cells[2].textContent);
+        var performanceA = parseFloat(a.cells[3].textContent);
+        var performanceB = parseFloat(b.cells[3].textContent);
         return performanceA - performanceB;
       });
       break;
     case "performance-high-low-gpu":
       sortedRows.sort(function (a, b) {
-        var performanceA = parseFloat(a.cells[9].textContent);
-        var performanceB = parseFloat(b.cells[9].textContent);
+        var performanceA = parseFloat(a.cells[10].textContent);
+        var performanceB = parseFloat(b.cells[10].textContent);
         return performanceB - performanceA;
       });
       break;
     case "performance-low-high-gpu":
       sortedRows.sort(function (a, b) {
-        var performanceA = parseFloat(a.cells[9].textContent);
-        var performanceB = parseFloat(b.cells[9].textContent);
+        var performanceA = parseFloat(a.cells[10].textContent);
+        var performanceB = parseFloat(b.cells[10].textContent);
         return performanceA - performanceB;
       });
       break;

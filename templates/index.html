@@ -8,23 +8,20 @@
 <body>
     <header>
         <a href="/">
-        <img src="{{ url_for('static', filename='images/PcComparisonTool.png') }}" alt="PC Comparison Tool">
-    </a>  
+            <img src="{{ url_for('static', filename='images/PcComparisonTool.png') }}" alt="PC Comparison Tool">
+        </a>  
         <nav>
             <ul>
-                <section id="home">
-                    <h2><a href="/">Home</a></h2>
-                </section>
-                <section id="about">
-                    <h2><a href="/about">About Us</a></h2>
-                </section>
-                <section id="contact">
-                    <h2><a href="/contact">Contact</a></h2>
-                </section>
-                <section id="learn-more">
-                    <h2><a href="/learn-more">Learn More</a></h2>
-                </section>
-                
+                <li><a href="/">Home</a></li>
+                <li><a href="/about">About</a></li>
+                <li><a href="/contact">Contact</a></li>
+                <li><a href="/learn-more">Learn More</a></li>
+                {% if 'user_id' in session %}
+                    <li><a href="/comparison">Comparison</a></li>
+                    <li><a href="/logout" class="logout-button">Logout</a></li>
+                {% else %}
+                    <li><a href="/register">Register</a></li>
+                {% endif %}
             </ul>
         </nav>
     </header>
@@ -38,38 +35,17 @@
                 <label for="password">Password:</label>
                 <input type="password" id="password" name="password">
                 <br>
-                <input type="submit" value="Login" onclick="checkCredentials(event)">
-                <input type="button" value="Not a user? Register Here" onclick="window.location.href='/register'">
+                <input type="submit" value="Login">
+                <input type="button" value="Not a user? Register Here" onclick="redirectToRegister()">
             </form>
         </div>
         <script>
-            function checkCredentials(event) {
-              // Prevent the default form submission behavior
-              event.preventDefault();
-          
-              // Get the values of the username and password fields
-              const username = document.getElementById("username").value;
-              const password = document.getElementById("password").value;
-          
-              // Check if the username and password are correct
-              if (username === "Admin" && password === "Admin") {
-                // Redirect the user to the comaprison.html page
-                window.location.href = "/comparison";
-              } else {
-                // Display an error message
-                alert("Incorrect username or password. Please try again.");
-              }
-            }   
-        </script>  
+            function redirectToRegister() {
+                window.location.href = "/register";
+            }
+        </script>
     </section>
     <footer>
     </footer>
 </body>
 </html>
-
-
-
-
-
-
-

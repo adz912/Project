@@ -8,44 +8,49 @@
 <body>
     <header>
         <a href="/">
-        <img src="{{ url_for('static', filename='images/PcComparisonTool.png') }}" alt="PC Comparison Tool">
-    </a>  
+            <img src="{{ url_for('static', filename='images/PcComparisonTool.png') }}" alt="PC Comparison Tool">
+        </a>  
         <nav>
             <ul>
-                <section id="home">
-                    <h2><a href="/">Home</a></h2>
-                </section>
-                <section id="about">
-                    <h2><a href="/about">About Us</a></h2>
-                </section>
-                <section id="contact">
-                    <h2><a href="/contact">Contact</a></h2>
-                </section>
-                <section id="learn-more">
-                    <h2><a href="/learn-more">Learn More</a></h2>
-                </section>
-                
+                <li><a href="/">Home</a></li>
+                <li><a href="/about">About</a></li>
+                <li><a href="/contact">Contact</a></li>
+                <li><a href="/learn-more">Learn More</a></li>
+                {% if 'user_id' in session %}
+                    <li><a href="/comparison">Comparison</a></li>
+                    {% if 'user_id' in session %}
+                        <li><a href="/profile">Profile</a></li>
+                    {% endif %}
+                    <li><a href="/logout" class="logout-button">Logout</a></li>
+                {% else %}
+                    <li><a href="/register">Register</a></li>
+                {% endif %}
             </ul>
         </nav>
     </header>
     <main>
         <section>
-            <div class = "text-box">
-                    <h2>About Us</h2>
-                    <p class="about-p">
-                        With our website, we wanted to make it easier for everyone when it comes to buying a PC.
-                        We know it can be a daunting process, especially when you're about to shell out your hard 
-                        earned money on an expensive rig. With so many options to choose from, we wanted to give you,
-                        the buyer the knowledge and insight that you deserve when it comes to knowing what the best systems
-                        are for your desired budget, and to inform you on what you're actually buying.
-                    </p>
+            <div class="text-box">
+                <h2>About Us</h2>
+                <p class="about-p">
+                    Welcome to PC Comparison Tool! We are passionate about making the PC buying process easier for everyone. We understand that choosing the right PC can be overwhelming, especially when you're about to invest your hard-earned money in a high-performance machine. With the vast number of options available, we want to provide you with the knowledge and insights you need to make informed decisions based on your desired budget and requirements.
+                </p>
 
-                    <h2>How Our Website Works</h2>
+                <h2>How Our Website Works</h2>
+                <p class="about-p">
+                    Our website is designed to simplify the PC comparison process. Here's how it works:
+                    <ol>
+                        <li>Start by <a href="/register" id="link">registering an account</a> or logging in if you already have one.</li>
+                        <li>Explore our database of PCs and their specifications.</li>
+                        <li>Use our intuitive comparison tool to select the PCs you want to compare.</li>
+                        <li>View detailed side-by-side comparisons of the selected PCs, including performance, features, and pricing.</li>
+                        <li>You can then make an informed decision and choose the PC that best fits your needs and budget!</li><br>
+                    </ol>
+                </p>
             </div>
         </section>
     </main>
     <footer>
-        <p>Contact Us: example@example.com | Phone: 123-456-7890</p>
     </footer>
 </body>
 </html>

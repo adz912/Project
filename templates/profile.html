@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>PC Comparison Tool</title>
+    <title>PC Comparison Tool - Profile</title>
     <meta charset="utf-8">
     <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
 </head>
@@ -28,20 +28,19 @@
             </ul>
         </nav>
     </header>
-    <section>
-        <div class="login-box">
-          <h2>Register</h2>
-          <form method="post" action="{{ url_for('register') }}">
-            <label for="username">Username:</label>
-            <input type="text" id="username" name="username" required>
-            <label for="password">Password:</label>
-            <input type="password" id="password" name="password" required>
-            <label for="confirm-password">Confirm Password:</label>
-            <input type="password" id="confirm-password" name="confirm-password" required>
-            <input type="submit" value="Register">
-          </form>
-          </div>
-        </div>
-      </section>
+    
+
+    <main>
+        <section>
+            <div class="text-box">
+                <h2>Profile</h2>
+                <!-- Add your profile content here -->
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>Contact Us: example@example.com | Phone: 123-456-7890</p>
+    </footer>
 </body>
 </html>

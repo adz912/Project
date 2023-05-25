@@ -1,4 +1,29 @@
 $(document).ready(function() {
+    // Function to toggle the favorite status of a PC
+    function toggleFavorite(pcId) {
+        var button = $("#favorite-button-" + pcId);
+        var isLiked = button.hasClass("liked");
+
+        // Send an AJAX request to update the favorite status
+        $.ajax({
+            url: "/api/toggle-favorite",
+            type: "POST",
+            data: { pcId: pcId, isLiked: isLiked },
+            success: function(response) {
+                if (response.success) {
+                    // Update the button text and style based on the new favorite status
+                    button.text(response.isLiked ? "Liked!" : "Like");
+                    button.toggleClass("liked");
+                } else {
+                    console.log("Error toggling favorite status:", response.error);
+                }
+            },
+            error: function() {
+                console.log("Error toggling favorite status.");
+            }
+        });
+    }
+
     // Function to populate the comparison table with data
     function populateTable() {
         $.ajax({
@@ -17,6 +42,13 @@ $(document).ready(function() {
 
                     var row = "<tr>" +
                         "<td>" + pc.title + "</td>" +
+                        // Add the new favorite button column
+                        "<td>" +
+                            "<button id='favorite-button-" + pc.id + "' class='favorite-button " +
+                            (pc.isFavorite ? "liked" : "") + "' onclick='toggleFavorite(" + pc.id + ")'>" +
+                            (pc.isFavorite ? "Liked!" : "Like") +
+                            "</button>" +
+                        "</td>" +
                         "<td>" + pc.cpu + "</td>" +
                         "<td>" + pc.avgCPUperformance + "</td>" +
                         "<td>" + pc.coreCount + "</td>" +
