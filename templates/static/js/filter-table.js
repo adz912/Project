@@ -1,23 +1,6 @@
 function filterTable() {
   var filterInput = document.getElementById("filterInput");
-  var cpuFilter = document.getElementById("cpu");
-  var coreCountFilter = document.getElementById("coreCountFilter");
-  var cpuClockFilter = document.getElementById("cpu-clock");
-  var priceRangeFilter = document.getElementById("price-range");
-  var memoryFilter = document.getElementById("memory");
-  var ssdFilter = document.getElementById("ssd");
-  var hddFilter = document.getElementById("hdd");
-  var graphicsFilter = document.getElementById("graphics");
-
   var filter = filterInput.value.toUpperCase();
-  var cpuValue = cpuFilter.value.toUpperCase();
-  var coreCountValue = coreCountFilter.value;
-  var cpuClockValue = parseFloat(cpuClockFilter.value);
-  var priceRangeValue = parseFloat(priceRangeFilter.value);
-  var memoryValue = memoryFilter.value;
-  var ssdValue = ssdFilter.value;
-  var hddValue = hddFilter.value;
-  var graphicsValue = graphicsFilter.value.toUpperCase();
 
   var table = document.getElementById("pcTableBody");
   var rows = table.getElementsByTagName("tr");
@@ -26,37 +9,16 @@ function filterTable() {
     var row = rows[i];
     var cells = row.getElementsByTagName("td");
     var name = cells[0].textContent.toUpperCase();
-    var cpu = cells[1].textContent.toUpperCase();
-    var coreCount = parseInt(cells[2].textContent);
-    var cpuClock = parseFloat(cells[3].textContent);
-    var price = parseFloat(cells[9].textContent);
-    var memory = cells[4].textContent;
-    var ssdStorage = cells[5].textContent;
-    var hddStorage = cells[6].textContent;
-    var graphicsCard = cells[7].textContent.toUpperCase();
-
-    var matchFilters =
-      cpu.includes(cpuValue) ||
-      coreCount === parseInt(coreCountValue) ||
-      (cpuClock >= cpuClockValue || isNaN(cpuClockValue)) ||
-      (price <= priceRangeValue || isNaN(priceRangeValue)) ||
-      memory.includes(memoryValue) ||
-      ssdStorage.includes(ssdValue) ||
-      hddStorage.includes(hddValue) ||
-      graphicsCard.includes(graphicsValue);
 
     var matchSearch = name.includes(filter) || filter === "";
 
-    if (matchFilters && matchSearch) {
+    if (matchSearch) {
       row.style.display = "";
     } else {
       row.style.display = "none";
     }
   }
 }
-
-
-
 
 function sortTable() {
   var sortBySelect = document.getElementById("sort-by");
@@ -134,14 +96,3 @@ function sortTable() {
     table.appendChild(row);
   });
 }
-
-// Function to handle both filtering and sorting
-function updateTable() {
-  filterTable();
-  sortTable();
-}
-
-// Event listener for the "Sort By" dropdown change
-var sortBySelect = document.getElementById("sort-by");
-sortBySelect.addEventListener("change", updateTable);
-

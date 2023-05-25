@@ -149,7 +149,10 @@
             display: inline-block;
           }
           
-          
+          #price-slider {
+            background-color: #1e90ff;
+            max-width: 200px;
+          }
           
           
           .hero-image {
@@ -230,51 +233,70 @@
         }
 
         
-          #filterInput {
-        padding: 10px;
-        font-size: 16px;
-        width: 140px;
-        border: 1px solid #ddd;
-        border-radius: 10px;
-        margin-bottom: 20px;
-      }
+        
+        .filter-row {
+          display: flex;
+          flex-wrap: wrap;
+          justify-content: space-between;
+        }
+        
+        .filter-group {
+          /* Existing styles for the .filter-group container */
+          margin-bottom: 10px;
+        }
+        
+        .filter-group label {
+          /* Existing styles for the filter labels */
+        }
+        
+        .filter-group select,
+        .filter-group input[type="range"] {
+          /* Existing styles for the filter inputs */
+          width: 100%;
+          max-width: 200px; /* Adjust the max-width as needed */
+        }
+        
+        .filter-group:last-child {
+          flex-basis: 100%;
+        }
+        
+        .filter-group:not(:last-child) {
+          flex-basis: calc(50% - 5px); /* Adjust the width based on the number of filters */
+        }
+        
+        
 
-        .container {
-            border-radius: 10px;
-            border-color: #007bff;
-            background-color: lightgray;
-            padding: 10px;
-            width: 90%;
-            margin: 0 auto;
-          }
 
-          select {
-            padding: 8px 12px;
-            width: 120px;
-            border-radius: 10px;
-            font-size: 16px;
-            box-sizing: border-box;
-            background-color: #fff;
-            border: 1px solid #ccc;
-
-          }
-
-          .sort-container {
-            display: flex;
-            justify-content: flex-end;
-            align-items: center;
-            margin-right: 20px;
-          }
-          
-          .sort-container label {
-            margin-right: 20px;
-          }
-
-          select[id="sort-by"] {
-            display: inline-block;
-            min-width: 120px;
-            max-width: 500px;
-         }
+        
+        #filterInput {
+          padding: 10px;
+          font-size: 16px;
+          width: 140px;
+          border: 1px solid #ddd;
+          border-radius: 10px;
+          margin-right: 10px; /* Added margin-right to create space between input and label */
+        }
+        
+        .sort-container {
+          display: flex;
+          align-items: center;
+          margin-bottom: 20px;
+        }
+        
+        .sort-container label {
+          margin-right: 10px; /* Added margin-right to create space between label and select */
+        }
+        
+        select {
+          padding: 8px 12px;
+          width: 120px;
+          border-radius: 10px;
+          font-size: 16px;
+          box-sizing: border-box;
+          background-color: #fff;
+          border: 1px solid #ccc;
+        }
+        
         
          /* CSS code for Tips */
          .tooltip {
