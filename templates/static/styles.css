@@ -16,6 +16,7 @@
 
         header {
             text-align: center;
+            margin-bottom: 10px;
           }
           
 
@@ -162,6 +163,7 @@
           nav {
             background: (#f5f5f5);
             border-radius: 0;
+            border-top: 1px solid rgb(232, 232, 232);
             border-bottom: 1px solid rgb(232, 232, 232); /* add a thin black line at the bottom of the box */
           }
           
@@ -319,6 +321,7 @@
           border: 1px solid #ddd;
           border-radius: 10px;
           margin-right: 10px; /* Added margin-right to create space between input and label */
+          height: 18px;
         }
         
         .sort-container {
@@ -329,17 +332,36 @@
         
         .sort-container label {
           margin-right: 10px; /* Added margin-right to create space between label and select */
+          font-weight: bold;
         }
         
         select {
           padding: 8px 12px;
-          width: 120px;
+          width: 80px;
           border-radius: 10px;
           font-size: 16px;
           box-sizing: border-box;
           background-color: #fff;
           border: 1px solid #ccc;
+          height: 40px;
         }
+
+        input[type="number"] {
+          padding: 6px 10px;
+          width: 100px;
+          border-radius: 8px;
+          font-size: 14px;
+          box-sizing: border-box;
+          background-color: #fff;
+          border: 1px solid #ccc;
+          
+          height: 40px;
+        }
+        
+        label[for="sort-by"] {
+          margin-left: 10px;
+        }
+        
         
         
          /* CSS code for Tips */
@@ -382,11 +404,22 @@
           text-align: center;
         }
         
-        
-        
+      
         .tooltip:hover .tooltip-text {
           visibility: visible;
           opacity: 1;
+        }
+
+        a.learn-more-link {
+          color: white;
+          text-decoration: underline;
+          transition: color 0.4s;
+        }
+      
+        a.learn-more-link:hover {
+          color: #1e90ff;
+          text-decoration: underline;
+          transition: color 0.4s;
         }
 
         /* CSS for links in Learn More section */
@@ -399,11 +432,52 @@
 
         a#link:hover {
           color: #1e90ff;
+          text-decoration: underline;
           transition: color 0.4s;
         }
+        
+      /* CSS for Contact Page */
+        .contact-info {
+          margin-bottom: 20px;
+      }
 
+      .contact-info li {
+          margin-bottom: 10px;
+      }
 
+      .contact-info li a {
+          color: #333;
+          text-decoration: none;
+      }
 
+      .contact-form * {
+          box-sizing: border-box;
+          }
+
+          .contact-form input,
+          .contact-form textarea {
+          width: 100%;
+          padding: 10px;
+          margin-bottom: 10px;
+          border: 1px solid #ccc;
+          border-radius: 4px;
+          resize: vertical;
+          }
+
+          .contact-form button {
+          display: block;
+          width: 100%;
+          padding: 10px;
+          background-color: #333;
+          color: #fff;
+          border: none;
+          border-radius: 4px;
+          cursor: pointer;
+          }
+
+          .contact-form button:hover {
+          background-color: #555;
+          }
 
         /* CSS for Video Player section */
         .video-container {

@@ -44,6 +44,9 @@ document.getElementById('register-form').addEventListener('submit', function(eve
   } else {
     // username and password do not meet the requirements
     // display an error message to the user
-    alert('Username must contain at least 3 characters and password must contain at least 5 characters including letters, numbers and 1 symbol.');
+    alert('Username must contain at least 3 characters and password must contain at least 5 characters including letters, numbers, and 1 symbol.');
   }
 });
+
+
+

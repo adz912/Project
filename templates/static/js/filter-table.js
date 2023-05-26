@@ -92,11 +92,6 @@ function filterTable() {
 
 
 
-
-
-
-
-
 // Sort table based on selected option
 function sortTable() {
   var sortBySelect = document.getElementById("sort-by");
@@ -151,6 +146,76 @@ function sortTable() {
         return performanceA - performanceB;
       });
       break;
+    case "core-count-high-low":
+      sortedRows.sort(function (a, b) {
+        var coreCountA = parseInt(a.cells[4].textContent);
+        var coreCountB = parseInt(b.cells[4].textContent);
+        return coreCountB - coreCountA;
+      });
+      break;
+    case "core-count-low-high":
+      sortedRows.sort(function (a, b) {
+        var coreCountA = parseInt(a.cells[4].textContent);
+        var coreCountB = parseInt(b.cells[4].textContent);
+        return coreCountA - coreCountB;
+      });
+      break;
+      case "boost-high-low":
+        sortedRows.sort(function (a, b) {
+          var boostA = convertBoostClockToGHz(a.cells[5].textContent);
+          var boostB = convertBoostClockToGHz(b.cells[5].textContent);
+          return boostB - boostA;
+        });
+        break;
+      case "boost-low-high":
+        sortedRows.sort(function (a, b) {
+          var boostA = convertBoostClockToGHz(a.cells[5].textContent);
+          var boostB = convertBoostClockToGHz(b.cells[5].textContent);
+          return boostA - boostB;
+        });
+        break;
+    case "memory-high-low":
+      sortedRows.sort(function (a, b) {
+        var memoryA = convertStorageToGB(a.cells[6].textContent);
+        var memoryB = convertStorageToGB(b.cells[6].textContent);
+        return memoryB - memoryA;
+      });
+      break;
+    case "memory-low-high":
+      sortedRows.sort(function (a, b) {
+        var memoryA = convertStorageToGB(a.cells[6].textContent);
+        var memoryB = convertStorageToGB(b.cells[6].textContent);
+        return memoryA - memoryB;
+      });
+      break;
+    case "ssd-high-low":
+      sortedRows.sort(function (a, b) {
+        var ssdA = convertStorageToGB(a.cells[7].textContent);
+        var ssdB = convertStorageToGB(b.cells[7].textContent);
+        return ssdB - ssdA;
+      });
+      break;
+    case "ssd-low-high":
+      sortedRows.sort(function (a, b) {
+        var ssdA = convertStorageToGB(a.cells[7].textContent);
+        var ssdB = convertStorageToGB(b.cells[7].textContent);
+        return ssdA - ssdB;
+      });
+      break;
+    case "hdd-high-low":
+      sortedRows.sort(function (a, b) {
+        var hddA = convertStorageToGB(a.cells[8].textContent);
+        var hddB = convertStorageToGB(b.cells[8].textContent);
+        return hddB - hddA;
+      });
+      break;
+    case "hdd-low-high":
+      sortedRows.sort(function (a, b) {
+        var hddA = convertStorageToGB(a.cells[8].textContent);
+        var hddB = convertStorageToGB(b.cells[8].textContent);
+        return hddA - hddB;
+      });
+      break;
     default:
       // No sorting needed
       return;
@@ -167,9 +232,87 @@ function sortTable() {
   });
 }
 
+// Function to convert CPU Boost Clock value with unit to GHz
+function convertBoostClockToGHz(boostClockValue) {
+  var numericValue = parseFloat(boostClockValue.replace(/[A-Za-z]/g, ""));
+  var unit = boostClockValue.match(/[A-Za-z]+/)[0].toLowerCase();
+  if (boostClockValue === "N/A") {
+    return 0;
+  }
+
+  if (unit === "ghz") {
+    return numericValue; // Already in GHz
+  }
+
+  if (unit === "mhz") {
+    numericValue /= 1000; // Convert MHz to GHz
+  }
+
+  return numericValue;
+}
+
+
+// Function to convert storage value with unit to GB
+function convertStorageToGB(storageValue) {
+  var numericValue = parseFloat(storageValue.replace(/[A-Za-z]/g, ""));
+  var unit = storageValue.match(/[A-Za-z]+/)[0].toLowerCase();
+  if (storageValue === "N/A") {
+    return 0;
+  }
+
+  if (unit === "tb") {
+    numericValue *= 1024; // Convert TB to GB
+  }
+
+  return numericValue;
+}
+
 // Attach event listeners to filter input and sort select
 var filterInput = document.getElementById("filterInput");
 filterInput.addEventListener("input", filterTable);
 
 var sortBySelect = document.getElementById("sort-by");
 sortBySelect.addEventListener("change", sortTable);
+
+
+// Filter table based on price range
+function filterByPrice() {
+  var minPrice = document.getElementById("price-min").value;
+  var maxPrice = document.getElementById("price-max").value;
+
+  var table = document.getElementById("pcTableBody");
+  var rows = table.getElementsByTagName("tr");
+
+  // Iterate over the rows and hide/show based on price range
+  for (var i = 0; i < rows.length; i++) {
+    var priceCell = rows[i].cells[11]; // Price cell is in the 11th column
+
+    if (priceCell) {
+      var price = parseFloat(priceCell.textContent.replace("£", ""));
+
+      if ((minPrice && price < minPrice) || (maxPrice && price > maxPrice)) {
+        rows[i].style.display = "none"; // Hide row if price is outside the range
+      } else {
+        rows[i].style.display = ""; // Show row if price is within the range
+      }
+    }
+  }
+}
+
+
+
+// Attach event listeners to filter input, sort select, and price range inputs
+var filterInput = document.getElementById("filterInput");
+filterInput.addEventListener("input", filterTable);
+
+var sortBySelect = document.getElementById("sort-by");
+sortBySelect.addEventListener("change", sortTable);
+
+var priceMinInput = document.getElementById("price-min");
+priceMinInput.addEventListener("input", filterByPrice);
+
+var priceMaxInput = document.getElementById("price-max");
+priceMaxInput.addEventListener("input", filterByPrice);
+
+
+

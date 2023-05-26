@@ -4,6 +4,7 @@
     <title>PC Comparison Tool</title>
     <meta charset="utf-8">
     <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+
 </head>
 <body>
     <header>
@@ -37,6 +38,8 @@
                 <br>
                 <input type="submit" value="Login">
                 <input type="button" value="Not a user? Register Here" onclick="redirectToRegister()">
+                <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script src="{{ url_for('static', filename='js/login-check.js') }}"></script>
             </form>
         </div>
         <script>
@@ -44,6 +47,7 @@
                 window.location.href = "/register";
             }
         </script>
+        
     </section>
     <footer>
         <div class="footer-content">

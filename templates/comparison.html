@@ -184,18 +184,37 @@
 
       
         <div class="sort-container">
-            <label for="name">Name:</label>
-            <input type="text" id="filterInput" onkeyup="filterTable()" placeholder="Search...">
-            <label for="sort-by">Sort By:</label>
-             <select id="sort-by" onchange="sortTable()">
-            <option value="Default">Default</option>
-            <option value="price-high-low">Price: High-Low</option>
-            <option value="price-low-high">Price: Low-High</option>
-            <option value="performance-high-low-cpu">3D Mark CPU Performance: High-Low</option>
-            <option value="performance-low-high-cpu">3D Mark CPU Performance: Low-High</option>
-            <option value="performance-high-low-gpu">3D Mark GPU Performance: High-Low</option>
-            <option value="performance-low-high-gpu">3D Mark GPU Performance: Low-High</option>
-          </select>
+              <label for="name">Name:</label>
+              <input type="text" id="filterInput" onkeyup="filterTable()" placeholder="Search...">
+
+              <label for="price-min">Price Range:</label>
+              <input type="number" id="price-min" placeholder="Min Price" oninput="filterByPrice()">
+              <p> -</p>
+              <input type="number" id="price-max" placeholder="Max Price" oninput="filterByPrice()">
+
+
+              <label for="sort-by">Sort By:</label>
+              
+
+            <select id="sort-by" onchange="sortTable()">
+              <option value="Default">Default</option>
+              <option value="performance-high-low-cpu">3D Mark CPU Performance: High-Low</option>
+              <option value="performance-low-high-cpu">3D Mark CPU Performance: Low-High</option>
+              <option value="core-count-high-low">Core Count: High-Low</option>
+              <option value="core-count-low-high">Core Count: Low-High</option>
+              <option value="boost-high-low">CPU Boost Clock: High-Low</option>
+              <option value="boost-low-high">CPU Boost Clock: Low-High</option>
+              <option value="memory-high-low">Memory: High-Low</option>
+              <option value="memory-low-high">Memory: Low-High</option>
+              <option value="ssd-high-low">SSD Storage: High-Low</option>
+              <option value="ssd-low-high">SSD Storage: Low-High</option>
+              <option value="hdd-high-low">HDD Storage: High-Low</option>
+              <option value="hdd-low-high">HDD Storage: Low-High</option>
+              <option value="performance-high-low-gpu">3D Mark GPU Performance: High-Low</option>
+              <option value="performance-low-high-gpu">3D Mark GPU Performance: Low-High</option>
+              <option value="price-high-low">Price: High-Low</option>
+              <option value="price-low-high">Price: Low-High</option>
+            </select>            
         </div>
       
         <script src="static/js/update-sort.js"></script>
@@ -226,16 +245,16 @@
                               <span class="table-heading">CPU</span><br>
                               <span class="info-icon">i</span>
                               <span class="tooltip-text">The Central Processing Unit. It is considered as the brains of the computer. <br>
-                                <a href="/learn-more" target="/learn-more" class="learn-more-link">Click here to learn more</a></span>
+                                <a href="/learn-more" target="/learn-more" class="learn-more-link"><br>Click here to learn more</a></span>
                             </div>
                           </th>
                           <th id = "mark">
                             <div class="tooltip">
                                 <span class="table-heading">3D Mark AVG CPU Performance</span><br>
                                 <span class="info-icon">i</span>
-                                <span class="tooltip-text">3D Mark is a benchmarking tool used to measure the performance of CPUs. The benchmark specifically is Time Spy. 
+                                <span class="tooltip-text">3D Mark is a benchmarking tool used to measure the performance of CPUs. The benchmark selected is Time Spy. 
                                     It is one of many and it is always best to look at many reviews and benchmarks to see what kind of performance you will get.<br>
-                                  <a href="https://benchmarks.ul.com/3dmark" target="/learn-more" class="learn-more-link">Click here to learn more</a></span>
+                                  <a href="https://benchmarks.ul.com/3dmark" target="/learn-more" class="learn-more-link"><br>Click here to learn more</a></span>
                               </div>
                         </th>
                         <th>
@@ -243,7 +262,7 @@
                                 <span class="table-heading">Core Count</span><br>
                                 <span class="info-icon">i</span>
                                 <span class="tooltip-text">How many cores are in the CPU <br>
-                                  <a href="/learn-more" target="/learn-more" class="learn-more-link">Click here to learn more</a></span>
+                                  <a href="/learn-more" target="/learn-more" class="learn-more-link"><br>Click here to learn more</a></span>
                               </div>
                         </th>
                         <th>
@@ -251,7 +270,7 @@
                                 <span class="table-heading">CPU Boost Clock</span><br>
                                 <span class="info-icon">i</span>
                                 <span class="tooltip-text">The Boost Clock Speed of the CPU. Generally the better especially for gaming.<br>
-                                  <a href="/learn-more" target="/learn-more" class="learn-more-link">Click here to learn more</a></span>
+                                  <a href="/learn-more" target="/learn-more" class="learn-more-link"><br>Click here to learn more</a></span>
                               </div>
                         </th>
                         <th>
@@ -260,7 +279,7 @@
                                 <span class="info-icon">i</span>
                                 <span class="tooltip-text">Also known as RAM. All applications are loaded into it and the more you have,
                                      the more apps you can have loaded at once.<br>
-                                  <a href="/learn-more" target="/learn-more" class="learn-more-link">Click here to learn more</a></span>
+                                  <a href="/learn-more" target="/learn-more" class="learn-more-link"><br>Click here to learn more</a></span>
                               </div>
                         </th>
                         <th>
@@ -268,7 +287,7 @@
                                 <span class="table-heading">SSD Storage</span><br>
                                 <span class="info-icon">i</span>
                                 <span class="tooltip-text">The amount of Solid State Drive Stoage.<br>
-                                  <a href="/learn-more" target="/learn-more" class="learn-more-link">Click here to learn more</a></span>
+                                  <a href="/learn-more" target="/learn-more" class="learn-more-link"><br>Click here to learn more</a></span>
                               </div>
                         </th>
                         <th>
@@ -276,7 +295,7 @@
                                 <span class="table-heading">HDD Storage</span><br>
                                 <span class="info-icon">i</span>
                                 <span class="tooltip-text">The amount of Hard Disk Drive Stoage.<br>
-                                  <a href="/learn-more" target="/learn-more" class="learn-more-link">Click here to learn more</a></span>
+                                  <a href="/learn-more" target="/learn-more" class="learn-more-link"><br>Click here to learn more</a></span>
                               </div>
                         </th>
                         <th>
@@ -284,7 +303,7 @@
                                 <span class="table-heading">Graphics Card</span><br>
                                 <span class="info-icon">i</span>
                                 <span class="tooltip-text">Also known as the GPU. Is responsible for all graphics tasks on the PC such as Gaming.<br>
-                                  <a href="/learn-more" target="/learn-more" class="learn-more-link">Click here to learn more</a></span>
+                                  <a href="/learn-more" target="/learn-more" class="learn-more-link"><br>Click here to learn more</a></span>
                               </div>
                         </th>
                         
@@ -292,9 +311,9 @@
                             <div class="tooltip">
                                 <span class="table-heading">3D Mark AVG GPU Performance</span><br>
                                 <span class="info-icon">i</span>
-                                <span class="tooltip-text">3D Mark is a benchmarking tool used to measure the performance of GPUs. The benchmark specifically is Time Spy. 
+                                <span class="tooltip-text">3D Mark is a benchmarking tool used to measure the performance of GPUs. The benchmark selected is Time Spy. 
                                     It is one of many and it is always best to look at many reviews and benchmarks to see what kind of performance you will get.<br>
-                                  <a href="https://benchmarks.ul.com/3dmark" target="/learn-more" class="learn-more-link">Click here to learn more</a></span>
+                                  <a href="https://benchmarks.ul.com/3dmark" target="/learn-more" class="learn-more-link"><br><br>Click here to learn more</a></span>
                               </div>
                         </th>
                         <th id = "price">
@@ -302,7 +321,7 @@
                                 <span class="table-heading">Price</span><br>
                                 <span class="info-icon">i</span>
                                 <span class="tooltip-text">Prices of the PC are prices extracted from Amazon.
-                                    Please note prices may not be fully up to date.<br>
+                                    Please note prices may not be fully up to date. Please click on the links below for up to date pricing.<br>
                               </div>
                         </th>
                     </tr>

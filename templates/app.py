@@ -37,11 +37,13 @@ def index():
             user = cursor.fetchone()
 
             if user is None:
-                return 'Invalid username or password.'
+                # User does not exist or incorrect username
+                return render_template('index.html', error='Invalid username or password.')
 
             # Check the password using password hashing
             if not check_password_hash(user[2], password):
-                return 'Invalid username or password.'
+                # Incorrect password
+                return render_template('index.html', error='Invalid username or password.')
 
             # Store the user's ID in the session
             session['user_id'] = user[0]
@@ -58,6 +60,8 @@ def index():
             mydb.close()
 
     return render_template('index.html')
+
+
 
 
 @app.route('/register', methods=['GET', 'POST'])
