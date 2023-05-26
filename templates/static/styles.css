@@ -113,6 +113,10 @@
             text-decoration: underline;
           }
 
+          
+          #pw-info {
+            font-size: 10px;
+          }
 
         /* Style for Like Button */
         .favorite-button {
@@ -209,6 +213,18 @@
           text-align: center;
         }
         
+        .product-price-link {
+          color: black;
+          text-decoration: none;
+          transition: color 0.4s;
+        }
+        
+        .product-price-link:hover {
+          color: #1e90ff;
+          transition: color 0.4s;
+        }
+        
+        
         
         .my-table {
           border-collapse: collapse;
@@ -219,7 +235,7 @@
         .my-table td {
           border: 1px solid #ccc;
           padding: 8px;
-          text-align: left;
+          text-align: center;
         }
 
         .my-table td {

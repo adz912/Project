@@ -29,21 +29,26 @@
             </ul>
         </nav>
     </header>
-<section>
-    <div class="login-box">
-        <h2>Register</h2>
-        <form method="post" action="{{ url_for('register') }}">
-            <label for="username">Username:</label>
-            <input type="text" id="username" name="username" required>
-            <label for="password">Password:</label>
-            <input type="password" id="password" name="password" required pattern="^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{5,}$">
-            <label for="confirm-password">Confirm Password:</label>
-            <input type="password" id="confirm-password" name="confirm-password" required>
-            <input type="submit" value="Register">
-            <script src="static/js/login-validation.js"></script>
-        </form>
-    </div>
-</section>
+    <section>
+        <div class="login-box">
+            <h2>Register</h2>
+            <form method="post" action="{{ url_for('register') }}" id="register-form">
+                <label for="username">Username:</label>
+                <p id="pw-info"></p>
+                <input type="text" id="username" name="username" required>
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password" required pattern="^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{5,}$">
+                <label for="confirm-password">Confirm Password:</label>
+                
+                <input type="password" id="confirm-password" name="confirm-password" required>
+                <input type="submit" value="Register">
+                <p id="pw-info">Note: Username must contain at least 3 characters and Password must contain at least 5 characters including letters, numbers and 1 symbol. </p>
+            </form>
+        </div>
+    </section>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="{{ url_for('static', filename='js/login-validation.js') }}"></script>
+    
 <footer>
     <div class="footer-content">
       <p class="footer-text">PC Comparison Tool</p>

@@ -41,45 +41,48 @@ $(document).ready(function() {
                     var hddStorage = pc.hddStorage !== null ? pc.hddStorage : "N/A";  // Check if HDD Storage is null
 
                     var row = "<tr>" +
-                        "<td>" +
-                        "<div class='product-image-container'>" +
-                            "<img src='" + pc.image_url + "' class='product-image'>" +
-                        "</div>" +
-                        "<div class='product-text'>" +
-                            "<span>" + pc.title + "</span>" +
-                            "<span>" + "</span>" +
-                        "</div>" +
-                        "<td>" +
-                            "<button id='favorite-button-" + pc.id + "' class='favorite-button " +
-                            (pc.isFavorite ? "liked" : "") + "' onclick='toggleFavorite(" + pc.id + ")'>" +
-                            (pc.isFavorite ? "Liked!" : "Like") +
-                            "</button>" +
-                        "</td>" +
-                        "<td>" + pc.cpu + "</td>" +
-                        "<td>" + pc.avgCPUperformance + "</td>" +
-                        "<td>" + pc.coreCount + "</td>" +
-                        "<td>" + pc.cpuBoostClock + "</td>" +
-                        "<td>" + pc.memory + "</td>" +
-                        "<td>" + pc.ssdStorage + "</td>" +
-                        "<td>" + hddStorage + "</td>" +
-                        "<td>" + pc.graphicsCard + "</td>" +
-                        "<td>" + pc.avgPerformance + "</td>" +
-                        "<td>" +
-                            "<a href='" + pc.amazon_link + "' target='_blank' class='price-link'>" +
-                                "£" + pc.price +
-                            "</a>" +
-                        "</tr>";
-
-                    pcTableBody.append(row);
-                    console.log("Populating table...");
+                    "<td>" +
+                      "<div class='product-image-container'>" +
+                        "<img src='" + pc.image_url + "' class='product-image'>" +
+                      "</div>" +
+                      "<div class='product-text'>" +
+                        "<span>" + pc.title + "</span>" +
+                      "</div>" +
+                    "</td>" +
+                    "<td>" +
+                      "<button id='favorite-button-" + pc.id + "' class='favorite-button " +
+                      (pc.isFavorite ? "liked" : "") + "' onclick='toggleFavorite(" + pc.id + ")'>" +
+                      (pc.isFavorite ? "Liked!" : "Like") +
+                      "</button>" +
+                    "</td>" +
+                    "<td>" + pc.cpu + "</td>" +
+                    "<td>" + pc.avgCPUperformance + "</td>" +
+                    "<td>" + pc.coreCount + "</td>" +
+                    "<td>" + pc.cpuBoostClock + "</td>" +
+                    "<td>" + pc.memory + "</td>" +
+                    "<td>" + pc.ssdStorage + "</td>" +
+                    "<td>" + hddStorage + "</td>" +
+                    "<td>" + pc.graphicsCard + "</td>" +
+                    "<td>" + pc.avgPerformance + "</td>" +
+                    "<td>" +
+                      "<div class='product-price-link'>" +
+                        "<a href='" + pc.amazon_link + "' target='_blank'>" +
+                          "£" + pc.price +
+                        "</a>" +
+                      "</div>" +
+                    "</td>" +
+                    "</tr>";
+        
+                  pcTableBody.append(row);
+                  console.log("Populating table...");
                 }
-            },
-            error: function() {
+              },
+              error: function() {
                 console.log("Error retrieving PC data.");
-            }
+              }
+            });
+          }
+        
+          // Call the populateTable function to initially populate the table
+          populateTable();
         });
-    }
-
-    // Call the populateTable function to initially populate the table
-    populateTable();
-});

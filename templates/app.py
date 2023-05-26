@@ -1,4 +1,5 @@
-from flask import Flask, render_template, jsonify, request, redirect, session
+from flask import Flask, render_template, jsonify, request, redirect, session, flash
+from werkzeug.security import generate_password_hash, check_password_hash
 import mysql.connector
 from sendgrid import SendGridAPIClient
 from sendgrid.helpers.mail import Mail
@@ -38,8 +39,8 @@ def index():
             if user is None:
                 return 'Invalid username or password.'
 
-            # Check the password
-            if user[2] != password:
+            # Check the password using password hashing
+            if not check_password_hash(user[2], password):
                 return 'Invalid username or password.'
 
             # Store the user's ID in the session
@@ -96,11 +97,13 @@ def register():
             if existing_user:
                 return jsonify({'success': False, 'message': 'Username already exists. Please choose a different username.'})
 
-            # Insert the new user into the database
-            cursor.execute('INSERT INTO users (username, password) VALUES (%s, %s)', (username, password))
+            # Hash the password
+            password_hash = generate_password_hash(password)
+
+            # Insert the new user into the database with the hashed password
+            cursor.execute('INSERT INTO users (username, password) VALUES (%s, %s)', (username, password_hash))
             mydb.commit()
 
-            # Redirect the user to the index page
             return jsonify({'success': True, 'message': 'Account successfully created.'})
 
         except mysql.connector.Error as err:
@@ -112,6 +115,7 @@ def register():
             mydb.close()
 
     return render_template('register.html')
+
 
 
 
