@@ -46,6 +46,7 @@
           <div id="graphics">
             <label><input type="checkbox" name="graphics-option" value="nvidia" onclick="updateTable()">NVIDIA</label>
             <label><input type="checkbox" name="graphics-option" value="amd" onclick="updateTable()">AMD</label>
+            <label><input type="checkbox" name="graphics-option" value="intel" onclick="updateTable()">Intel</label>
           </div>
         </div>
       </div>
@@ -178,7 +179,7 @@
           </div>
         </div>
       </div>
-    </div>
+    
     
 
 
@@ -197,7 +198,7 @@
               
 
             <select id="sort-by" onchange="sortTable()">
-              <option value="Default">Default</option>
+              <option value="Default">No Sorting</option>
               <option value="performance-high-low-cpu">3D Mark CPU Performance: High-Low</option>
               <option value="performance-low-high-cpu">3D Mark CPU Performance: Low-High</option>
               <option value="core-count-high-low">Core Count: High-Low</option>
@@ -212,14 +213,20 @@
               <option value="hdd-low-high">HDD Storage: Low-High</option>
               <option value="performance-high-low-gpu">3D Mark GPU Performance: High-Low</option>
               <option value="performance-low-high-gpu">3D Mark GPU Performance: Low-High</option>
+              <option value="1080-fps-high-low">1080P FPS: High-Low</option>
+              <option value="1080-fps-low-high">1080P FPS: Low-High</option>
+              <option value="4k-fps-high-low">4K FPS: High-Low</option>
+              <option value="4k-fps-low-high">4K FPS: Low-High</option>
               <option value="price-high-low">Price: High-Low</option>
               <option value="price-low-high">Price: Low-High</option>
+              <option value="price-performance-high-low">Price to Performance: High-Low</option>
+              <option value="price-performance-low-high">Price to Performance: Low-High</option>
             </select>            
         </div>
       
         <script src="static/js/update-sort.js"></script>
       </div>
-      
+    </div>
     </div>
         <br>
             <table class="my-table">
@@ -229,9 +236,10 @@
                             <div class="tooltip">
                               <span class="table-heading">Name</span><br>
                               <span class="info-icon">i</span>
-                              <span class="tooltip-text">Product Name</span>
+                              <span class="tooltip-text-name">Product Name</span>
                             </div>
                           </th>
+
                           <th>
                             <div class="tooltip">
                               <span class="table-heading-like">Like</span><br>
@@ -240,6 +248,7 @@
                                 </span>
                             </div>
                           </th>
+
                           <th>
                             <div class="tooltip">
                               <span class="table-heading">CPU</span><br>
@@ -248,15 +257,18 @@
                                 <a href="/learn-more" target="/learn-more" class="learn-more-link"><br>Click here to learn more</a></span>
                             </div>
                           </th>
+
                           <th id = "mark">
                             <div class="tooltip">
                                 <span class="table-heading">3D Mark AVG CPU Performance</span><br>
                                 <span class="info-icon">i</span>
                                 <span class="tooltip-text">3D Mark is a benchmarking tool used to measure the performance of CPUs. The benchmark selected is Time Spy. 
-                                    It is one of many and it is always best to look at many reviews and benchmarks to see what kind of performance you will get.<br>
+                                    It is one of many and it is always best to look at many reviews and benchmarks to see what kind of performance you will get. 
+                                    The higher the number, the faster the CPU.<br>
                                   <a href="https://benchmarks.ul.com/3dmark" target="/learn-more" class="learn-more-link"><br>Click here to learn more</a></span>
                               </div>
                         </th>
+
                         <th>
                             <div class="tooltip">
                                 <span class="table-heading">Core Count</span><br>
@@ -265,6 +277,7 @@
                                   <a href="/learn-more" target="/learn-more" class="learn-more-link"><br>Click here to learn more</a></span>
                               </div>
                         </th>
+
                         <th>
                             <div class="tooltip">
                                 <span class="table-heading">CPU Boost Clock</span><br>
@@ -273,6 +286,7 @@
                                   <a href="/learn-more" target="/learn-more" class="learn-more-link"><br>Click here to learn more</a></span>
                               </div>
                         </th>
+
                         <th>
                             <div class="tooltip">
                                 <span class="table-heading">Memory</span><br>
@@ -282,6 +296,7 @@
                                   <a href="/learn-more" target="/learn-more" class="learn-more-link"><br>Click here to learn more</a></span>
                               </div>
                         </th>
+
                         <th>
                             <div class="tooltip">
                                 <span class="table-heading">SSD Storage</span><br>
@@ -290,6 +305,7 @@
                                   <a href="/learn-more" target="/learn-more" class="learn-more-link"><br>Click here to learn more</a></span>
                               </div>
                         </th>
+
                         <th>
                             <div class="tooltip">
                                 <span class="table-heading">HDD Storage</span><br>
@@ -298,6 +314,7 @@
                                   <a href="/learn-more" target="/learn-more" class="learn-more-link"><br>Click here to learn more</a></span>
                               </div>
                         </th>
+
                         <th>
                             <div class="tooltip">
                                 <span class="table-heading">Graphics Card</span><br>
@@ -312,10 +329,32 @@
                                 <span class="table-heading">3D Mark AVG GPU Performance</span><br>
                                 <span class="info-icon">i</span>
                                 <span class="tooltip-text">3D Mark is a benchmarking tool used to measure the performance of GPUs. The benchmark selected is Time Spy. 
-                                    It is one of many and it is always best to look at many reviews and benchmarks to see what kind of performance you will get.<br>
+                                    It is one of many and it is always best to look at many reviews and benchmarks to see what kind of performance you will get.
+                                    The higher the number, the faster the GPU.<br>
                                   <a href="https://benchmarks.ul.com/3dmark" target="/learn-more" class="learn-more-link"><br><br>Click here to learn more</a></span>
                               </div>
                         </th>
+
+                        <th id = "mark">
+                          <div class="tooltip">
+                              <span class="table-heading">1080P (Medium) FPS</span><br>
+                              <span class="info-icon">i</span>
+                              <span class="tooltip-text">Average FPS at 1080P Medium Settings. Sourced information from Tom's Hardware. 
+                                  The higher the FPS, the faster the GPU.<br>
+                                <a href="https://www.tomshardware.com/reviews/gpu-hierarchy,4388.html" target="/learn-more" class="learn-more-link"><br><br>Click here to learn more</a></span>
+                            </div>
+                      </th>
+
+                        <th id = "mark">
+                          <div class="tooltip">
+                              <span class="table-heading">4K (Ultra) FPS</span><br>
+                              <span class="info-icon">i</span>
+                              <span class="tooltip-text">Average FPS at 4K Ultra Settings. Sourced information from Tom's Hardware. 
+                                  The higher the FPS, the faster the GPU.<br>
+                                <a href="https://www.tomshardware.com/reviews/gpu-hierarchy,4388.html" target="/learn-more" class="learn-more-link"><br><br>Click here to learn more</a></span>
+                            </div>
+                      </th>
+
                         <th id = "price">
                             <div class="tooltip">
                                 <span class="table-heading">Price</span><br>
@@ -324,6 +363,15 @@
                                     Please note prices may not be fully up to date. Please click on the links below for up to date pricing.<br>
                               </div>
                         </th>
+
+                        <th id = "mark">
+                          <div class="tooltip">
+                              <span class="table-heading">Price to Performance</span><br>
+                              <span class="info-icon">i</span>
+                              <span class="tooltip-text-price-performance">The price to performance ratio. 
+                                  The higher the number, the better the value. Please not this was calculated by taking the 3D Mark AVG GPU Performance/Price.<br>
+                            </div>
+                      </th>
                     </tr>
                 </thead>
                 <tbody id="pcTableBody">

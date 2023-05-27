@@ -151,10 +151,10 @@ def contact():
             # Send the email
             sg = SendGridAPIClient(api_key=os.environ.get('SENDGRID_API_KEY'))
             response = sg.send(email_message)
-            return 'Email sent successfully'
+            flash('Email sent successfully', 'success')  # Flash success message
         except Exception as e:
             print(str(e))
-            return 'Error sending email'
+            flash('Error sending email', 'error')  # Flash error message
 
     return render_template('contact.html')
 

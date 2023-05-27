@@ -33,9 +33,9 @@
 		}
 
         .text-box {
-            background-color: rgb(241, 241, 241);
             margin-left: 12%;
             margin-right: 10%;
+            
           }
 
           
@@ -152,12 +152,12 @@
             display: block;
             text-decoration: none;
             color: black; 
-            transition: color 0.4s;
+            transition: color 0.25s;
           }
 
           nav a:hover {
             color: #1e90ff; /* change to your desired color */
-            transition: color 0.4s;
+            transition: color 0.25s;
           }
 
           nav {
@@ -218,12 +218,12 @@
         .product-price-link {
           color: black;
           text-decoration: none;
-          transition: color 0.4s;
+          transition: color 0.25s;
         }
         
         .product-price-link:hover {
           color: #1e90ff;
-          transition: color 0.4s;
+          transition: color 0.25s;
         }
         
         
@@ -280,10 +280,9 @@
         }
 
         th#price {
-           width: 100px;
+           width: 40px;
         }
 
-        
         
         .filter-row {
           display: flex;
@@ -403,6 +402,53 @@
           transition: opacity 0.3s;
           text-align: center;
         }
+
+        .tooltip-text-price-performance {
+          visibility: hidden;
+          background-color: #333;
+          color: #fff;
+          text-align: center;
+          border-radius: 6px;
+          padding: 5px;
+          position: absolute;
+          z-index: 1;
+          top: 100%;
+          left: calc(50% - 50px);
+          transform: translateX(-50%);
+          width: 150px;
+          opacity: 0;
+          transition: opacity 0.3s;
+          text-align: center;
+        }
+
+        .tooltip:hover .tooltip-text-price-performance {
+          visibility: visible;
+          opacity: 1;
+        }
+
+        .tooltip-text-name {
+          visibility: hidden;
+          background-color: #333;
+          color: #fff;
+          text-align: center;
+          border-radius: 6px;
+          padding: 5px;
+          position: absolute;
+          z-index: 1;
+          top: 100%;
+          left: calc(220% - 50px);
+          transform: translateX(-50%);
+          width: 100px;
+          opacity: 0;
+          transition: opacity 0.3s;
+          text-align: center;
+        }
+
+        .tooltip:hover .tooltip-text-name {
+          visibility: visible;
+          opacity: 1;
+        }
+        
         
       
         .tooltip:hover .tooltip-text {
@@ -413,27 +459,27 @@
         a.learn-more-link {
           color: white;
           text-decoration: underline;
-          transition: color 0.4s;
+          transition: color 0.25s;
         }
       
         a.learn-more-link:hover {
           color: #1e90ff;
           text-decoration: underline;
-          transition: color 0.4s;
+          transition: color 0.25s;
         }
 
         /* CSS for links in Learn More section */
 
         a#link {
           color: black;
-          text-decoration: none;
-          transition: color 0.4s;
+          text-decoration: underline;
+          transition: color 0.25s;
         }
 
         a#link:hover {
           color: #1e90ff;
           text-decoration: underline;
-          transition: color 0.4s;
+          transition: color 0.25s;
         }
         
       /* CSS for Contact Page */

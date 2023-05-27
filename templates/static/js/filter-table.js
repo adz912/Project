@@ -106,15 +106,15 @@ function sortTable() {
   switch (sortByValue) {
     case "price-high-low":
       sortedRows.sort(function (a, b) {
-        var priceA = parseFloat(a.cells[11].textContent.replace("£", ""));
-        var priceB = parseFloat(b.cells[11].textContent.replace("£", ""));
+        var priceA = parseFloat(a.cells[13].textContent.replace("£", ""));
+        var priceB = parseFloat(b.cells[13].textContent.replace("£", ""));
         return priceB - priceA;
       });
       break;
     case "price-low-high":
       sortedRows.sort(function (a, b) {
-        var priceA = parseFloat(a.cells[11].textContent.replace("£", ""));
-        var priceB = parseFloat(b.cells[11].textContent.replace("£", ""));
+        var priceA = parseFloat(a.cells[13].textContent.replace("£", ""));
+        var priceB = parseFloat(b.cells[13].textContent.replace("£", ""));
         return priceA - priceB;
       });
       break;
@@ -215,7 +215,48 @@ function sortTable() {
         var hddB = convertStorageToGB(b.cells[8].textContent);
         return hddA - hddB;
       });
-      break;
+      case "1080-fps-high-low":
+        sortedRows.sort(function (a, b) {
+          var fps1080A = convertFPStoInteger(a.cells[11].textContent);
+          var fps1080B = convertFPStoInteger(b.cells[11].textContent);
+          return fps1080B - fps1080A;
+        });
+        break;
+      case "1080-fps-low-high":
+        sortedRows.sort(function (a, b) {
+          var fps1080A = convertFPStoInteger(a.cells[11].textContent);
+          var fps1080B = convertFPStoInteger(b.cells[11].textContent);
+          return fps1080A - fps1080B;
+        });
+        break;
+        case "4k-fps-high-low":
+          sortedRows.sort(function(a, b) {
+            var fps4kA = convertFPStoInteger(a.cells[12].textContent);
+            var fps4kB = convertFPStoInteger(b.cells[12].textContent);
+            return fps4kB - fps4kA;
+          });
+          break;
+        case "4k-fps-low-high":
+          sortedRows.sort(function(a, b) {
+            var fps4kA = convertFPStoInteger(a.cells[12].textContent);
+            var fps4kB = convertFPStoInteger(b.cells[12].textContent);
+            return fps4kA - fps4kB;
+          });
+          break;
+          case "price-performance-high-low":
+          sortedRows.sort(function(a, b) {
+            var ppA = parseFloat(a.cells[14].textContent);
+            var ppB = parseFloat(b.cells[14].textContent);
+            return ppB - ppA;
+          });
+          break;
+        case "price-performance-low-high":
+          sortedRows.sort(function(a, b) {
+            var ppA = parseFloat(a.cells[14].textContent);
+            var ppB = parseFloat(b.cells[14].textContent);
+            return ppA - ppB;
+          });
+          break;
     default:
       // No sorting needed
       return;
@@ -231,6 +272,15 @@ function sortTable() {
     table.appendChild(row);
   });
 }
+
+// Function to convert fps value to 0 if N/A
+function convertFPStoInteger(fpsValue) {
+  if (fpsValue === "N/A") {
+    return 0;
+  }
+  return parseInt(fpsValue);
+}
+
 
 // Function to convert CPU Boost Clock value with unit to GHz
 function convertBoostClockToGHz(boostClockValue) {
@@ -285,7 +335,7 @@ function filterByPrice() {
 
   // Iterate over the rows and hide/show based on price range
   for (var i = 0; i < rows.length; i++) {
-    var priceCell = rows[i].cells[11]; // Price cell is in the 11th column
+    var priceCell = rows[i].cells[13]; // Price cell is in the 11th column
 
     if (priceCell) {
       var price = parseFloat(priceCell.textContent.replace("£", ""));
