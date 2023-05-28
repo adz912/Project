@@ -3,17 +3,24 @@ $(document).ready(function() {
   function toggleFavorite(pcId) {
     var button = $("#favorite-button-" + pcId);
     var isLiked = button.hasClass("liked");
+    var userId = getUserId(); // Add the user's ID to the payload
 
     // Send an AJAX request to update the favorite status
     $.ajax({
-      url: "/toggle-favorite",
+      url: "/api/toggle-favorite",
       type: "POST",
-      data: { pcId: pcId, isLiked: isLiked },
+      data: JSON.stringify({ pc_id: pcId, is_liked: isLiked, user_id: userId }),
+      contentType: "application/json",
       success: function(response) {
-        if (response.success) {
+        if (response.message === "Like toggled successfully") {
           // Update the button text and style based on the new favorite status
-          button.text(response.isLiked ? "Liked!" : "Like");
-          button.toggleClass("liked");
+          if (isLiked) {
+            button.text("Like");
+            button.removeClass("liked");
+          } else {
+            button.text("Liked!");
+            button.addClass("liked");
+          }
         } else {
           console.log("Error toggling favorite status:", response.error);
         }
@@ -24,43 +31,61 @@ $(document).ready(function() {
     });
   }
 
+  // Function to get the user's ID
+  function getUserId() {
+    // Replace this with the actual method to get the current user's ID
+    // e.g., retrieve it from the user session or local storage
+    return 'USER_ID';
+  }
+
+  
 // Function to populate the comparison table with data
 function populateTable() {
   $.ajax({
-    url: "/get_pcs",
-    type: "GET",
-    success: function(data) {
-      var pcTableBody = $("#pcTableBody");
+    url: '/get_pcs',
+    type: 'GET',
+    success: function (data) {
+      var pcTableBody = $('#pcTableBody');
       pcTableBody.empty();
 
       for (var i = 0; i < data.length; i++) {
         var pc = data[i];
-        var hddStorage = pc.hddStorage !== null ? pc.hddStorage : "N/A";
-        var ssdStorage = pc.ssdStorage !== null ? pc.ssdStorage : "N/A";
-        var fpsFourk = pc.fpsFourk !== null ? pc.fpsFourk + "FPS" : "N/A";
-        var fpsTenEighty = pc.fpsTenEighty !== null ? pc.fpsTenEighty + "FPS" : "N/A";
-        var priceToPerformance = pc.avgPerformance !== null && pc.price !== null ? (pc.avgPerformance / pc.price).toFixed(2) : "N/A";
+        var hddStorage = pc.hddStorage !== null ? pc.hddStorage : 'N/A';
+        var ssdStorage = pc.ssdStorage !== null ? pc.ssdStorage : 'N/A';
+        var fpsFourk = pc.fpsFourk !== null ? pc.fpsFourk + 'FPS' : 'N/A';
+        var fpsTenEighty = pc.fpsTenEighty !== null ? pc.fpsTenEighty + 'FPS' : 'N/A';
+        var priceToPerformance =
+          pc.avgPerformance !== null && pc.price !== null ? (pc.avgPerformance / pc.price).toFixed(2) : 'N/A';
 
-        var row = "<tr>" +
+        var row =
+          '<tr>' +
           "<td>" +
-            "<div class='product-image-container'>" +
-              "<img src='" + pc.image_url + "' class='product-image'>" +
-            "</div>" +
-            "<div class='product-text'>" +
-              "<span>" + pc.title + "</span>" +
-            "</div>" +
-          "</td>" +
-          "<td>" +
-            "<button id='favorite-button-" + pc.id + "' class='favorite-button " +
-            (pc.isFavorite ? "liked" : "") + "' onclick='toggleFavorite(" + pc.id + ")'>" +
-            (pc.isFavorite ? "Liked!" : "Like") +
-            "</button>" +
+          "<div class='product-image-container'>" +
+          "<img src='" +
+          pc.image_url +
+          "' class='product-image'>" +
+          '</div>' +
+          "<div class='product-text'>" +
+          '<span>' +
+          pc.title +
+          '</span>' +
+          '</div>' +
+          '</td>' +
+          '<td>' +
+          "<button id='favorite-button-" +
+          pc.pc_id +
+          "' class='favorite-button " +
+          (pc.is_liked ? 'liked' : '') +
+          "' onclick='handleButtonClick(" +
+          pc.pc_id +
+          ")'>" +
+          (pc.is_liked ? 'Liked!' : 'Like') +
+          "</button>" +
           "</td>" +
           "<td>" + pc.cpu + "</td>" +
           "<td>" + pc.avgCPUperformance + "</td>" +
           "<td>" + pc.coreCount + "</td>" +
-          "<td>" + pc.cpuBoostClock + "</td>" +
-          "<td>" + pc.memory + "</td>" +
+          "<td>" + pc.cpuBoostClock + "<td>" + pc.memory + "</td>" +
           "<td>" + ssdStorage + "</td>" +
           "<td>" + hddStorage + "</td>" +
           "<td>" + pc.graphicsCard + "</td>" +
@@ -78,17 +103,16 @@ function populateTable() {
         "</tr>";
 
         pcTableBody.append(row);
-        console.log("Populating table...");
+        console.log('Populating table...');
       }
     },
-    error: function() {
-      console.log("Error retrieving PC data.");
-    }
+    error: function () {
+      console.log('Error retrieving PC data.');
+    },
   });
 }
 
 // Call the populateTable function to initially populate the table
 populateTable();
-
 });
 

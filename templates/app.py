@@ -164,41 +164,73 @@ def contact():
 
     return render_template('contact.html')
 
-# For toggling favourite button
-@app.route('/toggle_favorite', methods=['POST'])
+@app.route('/api/toggle-favorite', methods=['POST'])
 def toggle_favorite():
-    pc_id = request.form['pcId']
-    is_liked = request.form['isLiked']
+    data = request.get_json()
+    pc_id = data.get('pc_id')
+    is_liked = data.get('is_liked')
+
+    # Get the user_id from the session
+    user_id = session.get('user_id')
+
+    # If user_id is None, return an error response
+    if user_id is None:
+        response = {'error': 'User not logged in'}
+        return jsonify(response), 401
 
     # Connect to the database
-    mydb = mysql.connector.connect(
-        host="127.0.0.1",
-        user="Admin",
-        password="Adminpw2023",
-        database="pc_comparison"
+    db = mysql.connector.connect(
+            host="127.0.0.1",
+            user="Admin",
+            password="Adminpw2023",
+            database="pc_comparison"
     )
 
+    # Create a cursor to execute SQL queries
+    cursor = db.cursor()
+
     try:
-        # Create a cursor to execute SQL queries
-        cursor = mydb.cursor()
-
-        # Update the favorite status for the PC in the database
-        query = "UPDATE pcs SET isFavorite = %s WHERE id = %s"
-        values = (is_liked, pc_id)
+        # Check if the user has already liked the product
+        query = "SELECT is_liked FROM likes WHERE user_id = %s AND pc_id = %s"
+        values = (user_id, pc_id)
         cursor.execute(query, values)
-        mydb.commit()
+        result = cursor.fetchone()
 
-        # Return a response indicating success
-        return jsonify({'success': True, 'isLiked': is_liked})
+        # If the record exists, toggle the is_liked value
+        if result is not None:
+            is_liked = not result[0]
 
-    except mysql.connector.Error as err:
-        # Return a response indicating an error
-        return jsonify({'success': False, 'error': str(err)})
+            # Update the existing like record
+            query = "UPDATE likes SET is_liked = %s WHERE user_id = %s AND pc_id = %s"
+            values = (is_liked, user_id, pc_id)
+            cursor.execute(query, values)
+
+        else:
+            # Insert a new like record
+            query = "INSERT INTO likes (user_id, pc_id, is_liked) VALUES (%s, %s, %s)"
+            values = (user_id, pc_id, is_liked)
+            cursor.execute(query, values)
+
+        # Commit the transaction
+        db.commit()
+
+        # Return a success response
+        response = {'message': 'Like toggled successfully'}
+        return jsonify(response), 200
+
+    except mysql.connector.Error as error:
+        # Rollback the transaction in case of an error
+        db.rollback()
+
+        # Return an error response
+        response = {'error': str(error)}
+        return jsonify(response), 500
 
     finally:
-        # Close the database connection
+        # Close the cursor and database connection
         cursor.close()
-        mydb.close()
+        db.close()
+
 
 
 @app.route('/comparison')
@@ -226,7 +258,7 @@ def get_pcs():
 
     # Retrieve data from the database
     cursor = mydb.cursor(dictionary=True)
-    cursor.execute("SELECT * FROM pcs")
+    cursor.execute("SELECT pcs.*, IFNULL(likes.is_liked, FALSE) AS is_liked FROM pcs LEFT JOIN likes ON pcs.pc_id = likes.pc_id")
     data = cursor.fetchall()
 
     # Close the database connection

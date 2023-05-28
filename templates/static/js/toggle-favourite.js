@@ -1,60 +1,48 @@
-function toggleFavorite(pcId) {
-    $(document).ready(function() {
-      // Bind event listener to all like buttons
-      $('.like-button').click(function(event) {
-        event.preventDefault();
-        var $this = $(this);
-    
-        // Send a POST request to the API endpoint
-        $.ajax({
-          url: '/api/toggle-favorite?pcId=' + pcId,
-          method: 'POST',
-          success: function(response) {
-            // Handle the response from the server
-            // Update the UI based on the new favorite status
-            if (response.success) {
-              // Update the UI to reflect the new favorite status
-              if (response.isFavorite) {
-                // Set the button as liked
-                $this.addClass('liked');
-              } else {
-                // Set the button as unliked
-                $this.removeClass('liked');
-              }
-            } else {
-              // Handle the error case
-              console.error('Failed to toggle favorite status:', response.error);
-            }
-          },
-          error: function(xhr, status, error) {
-            // Handle the AJAX request error
-            console.error('AJAX request failed:', error);
-          }
-        });
-      });
-      
-      // Assuming you have an API endpoint `/api/toggle-favorite` that handles the favorite toggling
-      fetch(`/api/toggle-favorite?pcId=${pcId}`, {
-        method: 'POST',
-        // Add any required headers or authentication tokens
-      })
-        .then(response => response.json())
-        .then(data => {
-          // Handle the response from the server
-          if (data.success) {
-            // Update the button text based on the updated favorite status
-            const button = document.querySelector(`button.favorite-button[data-pc-id="${pcId}"]`);
-            if (button) {
-              button.textContent = data.isFavorite ? 'Liked' : 'Like';
-            }
-          } else {
-            // Handle any errors or display a message to the user
-            console.error('Failed to toggle favorite status');
-          }
-        })
-        .catch(error => {
-          console.error('An error occurred while toggling favorite status:', error);
-        });
+function toggleFavorite(pcId, isLiked, userId) {
+  const payload = {
+    pc_id: pcId,
+    is_liked: !isLiked, // Invert the value of isLiked
+    user_id: userId // Include the user_id in the payload
+  };
+
+  fetch('/api/toggle-favorite', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(payload)
+  })
+    .then(response => response.json())
+    .then(data => {
+      console.log(data);
+      // Handle the response data
+
+      // Update the button text and class based on the updated is_liked value
+      const button = document.getElementById('favorite-button-' + pcId);
+      if (data.message === 'Like toggled successfully') {
+        isLiked = !isLiked; // Update the isLiked variable based on the new value
+
+        if (isLiked) {
+          button.textContent = 'Liked!';
+          button.classList.add('liked');
+        } else {
+          button.textContent = 'Like';
+          button.classList.remove('liked');
+        }
+      } else {
+        console.log('Error toggling favorite status:', data.error);
+      }
+    })
+    .catch(error => {
+      console.error('Error:', error);
+      // Handle the error
     });
-  }
-  
+}
+
+// Function to handle the button click event
+function handleButtonClick(pcId, userId) {
+  const button = document.getElementById('favorite-button-' + pcId);
+  const isLiked = button.classList.contains('liked');
+
+  toggleFavorite(pcId, isLiked, userId);
+}
