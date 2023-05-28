@@ -4,17 +4,14 @@
     <title>Contact Us</title>
     <meta charset="utf-8">
     <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <script src="static/js/contact-validation.js"></script>
+
     <style>
         /* Styles Specifically for Contact Page */
         .container {
             max-width: 800px;
             margin: 0 auto;
             padding: 20px;
-        }
-
-        h1 {
-            text-align: center;
-            color: #333;
         }
 
     </style>
@@ -44,71 +41,19 @@
     </header>
     <div class="container">
         <div class="contact-form">
-          <h2>Get in Touch</h2>
-          <p>We value your input and strive to provide the best possible experience for our users. Whether you have a suggestion, concern, or praise, we are eager to listen and address your needs. Thank you for choosing to contact us.</p>
-          {% with messages = get_flashed_messages() %}
-            {% if messages %}
-              <div class="flash-messages">
-                {% for message in messages %}
-                  <div class="flash-message">{{ message }}</div>
-                {% endfor %}
-              </div>
-            {% endif %}
-          {% endwith %}
-          <form action="#" method="post">
-            <input type="text" name="name" placeholder="Your Name" required>
-            <!-- Only adelzaky912@gmail.com works in email field. Requires paid sendgrid account in order to set up domain authentication and a DNS -->
-            <input type="email" name="email" placeholder="Your Email" required>
-            <textarea name="message" placeholder="Your Message" rows="5" required></textarea>
-            <button type="submit">Send Message</button>
-          </form>
-          <script>
-            document.getElementById('contact-form').addEventListener('submit', function(event) {
-              event.preventDefault();
-          
-              const form = document.getElementById('contact-form');
-              const formData = new FormData(form);
-          
-              const name = formData.get('name');
-              const email = formData.get('email');
-              const message = formData.get('message');
-          
-              // Send a POST request to the server
-              fetch('/contact', {
-                method: 'POST',
-                body: formData
-              })
-                .then(response => response.text())
-                .then(data => {
-                  if (data === 'Email sent successfully') {
-                    // Email sent successfully
-                    showNotification('Email sent successfully', 'success');
-                    form.reset(); // Reset the form after displaying the notification
-                  } else {
-                    // Error sending email
-                    showNotification('Error sending email', 'error');
-                  }
-                })
-                .catch(error => {
-                  console.error('An error occurred while sending the email:', error);
-                });
-            });
-          
-            function showNotification(message, type) {
-              const notification = document.createElement('div');
-              notification.className = 'notification ' + type;
-              notification.textContent = message;
-          
-              document.body.appendChild(notification);
-          
-              setTimeout(function() {
-                notification.remove();
-              }, 3000); // Remove the notification after 3 seconds
-            }
-          </script>
-          
+            <h2>Get in Touch</h2>
+            <p>We value your input and strive to provide the best possible experience for our users. 
+              Whether you have a suggestion, concern, or praise, we are eager to listen and address your needs. 
+              Thank you for choosing to contact us.</p>
+              <div id="notification-container"></div>
+            <form id="contact-form" action="/contact" method="post">
+                <input type="text" name="name" placeholder="Your Name" required>
+                <input type="email" name="email" placeholder="Your Email" required>
+                <textarea name="message" placeholder="Your Message" rows="5" required></textarea>
+                <button type="submit">Send Message</button>
+            </form>
         </div>
-      </div>
+    </div>    
       
 </body>
 <footer>

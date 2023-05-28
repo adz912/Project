@@ -22,7 +22,7 @@ document.getElementById('register-form').addEventListener('submit', function(eve
         .then(data => {
           if (data.success) {
             // Account created successfully
-            alert('Account has been successfully created!');
+            alert('Account has been created!');
             location.reload(); // Refresh the page after displaying the alert
           } else {
             // Display the error message from the server

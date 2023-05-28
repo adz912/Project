@@ -131,7 +131,6 @@ def about():
 
 from sendgrid import SendGridAPIClient
 from sendgrid.helpers.mail import Mail
-
 @app.route('/contact', methods=['GET', 'POST'])
 def contact():
     if request.method == 'POST':
@@ -151,10 +150,17 @@ def contact():
             # Send the email
             sg = SendGridAPIClient(api_key=os.environ.get('SENDGRID_API_KEY'))
             response = sg.send(email_message)
-            flash('Email sent successfully', 'success')  # Flash success message
+
+            if response.status_code == 202:
+                # Email sent successfully
+                return jsonify({'success': True, 'message': 'Email has been successfully sent.'})
+            else:
+                # Error sending email
+                return jsonify({'success': False, 'message': 'Error sending email.'})
+
         except Exception as e:
             print(str(e))
-            flash('Error sending email', 'error')  # Flash error message
+            return jsonify({'success': False, 'message': 'Error sending email.'})
 
     return render_template('contact.html')
 

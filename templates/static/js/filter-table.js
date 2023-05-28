@@ -365,4 +365,3 @@ var priceMaxInput = document.getElementById("price-max");
 priceMaxInput.addEventListener("input", filterByPrice);
 
 
-
