@@ -8,8 +8,8 @@ document.getElementById('login-form').addEventListener('submit', function(event)
   const password = formData.get('password');
 
   if (username.length >= 3 && password.length >= 5) {
-    // username and password meet the requirements
-    // you can then proceed to authenticate the user
+    // Username and password meet the requirements
+    // Proceed to authenticate the user
 
     // Send a POST request to the server
     fetch('/', {
@@ -36,8 +36,8 @@ document.getElementById('login-form').addEventListener('submit', function(event)
         alert('An error occurred while logging in. Please try again later.');
       });
   } else {
-    // username and password do not meet the requirements
-    // display an error message to the user
-    alert('Username must contain at least 3 characters and password must contain at least 5 characters.');
+    // Username and password do not meet the requirements
+    // Display an error message to the user
+    alert('Username must contain at least 3 characters and password must contain at least 5 characters including letters, numbers, and 1 symbol.');
   }
 });

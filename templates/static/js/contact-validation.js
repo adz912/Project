@@ -18,20 +18,27 @@ document.getElementById('contact-form').addEventListener('submit', function(even
           // Email sent successfully
           return response.json().then(data => {
             if (data.success) {
-              alert('Email sent successfully', 'success');
+              // Set success message
+              document.getElementById('notification').classList.add('success');
+              document.getElementById('notification').textContent = 'Email sent successfully';
               form.reset(); // Reset the form after displaying the notification
             } else {
-              alert('Error sending email', 'error');
+              // Set error message
+              document.getElementById('notification').classList.add('error');
+              document.getElementById('notification').textContent = 'Error sending email';
             }
           });
         } else {
           // Error sending email
-          alert('Error sending email', 'error');
+          document.getElementById('notification').classList.add('error');
+          document.getElementById('notification').textContent = 'Error sending email';
         }
       })
       .catch(error => {
         console.error('An error occurred while sending the email:', error);
-        alert('Error sending email', 'error');
-      });
+        // Set error message
+        document.getElementById('notification').classList.add('error');
+        document.getElementById('notification').textContent = 'Error sending email';
+      });    
   });
   

@@ -7,29 +7,87 @@
 </head>
 <body>
   <header>
-    <a href="/">
-        <img src="{{ url_for('static', filename='images/PcComparisonTool.png') }}" alt="PC Comparison Tool">
-    </a>  
+    <a href="/"><img src="{{ url_for('static', filename='images/PcComparisonTool.png') }}" alt="PC Comparison Tool"></a>  
     <nav>
-        <ul>
-            <li><a href="/">Home</a></li>
-            <li><a href="/about">About</a></li>
-            <li><a href="/contact">Contact</a></li>
-            <li><a href="/learn-more">Learn More</a></li>
-            {% if 'user_id' in session %}
-                <li><a href="/comparison">Comparison</a></li>
-                {% if 'user_id' in session %}
-                    <li><a href="/profile">Profile</a></li>
-                {% endif %}
-                <li><a href="/logout" class="logout-button">Logout</a></li>
-            {% else %}
-                <li><a href="/register">Register</a></li>
-            {% endif %}
-        </ul>
+      <ul>
+        <li><a href="/">Home</a></li>
+        <li><a href="/about">About</a></li>
+        <li><a href="/contact">Contact</a></li>
+        <li class="dropdown">
+          <a href="/learn-more" class="dropdown-toggle">Learn More</a>
+          <div class="dropdown-menu">
+            <table>
+              <tr>
+                <td><a href="/learn-more#popular-youtube-channels">Popular YouTube Channels</a></td>
+                <td><a href="/learn-more#popular-pc-websites">Popular PC Websites</a></td>
+              </tr>
+              <tr>
+                <td><a href="/learn-more#cpu-learn">What is a CPU?</a></td>
+                <td><a href="/learn-more#cpu-cores-learn">What are CPU Cores?</a></td>
+              </tr>
+              <tr>
+                <td><a href="/learn-more#cpu-clock-speed-learn">What is CPU Clock Speed?</a></td>
+                <td><a href="/learn-more#memory-learn">What is Memory?</a></td>
+              </tr>
+              <tr>
+                <td><a href="/learn-more#storage-learn">What is Storage?</a></td>
+                <td><a href="/learn-more#SSDorHDD">What is an SSD? What is an HDD?</a></td>
+              </tr>
+              <tr>
+                <td><a href="/learn-more#What should I pick/prioritise?">What storage should I pick for my PC?</a></td>
+                <td><a href="/learn-more#graphics-card-learn">What is a Graphics Card?</a></td>
+              </tr>
+              <tr>
+                <td><a href="/learn-more#ray-tracing-learn">What is Ray Tracing?</a></td>
+                <td><a href="/learn-more#vram-learn">What is VRAM?</a></td>
+              </tr>
+            </table>
+          </div>
+        </li>
+        {% if 'user_id' in session %}
+          <li><a href="/comparison">Comparison</a></li>
+          {% if 'user_id' in session %}
+          <li><a href="/profile">Profile</a></li>
+          {% endif %}
+          <li><a href="/logout" class="logout-button">Logout</a></li>
+        {% else %}
+          <li><a href="/register">Register</a></li>
+        {% endif %}
+      </ul>
     </nav>
 </header>
     <main>
         <div class="text-box">
+
+          <section id="quick-links">
+            <table>
+              <tr>
+                <td><a href="#popular-youtube-channels" id="link">Popular YouTube Channels</a></td>
+                <td><a href="#popular-pc-websites" id="link">Popular PC Websites</a></td>
+              </tr>
+              <tr>
+                <td><a href="#cpu-learn" id="link">What is a CPU?</a></td>
+                <td><a href="#cpu-cores-learn" id="link">What are CPU Cores?</a></td>
+              </tr>
+              <tr>
+                <td><a href="#cpu-clock-speed-learn" id="link">What is CPU Clock Speed?</a></td>
+                <td><a href="#memory-learn" id="link">What is Memory?</a></td>
+              </tr>
+              <tr>
+                <td><a href="#storage-learn" id="link">What is Storage?</a></td>
+                <td><a href="#SSDorHDD" id="link">What is an SSD? What is an HDD?</a></td>
+              </tr>
+              <tr>
+                <td><a href="#What should I pick/prioritise?" id="link">What storage should I pick for my PC?</a></td>
+                <td><a href="#graphics-card-learn" id="link">What is a Graphics Card?</a></td>
+              </tr>
+              <tr>
+                <td><a href="#ray-tracing-learn" id="link">What is Ray Tracing?</a></td>
+                <td><a href="#vram-learn" id="link">What is VRAM?</a></td>
+              </tr>
+            </table>
+          </section>
+          
 
           <section id="popular-youtube-channels">
             <h2>Popular YouTube Channels</h2>
@@ -42,6 +100,18 @@
               <li><a href="https://www.youtube.com/@PCBuilderChannel" id="link">PC Builder</a></li>
             </ul>
           </section> 
+
+          <section id="popular-pc-websites">
+            <h2>Popular PC Websites</h2>
+            <p>Here are some popular PC websites that can be valuable resources when it comes to gathering information, reviews, and keeping up with the latest trends in the PC world:</p>
+            <ul>
+              <li><a href="https://www.tomshardware.com" id="link">Tom's Hardware</a></li>
+              <li><a href="https://www.anandtech.com" id="link">AnandTech</a></li>
+              <li><a href="https://www.guru3d.com" id="link">Guru3D</a></li>
+              <li><a href="https://www.techpowerup.com/" id="link">Tech Power Up</a></li>
+              <li><a href="https://videocardz.com/" id="link">VideoCardz</a></li>
+            </ul>
+          </section>
 
           <section id="cpu-learn">
             <h2>What is a CPU?</h2>

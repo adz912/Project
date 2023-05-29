@@ -12,21 +12,51 @@
         </a>  
         <nav>
             <ul>
-                <li><a href="/">Home</a></li>
-                <li><a href="/about">About</a></li>
-                <li><a href="/contact">Contact</a></li>
-                <li><a href="/learn-more">Learn More</a></li>
+              <li><a href="/">Home</a></li>
+              <li><a href="/about">About</a></li>
+              <li><a href="/contact">Contact</a></li>
+              <li class="dropdown">
+                <a href="/learn-more" class="dropdown-toggle">Learn More</a>
+                <div class="dropdown-menu">
+                  <table>
+                    <tr>
+                      <td><a href="/learn-more#popular-youtube-channels">Popular YouTube Channels</a></td>
+                      <td><a href="/learn-more#popular-pc-websites">Popular PC Websites</a></td>
+                    </tr>
+                    <tr>
+                      <td><a href="/learn-more#cpu-learn">What is a CPU?</a></td>
+                      <td><a href="/learn-more#cpu-cores-learn">What are CPU Cores?</a></td>
+                    </tr>
+                    <tr>
+                      <td><a href="/learn-more#cpu-clock-speed-learn">What is CPU Clock Speed?</a></td>
+                      <td><a href="/learn-more#memory-learn">What is Memory?</a></td>
+                    </tr>
+                    <tr>
+                      <td><a href="/learn-more#storage-learn">What is Storage?</a></td>
+                      <td><a href="/learn-more#SSDorHDD">What is an SSD? What is an HDD?</a></td>
+                    </tr>
+                    <tr>
+                      <td><a href="/learn-more#What should I pick/prioritise?">What storage should I pick for my PC?</a></td>
+                      <td><a href="/learn-more#graphics-card-learn">What is a Graphics Card?</a></td>
+                    </tr>
+                    <tr>
+                      <td><a href="/learn-more#ray-tracing-learn">What is Ray Tracing?</a></td>
+                      <td><a href="/learn-more#vram-learn">What is VRAM?</a></td>
+                    </tr>
+                  </table>
+                </div>
+              </li>
+              {% if 'user_id' in session %}
+                <li><a href="/comparison">Comparison</a></li>
                 {% if 'user_id' in session %}
-                    <li><a href="/comparison">Comparison</a></li>
-                    {% if 'user_id' in session %}
-                        <li><a href="/profile">Profile</a></li>
-                    {% endif %}
-                    <li><a href="/logout" class="logout-button">Logout</a></li>
-                {% else %}
-                    <li><a href="/register">Register</a></li>
+                  <li><a href="/profile">Profile</a></li>
                 {% endif %}
+                <li><a href="/logout" class="logout-button">Logout</a></li>
+              {% else %}
+                <li><a href="/register">Register</a></li>
+              {% endif %}
             </ul>
-        </nav>
+          </nav>
     </header>
     <main>
         <section>
@@ -34,31 +64,28 @@
                 <h2>About Us</h2>
                 <p class="about-p">
                     Welcome to the PC Comparison Tool! Our mission is to simplify the PC buying process for everyone. 
-                    We understand that selecting the perfect PC can be a daunting task, especially when you're preparing to invest your hard-earned money in a high-performance machine.
-                    Given the wide variety of PC options available, we are here to equip you with the knowledge and insights 
-                    necessary to make informed decisions that align with your specific budget and requirements. 
-                    We want to ensure that you have all the information you need to confidently choose the PC that best suits your needs.
-                    Feel free to <a href="/contact" id="link">contact us</a> if you have any questions or need further assistance. We're here to help make your PC buying journey a smooth and enjoyable experience!
-                    <br><br>  <a href="/learn-more" id="link">Want to learn more about PCs? Click Here</a>
+                    We understand that selecting the perfect PC can feel overwhelming, especially when you're about to invest your hard-earned money in a high-performance machine.
+                    With the wide variety of PC options available in the market, our goal is to provide you with the knowledge and insights that will enable you to make informed decisions. 
+                    We want to ensure that you have all the necessary information to confidently choose a PC that not only fits your budget but also meets your specific requirements.
+                    <br><br>If you have any questions or need further assistance, please don't hesitate to <a href="/contact" id="link">contact us.</a> 
+                    Thank you for choosing our PC Comparison Tool, and we look forward to helping you find the perfect PC!
                 </p>
 
                 <h2>How Our Website Works</h2>
                 <p class="about-p">
-                    <ol>
-                        <li>Start by <a href="/register" id="link">creating an account</a> or logging in if you already have one.</li>
-                        <li>Take a look at our huge collection of PCs and their specifications.</li>
-                        <li>Utilize our filters to specify exactly what you're looking for in a PC and pick your desired budget.</li>
-                        <li>Compare and sort the PCs on performance, pricing, storage etc.</li>
-                        <li>Select the PC that best suits your needs and budget and click on the price to view the Amazon link!</li><br>
-                    </ol>
+                        Start by <a href="/register" id="link">creating an account</a> or logging in if you already have one.<br>
+                        Take a look at our huge collection of PCs and their specifications.<br>
+                        Utilize our filters to specify exactly what you're looking for in a PC and pick your desired budget.<br>
+                        Compare and sort the PCs on performance, pricing, storage etc.<br>
+                        Select the PC that best suits your needs and budget and click on the price to view the Amazon link!<br>
                 </p>
                 <h2>Why Do We Use 3DMARK?</h2>
                 <p class="about-p">3DMark has established itself as a highly reputable benchmarking tool renowned for its wide variety of tests, 
                     which effectively assess the performance of CPUs and GPUs and more. It offers a wide range of realistic gaming scenarios and stress tests 
                     ensuring that the results obtained are trustworthy and accurate. Once the benchmarks are complete, it validates the score ensuring autheticity. 
-                    Additionally, 3DMark allows users to compare their system's performance against a vast database of results, 
-                    enabling them to make well-informed decisions when it comes to selecting the most suitable CPUs and GPUs, 
-                    articularly for gaming purposes. User's can also download the 3DMark app and see how their own PC performs, relative to others.</p>
+                    Additionally, 3DMark allows users to compare their system's performance against a huge database of user submitted results, 
+                    enabling them to make well-informed decisions when it comes to selecting the most suitable CPUs and GPUs and more, 
+                    articularly for gaming purposes. User's can also download the <a href="https://benchmarks.ul.com/3dmark#windows" id="link">3DMark app here.</a></p>
             </div>
         </section>
     </main>

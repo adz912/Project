@@ -4,7 +4,8 @@
     <title>PC Comparison Tool</title>
     <meta charset="utf-8">
     <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
-
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="{{ url_for('static', filename='js/login-check.js') }}"></script>
 </head>
 <body>
     <header>
@@ -13,18 +14,51 @@
         </a>  
         <nav>
             <ul>
-                <li><a href="/">Home</a></li>
-                <li><a href="/about">About</a></li>
-                <li><a href="/contact">Contact</a></li>
-                <li><a href="/learn-more">Learn More</a></li>
+              <li><a href="/">Home</a></li>
+              <li><a href="/about">About</a></li>
+              <li><a href="/contact">Contact</a></li>
+              <li class="dropdown">
+                <a href="/learn-more" class="dropdown-toggle">Learn More</a>
+                <div class="dropdown-menu">
+                  <table>
+                    <tr>
+                      <td><a href="/learn-more#popular-youtube-channels">Popular YouTube Channels</a></td>
+                      <td><a href="/learn-more#popular-pc-websites">Popular PC Websites</a></td>
+                    </tr>
+                    <tr>
+                      <td><a href="/learn-more#cpu-learn">What is a CPU?</a></td>
+                      <td><a href="/learn-more#cpu-cores-learn">What are CPU Cores?</a></td>
+                    </tr>
+                    <tr>
+                      <td><a href="/learn-more#cpu-clock-speed-learn">What is CPU Clock Speed?</a></td>
+                      <td><a href="/learn-more#memory-learn">What is Memory?</a></td>
+                    </tr>
+                    <tr>
+                      <td><a href="/learn-more#storage-learn">What is Storage?</a></td>
+                      <td><a href="/learn-more#SSDorHDD">What is an SSD? What is an HDD?</a></td>
+                    </tr>
+                    <tr>
+                      <td><a href="/learn-more#What should I pick/prioritise?">What storage should I pick for my PC?</a></td>
+                      <td><a href="/learn-more#graphics-card-learn">What is a Graphics Card?</a></td>
+                    </tr>
+                    <tr>
+                      <td><a href="/learn-more#ray-tracing-learn">What is Ray Tracing?</a></td>
+                      <td><a href="/learn-more#vram-learn">What is VRAM?</a></td>
+                    </tr>
+                  </table>
+                </div>
+              </li>
+              {% if 'user_id' in session %}
+                <li><a href="/comparison">Comparison</a></li>
                 {% if 'user_id' in session %}
-                    <li><a href="/comparison">Comparison</a></li>
-                    <li><a href="/logout" class="logout-button">Logout</a></li>
-                {% else %}
-                    <li><a href="/register">Register</a></li>
+                  <li><a href="/profile">Profile</a></li>
                 {% endif %}
+                <li><a href="/logout" class="logout-button">Logout</a></li>
+              {% else %}
+                <li><a href="/register">Register</a></li>
+              {% endif %}
             </ul>
-        </nav>
+          </nav>
     </header>
     <section>
         <div class="login-box">
@@ -35,11 +69,11 @@
                 <br>
                 <label for="password">Password:</label>
                 <input type="password" id="password" name="password">
-                <br>
+                {% if error %}
+                    <div class="error-message">{{ error }}</div>
+                {% endif %}
                 <input type="submit" value="Login">
                 <input type="button" value="Not a user? Register Here" onclick="redirectToRegister()">
-                <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-        <script src="{{ url_for('static', filename='js/login-check.js') }}"></script>
             </form>
         </div>
         <script>
@@ -47,13 +81,12 @@
                 window.location.href = "/register";
             }
         </script>
-        
     </section>
     <footer>
         <div class="footer-content">
-          <p class="footer-text">PC Comparison Tool</p>
-          <p class="footer-disclaimer">Please note this website is not intended for commercial use.</p>
-          </div>
-      </footer>
+            <p class="footer-text">PC Comparison Tool</p>
+            <p class="footer-disclaimer">Please note this website is not intended for commercial use.</p>
+        </div>
+    </footer>
 </body>
 </html>

@@ -12,14 +12,11 @@ app.secret_key = 'your_secret_key'
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
-   
+    error = None
 
     if 'user_id' in session:
         # User is already logged in, redirect to the comparison page
         return redirect('/comparison')
-     # Get the user_id from the session
-    
- 
 
     if request.method == 'POST':
         username = request.form['username']
@@ -43,18 +40,17 @@ def index():
 
             if user is None:
                 # User does not exist or incorrect username
-                return render_template('index.html', error='Invalid username or password.')
-
-            # Check the password using password hashing
-            if not check_password_hash(user[2], password):
-                # Incorrect password
-                return render_template('index.html', error='Invalid username or password.')
-
-            # Store the user's ID in the session
-            session['user_id'] = user[0]
-
-            # Redirect the user to the comparison page
-            return redirect('/comparison')
+                error = 'Invalid username or password. Please try again.'
+            else:
+                # Check the password using password hashing
+                if not check_password_hash(user[2], password):
+                    # Incorrect password
+                    error = 'Invalid username or password.'
+                else:
+                    # Store the user's ID in the session
+                    session['user_id'] = user[0]
+                    # Redirect the user to the comparison page
+                    return redirect('/comparison')
 
         except mysql.connector.Error as err:
             return f"Database error: {err}"
@@ -64,7 +60,8 @@ def index():
             cursor.close()
             mydb.close()
 
-    return render_template('index.html')
+    return render_template('index.html', error=error)
+
 
 
 
@@ -113,7 +110,7 @@ def register():
             cursor.execute('INSERT INTO users (username, password) VALUES (%s, %s)', (username, password_hash))
             mydb.commit()
 
-            return jsonify({'success': True, 'message': 'Account successfully created.'})
+            
 
         except mysql.connector.Error as err:
             return jsonify({'success': False, 'message': f"Database error: {err}"})
@@ -158,14 +155,16 @@ def contact():
 
             if response.status_code == 202:
                 # Email sent successfully
-                return jsonify({'success': True, 'message': 'Email has been successfully sent.'})
+                success_message = 'Email has been successfully sent.'
             else:
                 # Error sending email
-                return jsonify({'success': False, 'message': 'Error sending email.'})
+                success_message = 'Error sending email.'
+
+            return render_template('contact.html', success_message=success_message)
 
         except Exception as e:
             print(str(e))
-            return jsonify({'success': False, 'message': 'Error sending email.'})
+            return render_template('contact.html', success_message='Error sending email.')
 
     return render_template('contact.html')
 

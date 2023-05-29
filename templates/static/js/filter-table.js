@@ -47,8 +47,8 @@ function filterTable() {
     var graphics = cells[9].textContent.toUpperCase();
     var coreCount = cells[4].textContent;
     var memory = cells[6].textContent;
-    var ssdStorage = cells[7].textContent; // No conversion here
-    var hddStorage = cells[8].textContent; // No conversion here
+    var ssdStorage = cells[7].textContent; 
+    var hddStorage = cells[8].textContent; 
 
     var matchSearch = name.includes(filter) || filter === "";
     var matchCPU = selectedCPU.length === 0 || selectedCPU.some(option => cpu.includes(option));
