@@ -6,15 +6,20 @@ from sendgrid.helpers.mail import Mail
 import os
 
 app = Flask(__name__, template_folder='')
-
+app.secret_key = os.urandom(24)
 app.secret_key = 'your_secret_key'
 
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
+   
+
     if 'user_id' in session:
         # User is already logged in, redirect to the comparison page
         return redirect('/comparison')
+     # Get the user_id from the session
+    
+ 
 
     if request.method == 'POST':
         username = request.form['username']
@@ -231,19 +236,11 @@ def toggle_favorite():
         cursor.close()
         db.close()
 
+@app.route('/get_user_id', methods=['GET'])
+def get_user_id():
+    user_id = session.get('user_id')
+    return jsonify({'user_id': user_id})
 
-
-@app.route('/comparison')
-def comparison():
-    return render_template('comparison.html')
-
-@app.route('/profile')
-def profile():
-    return render_template('profile.html')
-
-@app.route('/learn-more')
-def learn_more():
-    return render_template('learn-more.html')
 
 
 @app.route('/get_pcs', methods=['GET'])
@@ -260,6 +257,8 @@ def get_pcs():
     cursor = mydb.cursor(dictionary=True)
     cursor.execute("SELECT pcs.*, IFNULL(likes.is_liked, FALSE) AS is_liked FROM pcs LEFT JOIN likes ON pcs.pc_id = likes.pc_id")
     data = cursor.fetchall()
+
+    
 
     # Close the database connection
     mydb.close()
@@ -297,7 +296,17 @@ def insert_pc():
 
     return 'PC inserted successfully'
 
+@app.route('/comparison')
+def comparison():
+    return render_template('comparison.html')
 
+@app.route('/profile')
+def profile():
+    return render_template('profile.html')
+
+@app.route('/learn-more')
+def learn_more():
+    return render_template('learn-more.html')
 
 @app.route('/logout')
 def logout():

@@ -46,3 +46,5 @@ function handleButtonClick(pcId, userId) {
 
   toggleFavorite(pcId, isLiked, userId);
 }
+
+

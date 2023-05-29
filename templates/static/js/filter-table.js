@@ -47,38 +47,16 @@ function filterTable() {
     var graphics = cells[9].textContent.toUpperCase();
     var coreCount = cells[4].textContent;
     var memory = cells[6].textContent;
-    var ssdStorage = cells[7].textContent;
-    var hddStorage = cells[8].textContent;
+    var ssdStorage = cells[7].textContent; // No conversion here
+    var hddStorage = cells[8].textContent; // No conversion here
 
     var matchSearch = name.includes(filter) || filter === "";
     var matchCPU = selectedCPU.length === 0 || selectedCPU.some(option => cpu.includes(option));
     var matchGraphics = selectedGraphics.length === 0 || selectedGraphics.some(option => graphics.includes(option));
     var matchCoreCount = selectedCoreCount.length === 0 || selectedCoreCount.includes(coreCount);
     var matchMemory = selectedMemory.length === 0 || selectedMemory.some(option => memory.includes(option));
-    var matchSSD = selectedSSD.length === 0 || selectedSSD.some(option => {
-      if (option.endsWith("GB") && ssdStorage.endsWith("GB")) {
-        var capacity = parseInt(ssdStorage);
-        var selectedCapacity = parseInt(option);
-        return capacity >= selectedCapacity && capacity < selectedCapacity + 256;
-      } else if (option.endsWith("TB")) {
-        var capacityTB = parseInt(option);
-        return ssdStorage.includes(capacityTB + "TB");
-      } else {
-        return ssdStorage.includes(option);
-      }
-    });
-    var matchHDD = selectedHDD.length === 0 || selectedHDD.some(option => {
-      if (option.endsWith("GB") && hddStorage.endsWith("GB")) {
-        var capacity = parseInt(hddStorage);
-        var selectedCapacity = parseInt(option);
-        return capacity >= selectedCapacity && capacity < selectedCapacity + 256;
-      } else if (option.endsWith("TB")) {
-        var capacityTB = parseInt(option);
-        return hddStorage.includes(capacityTB + "TB");
-      } else {
-        return hddStorage.includes(option);
-      }
-    });
+    var matchSSD = selectedSSD.length === 0 || selectedSSD.some(option => ssdStorage.includes(option));
+    var matchHDD = selectedHDD.length === 0 || selectedHDD.some(option => hddStorage.includes(option));
 
     if (matchSearch && matchCPU && matchGraphics && matchCoreCount && matchMemory && matchSSD && matchHDD) {
       row.style.display = "";
@@ -87,6 +65,7 @@ function filterTable() {
     }
   }
 }
+
 
 
 
@@ -363,5 +342,4 @@ priceMinInput.addEventListener("input", filterByPrice);
 
 var priceMaxInput = document.getElementById("price-max");
 priceMaxInput.addEventListener("input", filterByPrice);
-
 
