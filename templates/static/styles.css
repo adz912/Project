@@ -341,10 +341,18 @@
           margin-right: 5px; /* Adjust the margin as needed */
         }
         
-        
+
+        #go {
+          padding: 10px 20px;
+          background-color: #4CAF50;
+          color: white;
+          border: none;
+          cursor: pointer;
+          border-radius: 100px;
+          margin-left: 10px;
+        }
         
 
-        
         #filterInput {
           padding: 10px;
           font-size: 16px;
@@ -368,7 +376,7 @@
 
         .select-sort label select{
           display: flex;
-          align-items: right;
+          align-items: center;
         }
 
         select {

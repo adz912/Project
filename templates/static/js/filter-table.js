@@ -36,6 +36,9 @@ function filterTable() {
     .filter(option => option.checked)
     .map(option => option.value);
 
+  var minPrice = parseFloat(document.getElementById("price-min").value);
+  var maxPrice = parseFloat(document.getElementById("price-max").value);
+
   var table = document.getElementById("pcTableBody");
   var rows = table.getElementsByTagName("tr");
 
@@ -47,8 +50,9 @@ function filterTable() {
     var graphics = cells[9].textContent.toUpperCase();
     var coreCount = cells[4].textContent;
     var memory = cells[6].textContent;
-    var ssdStorage = cells[7].textContent; 
-    var hddStorage = cells[8].textContent; 
+    var ssdStorage = cells[7].textContent;
+    var hddStorage = cells[8].textContent;
+    var price = parseFloat(cells[13].textContent.replace("£", ""));
 
     var matchSearch = name.includes(filter) || filter === "";
     var matchCPU = selectedCPU.length === 0 || selectedCPU.some(option => cpu.includes(option));
@@ -57,14 +61,16 @@ function filterTable() {
     var matchMemory = selectedMemory.length === 0 || selectedMemory.some(option => memory.includes(option));
     var matchSSD = selectedSSD.length === 0 || selectedSSD.some(option => ssdStorage.includes(option));
     var matchHDD = selectedHDD.length === 0 || selectedHDD.some(option => hddStorage.includes(option));
+    var matchPrice = (isNaN(minPrice) || price >= minPrice) && (isNaN(maxPrice) || price <= maxPrice);
 
-    if (matchSearch && matchCPU && matchGraphics && matchCoreCount && matchMemory && matchSSD && matchHDD) {
+    if (matchSearch && matchCPU && matchGraphics && matchCoreCount && matchMemory && matchSSD && matchHDD && matchPrice) {
       row.style.display = "";
     } else {
       row.style.display = "none";
     }
   }
 }
+
 
 
 
@@ -241,6 +247,27 @@ function sortTable() {
       return;
   }
 
+  function filterByPrice() {
+    var minPrice = parseFloat(document.getElementById("price-min").value);
+    var maxPrice = parseFloat(document.getElementById("price-max").value);
+    var table = document.getElementById("pcTableBody");
+    var rows = table.getElementsByTagName("tr");
+  
+    for (var i = 0; i < rows.length; i++) {
+      var priceCell = rows[i].getElementsByTagName("td")[13]; // Price cell is in the 14th column
+  
+      if (priceCell) {
+        var price = parseFloat(priceCell.textContent.replace("£", ""));
+  
+        if ((isNaN(minPrice) || price >= minPrice) && (isNaN(maxPrice) || price <= maxPrice)) {
+          rows[i].style.display = "";
+        } else {
+          rows[i].style.display = "none";
+        }
+      }
+    }
+  }
+  
   // Clear the table body
   while (table.firstChild) {
     table.removeChild(table.firstChild);
@@ -304,32 +331,6 @@ var sortBySelect = document.getElementById("sort-by");
 sortBySelect.addEventListener("change", sortTable);
 
 
-// Filter table based on price range
-function filterByPrice() {
-  var minPrice = document.getElementById("price-min").value;
-  var maxPrice = document.getElementById("price-max").value;
-
-  var table = document.getElementById("pcTableBody");
-  var rows = table.getElementsByTagName("tr");
-
-  // Iterate over the rows and hide/show based on price range
-  for (var i = 0; i < rows.length; i++) {
-    var priceCell = rows[i].cells[13]; // Price cell is in the 11th column
-
-    if (priceCell) {
-      var price = parseFloat(priceCell.textContent.replace("£", ""));
-
-      if ((minPrice && price < minPrice) || (maxPrice && price > maxPrice)) {
-        rows[i].style.display = "none"; // Hide row if price is outside the range
-      } else {
-        rows[i].style.display = ""; // Show row if price is within the range
-      }
-    }
-  }
-}
-
-
-
 // Attach event listeners to filter input, sort select, and price range inputs
 var filterInput = document.getElementById("filterInput");
 filterInput.addEventListener("input", filterTable);
@@ -343,3 +344,13 @@ priceMinInput.addEventListener("input", filterByPrice);
 var priceMaxInput = document.getElementById("price-max");
 priceMaxInput.addEventListener("input", filterByPrice);
 
+
+function handleGoButtonClick() {
+  filterTable();
+  filterByPrice();
+  sortTable();
+}
+
+
+// Add event listener to the "Go" button
+document.getElementById("go-button").addEventListener("click", handleGoButtonClick);

@@ -85,10 +85,6 @@
       <div class="filter-row">
         <div class="filter-group">
           <label for="core-count"><b>Core Count:</b></label>
-          <div class="checkbox-container">
-            <input type="checkbox" id="coreCountFilter-2" name="core-count" value="2" onclick="updateTable()">
-            <label for="coreCountFilter-2">2</label>
-          </div>
           <div>
             <input type="checkbox" id="coreCountFilter-4" name="core-count" value="4" onclick="updateTable()">
             <label for="coreCountFilter-4">4</label>
@@ -156,6 +152,10 @@
             <label for="ssd-128">128 GB</label>
           </div>
           <div>
+            <input type="checkbox" id="ssd-240" name="ssd" value="240GB" onclick="updateTable()">
+            <label for="ssd-250">240 GB</label>
+          </div>
+          <div>
             <input type="checkbox" id="ssd-250" name="ssd" value="250GB" onclick="updateTable()">
             <label for="ssd-250">250 GB</label>
           </div>
@@ -211,47 +211,46 @@
 
 
       
-        <div class="sort-container">
-              <label for="name">Name:</label>
-              <input type="text" id="filterInput" onkeyup="filterTable()" placeholder="Search...">
-
-              <label for="price-min">Price Range:</label>
-              <input type="number" id="price-min" placeholder="Min Price" oninput="filterByPrice()">
-              <p> -</p>
-              <input type="number" id="price-max" placeholder="Max Price" oninput="filterByPrice()">
-
-
-          <div class = "select-sort">
-            <label for="sort-by">Sort By:</label>
-              
-
-            <select id="sort-by" onchange="sortTable()">
-              <option value="Default">No Sorting</option>
-              <option value="performance-high-low-cpu">3D Mark CPU Performance: High-Low</option>
-              <option value="performance-low-high-cpu">3D Mark CPU Performance: Low-High</option>
-              <option value="core-count-high-low">Core Count: High-Low</option>
-              <option value="core-count-low-high">Core Count: Low-High</option>
-              <option value="boost-high-low">CPU Boost Clock: High-Low</option>
-              <option value="boost-low-high">CPU Boost Clock: Low-High</option>
-              <option value="memory-high-low">Memory: High-Low</option>
-              <option value="memory-low-high">Memory: Low-High</option>
-              <option value="ssd-high-low">SSD Storage: High-Low</option>
-              <option value="ssd-low-high">SSD Storage: Low-High</option>
-              <option value="hdd-high-low">HDD Storage: High-Low</option>
-              <option value="hdd-low-high">HDD Storage: Low-High</option>
-              <option value="performance-high-low-gpu">3D Mark GPU Performance: High-Low</option>
-              <option value="performance-low-high-gpu">3D Mark GPU Performance: Low-High</option>
-              <option value="1080-fps-high-low">1080P FPS: High-Low</option>
-              <option value="1080-fps-low-high">1080P FPS: Low-High</option>
-              <option value="4k-fps-high-low">4K FPS: High-Low</option>
-              <option value="4k-fps-low-high">4K FPS: Low-High</option>
-              <option value="price-high-low">Price: High-Low</option>
-              <option value="price-low-high">Price: Low-High</option>
-              <option value="price-performance-high-low">Price to Performance: High-Low</option>
-              <option value="price-performance-low-high">Price to Performance: Low-High</option>
-            </select>            
-          </div>
+      <div class="sort-container">
+        <label for="name">Name:</label>
+        <input type="text" id="filterInput" onkeyup="filterTable()" placeholder="Search...">
+      
+        <label for="price-min">Price Range:</label>
+        <input type="number" id="price-min" placeholder="Min Price">
+        <p> - </p>
+        <input type="number" id="price-max" placeholder="Max Price">
+        <button id="go" onclick="handleGoButtonClick()">Go</button>
+      
+        <div class="select-sort">
+          <label for="sort-by">Sort By:</label>
+          <select id="sort-by" onchange="sortTable()">
+            <option value="Default">No Sorting</option>
+            <option value="performance-high-low-cpu">3D Mark CPU Performance: High-Low</option>
+            <option value="performance-low-high-cpu">3D Mark CPU Performance: Low-High</option>
+            <option value="core-count-high-low">Core Count: High-Low</option>
+            <option value="core-count-low-high">Core Count: Low-High</option>
+            <option value="boost-high-low">CPU Boost Clock: High-Low</option>
+            <option value="boost-low-high">CPU Boost Clock: Low-High</option>
+            <option value="memory-high-low">Memory: High-Low</option>
+            <option value="memory-low-high">Memory: Low-High</option>
+            <option value="ssd-high-low">SSD Storage: High-Low</option>
+            <option value="ssd-low-high">SSD Storage: Low-High</option>
+            <option value="hdd-high-low">HDD Storage: High-Low</option>
+            <option value="hdd-low-high">HDD Storage: Low-High</option>
+            <option value="performance-high-low-gpu">3D Mark GPU Performance: High-Low</option>
+            <option value="performance-low-high-gpu">3D Mark GPU Performance: Low-High</option>
+            <option value="1080-fps-high-low">1080P FPS: High-Low</option>
+            <option value="1080-fps-low-high">1080P FPS: Low-High</option>
+            <option value="4k-fps-high-low">4K FPS: High-Low</option>
+            <option value="4k-fps-low-high">4K FPS: Low-High</option>
+            <option value="price-high-low">Price: High-Low</option>
+            <option value="price-low-high">Price: Low-High</option>
+            <option value="price-performance-high-low">Price to Performance: High-Low</option>
+            <option value="price-performance-low-high">Price to Performance: Low-High</option>
+          </select>
         </div>
+      </div>
+      
       
         <script src="static/js/update-sort.js"></script>
       </div>
