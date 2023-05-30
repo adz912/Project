@@ -84,7 +84,7 @@ $(document).ready(function() {
             "<td>" + pc.cpu + "</td>" +
             "<td>" + pc.avgCPUperformance + "</td>" +
             "<td>" + pc.coreCount + "</td>" +
-            "<td>" + pc.cpuBoostClock + "<td>" + pc.memory + "</td>" +
+            "<td>" + pc.cpuBoostClock + "<td>" + pc.memory + "GB" + "</td>" +
             "<td>" + ssdStorage + "</td>" +
             "<td>" + hddStorage + "</td>" +
             "<td>" + pc.graphicsCard + "</td>" +
@@ -98,7 +98,7 @@ $(document).ready(function() {
                 "</a>" +
               "</div>" +
             "</td>" +
-            "<td>" + priceToPerformance + "FPS/£" + "</td>" +
+            "<td>" + priceToPerformance + "<br>Performance/£" + "</td>" +
           "</tr>";
   
           pcTableBody.append(row);

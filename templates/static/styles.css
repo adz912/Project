@@ -365,7 +365,12 @@
           margin-right: 10px; /* Added margin-right to create space between label and select */
           font-weight: bold;
         }
-        
+
+        .select-sort label select{
+          display: flex;
+          align-items: right;
+        }
+
         select {
           padding: 8px 12px;
           width: 80px;

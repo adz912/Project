@@ -127,10 +127,6 @@
         <div class="filter-group">
           <label for="memory"><b>Memory:</b></label>
           <div>
-            <input type="checkbox" id="memory-4" name="memory" value="4" onclick="updateTable()">
-            <label for="memory-4">4 GB</label>
-          </div>
-          <div>
             <input type="checkbox" id="memory-8" name="memory" value="8" onclick="updateTable()">
             <label for="memory-8">8 GB</label>
           </div>
@@ -225,7 +221,8 @@
               <input type="number" id="price-max" placeholder="Max Price" oninput="filterByPrice()">
 
 
-              <label for="sort-by">Sort By:</label>
+          <div class = "select-sort">
+            <label for="sort-by">Sort By:</label>
               
 
             <select id="sort-by" onchange="sortTable()">
@@ -253,6 +250,7 @@
               <option value="price-performance-high-low">Price to Performance: High-Low</option>
               <option value="price-performance-low-high">Price to Performance: Low-High</option>
             </select>            
+          </div>
         </div>
       
         <script src="static/js/update-sort.js"></script>
