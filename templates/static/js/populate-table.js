@@ -89,8 +89,8 @@ $(document).ready(function() {
             "<td>" + hddStorage + "</td>" +
             "<td>" + pc.graphicsCard + "</td>" +
             "<td>" + pc.avgPerformance + "</td>" +
-            "<td>" + fpsFourk + "</td>" +
             "<td>" + fpsTenEighty + "</td>" +
+            "<td>" + fpsFourk + "</td>" +
             "<td>" +
               "<div class='product-price-link'>" +
                 "<a href='" + pc.amazon_link + "' target='_blank'>" +
