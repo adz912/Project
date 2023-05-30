@@ -92,34 +92,35 @@ def register():
         )
 
         try:
-            # Creates a cursor to execute SQL queries
+            # Create a cursor to execute SQL queries
             cursor = mydb.cursor()
 
-            # Checks if the username already exists in the database
+            # Check if the username already exists in the database
             cursor.execute('SELECT * FROM users WHERE username = %s', (username,))
             existing_user = cursor.fetchone()
 
             if existing_user:
                 return jsonify({'success': False, 'message': 'Username already exists. Please choose a different username.'})
 
-            # Hashing the password
+            # Hash the password
             password_hash = generate_password_hash(password)
 
-            # Inserts the new user into the database with the hashed password
+            # Insert the new user into the database with the hashed password
             cursor.execute('INSERT INTO users (username, password) VALUES (%s, %s)', (username, password_hash))
             mydb.commit()
 
-            
+            return jsonify({'success': True, 'message': 'Account successfully created.'})
 
         except mysql.connector.Error as err:
             return jsonify({'success': False, 'message': f"Database error: {err}"})
 
         finally:
-            # Closes the database connection
+            # Close the database connection
             cursor.close()
             mydb.close()
 
     return render_template('register.html')
+
 
 
 
@@ -139,7 +140,7 @@ def contact():
         email = request.form['email']
         message = request.form['message']
 
-        # Create the email message
+        # Creates the email message
         email_message = Mail(
             from_email='adelzaky912@gmail.com',
             to_emails=email,

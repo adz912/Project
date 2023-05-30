@@ -22,7 +22,7 @@ document.getElementById('register-form').addEventListener('submit', function(eve
         .then(data => {
           if (data.success) {
             // Account created successfully
-            alert('Account has been created!');
+            alert('Account has been successfully created!');
             location.reload(); // Refresh the page after displaying the alert
           } else {
             // Display the error message from the server
@@ -40,7 +40,6 @@ document.getElementById('register-form').addEventListener('submit', function(eve
       // Passwords do not match
       alert('Passwords do not match. Please make sure to enter the same password in both fields.');
     }
-
   } else {
     // username and password do not meet the requirements
     // display an error message to the user
