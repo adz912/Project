@@ -15,14 +15,14 @@ def index():
     error = None
 
     if 'user_id' in session:
-        # User is already logged in, redirect to the comparison page
+        # If user is already logged in, it will redirect them to the comparison page
         return redirect('/comparison')
 
     if request.method == 'POST':
         username = request.form['username']
         password = request.form['password']
 
-        # Connect to the database
+        # Connects to the database
         mydb = mysql.connector.connect(
             host="127.0.0.1",
             user="Admin",
@@ -31,23 +31,22 @@ def index():
         )
 
         try:
-            # Create a cursor to execute SQL queries
+            # Creates a cursor to execute SQL queries
             cursor = mydb.cursor()
 
-            # Check if the user exists in the database
+            # Checks if user exists in the database
             cursor.execute('SELECT * FROM users WHERE username = %s', (username,))
             user = cursor.fetchone()
 
             if user is None:
-                # User does not exist or incorrect username
                 error = 'Invalid username or password. Please try again.'
             else:
-                # Check the password using password hashing
+                # Checks the password using password hashing
                 if not check_password_hash(user[2], password):
                     # Incorrect password
                     error = 'Invalid username or password.'
                 else:
-                    # Store the user's ID in the session
+                    # Stores the user's ID in the session
                     session['user_id'] = user[0]
                     # Redirect the user to the comparison page
                     return redirect('/comparison')
@@ -56,7 +55,7 @@ def index():
             return f"Database error: {err}"
 
         finally:
-            # Close the database connection
+            # Closes the database connection
             cursor.close()
             mydb.close()
 
@@ -93,20 +92,20 @@ def register():
         )
 
         try:
-            # Create a cursor to execute SQL queries
+            # Creates a cursor to execute SQL queries
             cursor = mydb.cursor()
 
-            # Check if the username already exists in the database
+            # Checks if the username already exists in the database
             cursor.execute('SELECT * FROM users WHERE username = %s', (username,))
             existing_user = cursor.fetchone()
 
             if existing_user:
                 return jsonify({'success': False, 'message': 'Username already exists. Please choose a different username.'})
 
-            # Hash the password
+            # Hashing the password
             password_hash = generate_password_hash(password)
 
-            # Insert the new user into the database with the hashed password
+            # Inserts the new user into the database with the hashed password
             cursor.execute('INSERT INTO users (username, password) VALUES (%s, %s)', (username, password_hash))
             mydb.commit()
 
@@ -116,7 +115,7 @@ def register():
             return jsonify({'success': False, 'message': f"Database error: {err}"})
 
         finally:
-            # Close the database connection
+            # Closes the database connection
             cursor.close()
             mydb.close()
 
@@ -142,8 +141,8 @@ def contact():
 
         # Create the email message
         email_message = Mail(
-            from_email=email,
-            to_emails='adelzaky912@gmail.com',
+            from_email='adelzaky912@gmail.com',
+            to_emails=email,
             subject='New Contact Form Submission',
             plain_text_content=f"Name: {name}\nEmail: {email}\nMessage: {message}"
         )
@@ -174,7 +173,7 @@ def toggle_favorite():
     pc_id = data.get('pc_id')
     is_liked = data.get('is_liked')
 
-    # Get the user_id from the session
+    # Gets the user_id from the session
     user_id = session.get('user_id')
 
     # If user_id is None, return an error response
@@ -182,7 +181,7 @@ def toggle_favorite():
         response = {'error': 'User not logged in'}
         return jsonify(response), 401
 
-    # Connect to the database
+    # Connects to the database
     db = mysql.connector.connect(
             host="127.0.0.1",
             user="Admin",
@@ -190,11 +189,11 @@ def toggle_favorite():
             database="pc_comparison"
     )
 
-    # Create a cursor to execute SQL queries
+    # Creates a cursor to execute SQL queries
     cursor = db.cursor()
 
     try:
-        # Check if the user has already liked the product
+        # Checks if the user has already liked the product
         query = "SELECT is_liked FROM likes WHERE user_id = %s AND pc_id = %s"
         values = (user_id, pc_id)
         cursor.execute(query, values)
@@ -204,13 +203,13 @@ def toggle_favorite():
         if result is not None:
             is_liked = not result[0]
 
-            # Update the existing like record
+            # Updates the existing like record
             query = "UPDATE likes SET is_liked = %s WHERE user_id = %s AND pc_id = %s"
             values = (is_liked, user_id, pc_id)
             cursor.execute(query, values)
 
         else:
-            # Insert a new like record
+            # Inserts a new like record
             query = "INSERT INTO likes (user_id, pc_id, is_liked) VALUES (%s, %s, %s)"
             values = (user_id, pc_id, is_liked)
             cursor.execute(query, values)
@@ -226,12 +225,12 @@ def toggle_favorite():
         # Rollback the transaction in case of an error
         db.rollback()
 
-        # Return an error response
+        # Returns an error response
         response = {'error': str(error)}
         return jsonify(response), 500
 
     finally:
-        # Close the cursor and database connection
+        # Closes the cursor and database connection
         cursor.close()
         db.close()
 
@@ -244,7 +243,7 @@ def get_user_id():
 
 @app.route('/get_pcs', methods=['GET'])
 def get_pcs():
-    # Connect to the database
+    # Connects to the database
     mydb = mysql.connector.connect(
         host="127.0.0.1",
         user="Admin",
@@ -252,17 +251,15 @@ def get_pcs():
         database="pc_comparison"
     )
 
-    # Retrieve data from the database
+    # Retrieves data from the database
     cursor = mydb.cursor(dictionary=True)
     cursor.execute("SELECT pcs.*, IFNULL(likes.is_liked, FALSE) AS is_liked FROM pcs LEFT JOIN likes ON pcs.pc_id = likes.pc_id")
     data = cursor.fetchall()
 
-    
-
-    # Close the database connection
+    # Closes the database connection
     mydb.close()
 
-    # Return the data as a list of dictionaries
+    # Returns the data as a list of dictionaries
     return jsonify(data)
 
 
@@ -281,15 +278,15 @@ def insert_pc():
         database='pc_comparison'
     )
 
-    # Create a cursor to execute SQL queries
+    # Creates a cursor to execute SQL queries
     cursor = db.cursor()
 
-    # Insert the data into the 'pcs' table
+    # Inserts the data into the 'pcs' table
     query = "INSERT INTO pcs (title, price) VALUES (%s, %s)"
     values = (title, price)
     cursor.execute(query, values)
 
-    # Commit the changes and close the database connection
+    # Commits the changes and close the database connection
     db.commit()
     db.close()
 
