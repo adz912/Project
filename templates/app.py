@@ -133,19 +133,20 @@ def about():
 
 from sendgrid import SendGridAPIClient
 from sendgrid.helpers.mail import Mail
+
 @app.route('/contact', methods=['GET', 'POST'])
 def contact():
     if request.method == 'POST':
         name = request.form['name']
-        email = request.form['email']
+        user_email = request.form['email']  # Email entered by the user
         message = request.form['message']
 
         # Creates the email message
         email_message = Mail(
             from_email='adelzaky912@gmail.com',
-            to_emails=email,
+            to_emails='adelzaky912@gmail.com',
             subject='New Contact Form Submission',
-            plain_text_content=f"Name: {name}\nEmail: {email}\nMessage: {message}"
+            plain_text_content=f"Name: {name}\nUser Email: {user_email}\nMessage: {message}"
         )
 
         try:
@@ -167,6 +168,10 @@ def contact():
             return render_template('contact.html', success_message='Error sending email.')
 
     return render_template('contact.html')
+
+
+
+
 
 @app.route('/api/toggle-favorite', methods=['POST'])
 def toggle_favorite():
