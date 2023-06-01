@@ -249,12 +249,13 @@
         
         .product-price-link {
           color: black;
-          text-decoration: none;
+          text-decoration: underline;
           transition: color 0.25s;
         }
         
         .product-price-link:hover {
           color: #1e90ff;
+          text-decoration: underline;
           transition: color 0.25s;
         }
         

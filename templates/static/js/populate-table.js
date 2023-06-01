@@ -92,8 +92,7 @@ $(document).ready(function() {
             "<td>" + fpsTenEighty + "</td>" +
             "<td>" + fpsFourk + "</td>" +
             "<td>" +
-              "<div class='product-price-link'>" +
-                "<a href='" + pc.amazon_link + "' target='_blank'>" +
+            "<a class='product-price-link' href='"+ pc.amazon_link + "' target='_blank'>" + 
                   "£" + pc.price +
                 "</a>" +
               "</div>" +
