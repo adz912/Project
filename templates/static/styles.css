@@ -505,30 +505,6 @@
 
         /* CSS for links in Learn More section */
 
-        #quick-links {
-          text-align: center;
-        }
-        
-        #quick-links ul {
-          list-style: none;
-          padding: 0;
-        }
-        
-        #quick-links table {
-          margin: 0 auto;
-          border-collapse: collapse;
-        }
-        
-        #quick-links td {
-          padding: 10px;
-        }
-        
-        #quick-links a {
-          text-decoration: none;
-          color: #000;
-        }
-        
-
         a.learn-more-link {
           color: white;
           text-decoration: underline;
